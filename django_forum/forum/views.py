@@ -1,8 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 import django.urls
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.views.decorators.http import require_http_methods
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 
 from forum.forms import AnswerForm, QuestionForm
@@ -143,15 +145,16 @@ class AnswerDeleteView(LoginRequiredMixin, DeleteView):
         return self.object.question.get_absolute_url()
 
 
-class AcceptAnswerView(LoginRequiredMixin, View):
-    def post(self, request, pk):
-        answer = get_object_or_404(Answer, pk=pk)
+@require_http_methods(["POST"])
+@login_required
+def accept_answer(request, pk):
+    answer = get_object_or_404(Answer, pk=pk)
 
-        if request.user != answer.question.author:
-            return JsonResponse({"error": "Only question author can accept answers"}, status=403)
+    if request.user != answer.question.author:
+        return JsonResponse({"error": "Only question author can accept answers"}, status=403)
 
-        Answer.objects.filter(question=answer.question, is_accepted=True).update(is_accepted=False)
+    Answer.objects.filter(question=answer.question, is_accepted=True).update(is_accepted=False)
 
-        answer.mark_accepted()
+    answer.mark_accepted()
 
-        return JsonResponse({"success": True})
+    return JsonResponse({"success": True})
