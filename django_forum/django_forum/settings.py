@@ -22,7 +22,7 @@ INSTALLED_APPS = [
     "forum.apps.ForumConfig",
     "reviews.apps.ReviewsConfig",
     "votes.apps.VotesConfig",
-    # "home.apps.HomeConfig",
+    "home.apps.HomeConfig",
 ]
 
 MIDDLEWARE = [

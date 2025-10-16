@@ -1,0 +1,343 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Night Coder - Where Developers Grow Together" %}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="night-gradient text-white py-4 py-md-5">
+    <div class="container py-3 py-md-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h1 class="display-5 display-md-4 fw-bold mb-3 mb-md-4">
+                    {% trans "Code Doesn't Sleep." %}<br>
+                    <span class="text-warning">{% trans "Neither Do We." %} 🌙</span>
+                </h1>
+                <p class="lead mb-3 mb-md-4">
+                    {% trans "Join thousands of night owls who code, learn, and grow together." %}
+                    {% trans "Get unstuck, share knowledge, and build your reputation in the developer community." %}
+                </p>
+
+                {% if not user.is_authenticated %}
+                <div class="d-flex gap-2 gap-md-3 flex-wrap">
+                    <a href="{% url 'users:signup' %}" class="btn btn-warning btn-lg fw-bold hover-glow pulse">
+                        🚀 {% trans "Start Coding Free" %}
+                    </a>
+                    <a href="{% url 'forum:question_list' %}" class="btn btn-outline-light btn-lg hover-glow">
+                        💬 {% trans "Browse Questions" %}
+                    </a>
+                </div>
+                {% else %}
+                <div class="d-flex gap-2 gap-md-3 flex-wrap">
+                    <a href="{% url 'forum:question_create' %}" class="btn btn-warning btn-lg fw-bold hover-glow">
+                        ❓ {% trans "Ask a Question" %}
+                    </a>
+                    <a href="{% url 'forum:question_list' %}" class="btn btn-outline-light btn-lg hover-glow">
+                        💡 {% trans "Help Others" %}
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="position-relative">
+                    <div class="bg-dark rounded-3 p-3 p-md-4 shadow-lg">
+                        <div class="text-monospace text-start small">
+                            <span class="text-success">// {% trans "Tonight's activity" %}</span><br>
+                            <span class="text-info">const</span> <span class="text-warning">community</span> = {<br>
+                            &nbsp;&nbsp;questions: <span class="text-info">{{ latest_questions.count }}</span>,<br>
+                            &nbsp;&nbsp;answers: <span class="text-info">{{ total_answers_tonight }}</span>,<br>
+                            &nbsp;&nbsp;developersOnline: <span class="text-info">{{ active_night_users }}</span><br>
+                            };
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<div class="container py-4 py-md-5">
+    <div class="row">
+        <!-- Left Column - Main Content -->
+        <div class="col-lg-8 mb-4 mb-lg-0">
+            {% if user.is_authenticated %}
+            <!-- User Stats Section -->
+            <div class="row mb-4 mb-md-5">
+                <div class="col-12">
+                    <div class="card professional-card shadow-lg">
+                        <div class="card-body p-3 p-md-4">
+                            <div class="row text-center">
+                                <div class="col-6 col-md-3 mb-3 mb-md-0">
+                                    <h3 class="text-warning mb-1 mb-md-2">{{ user.profile.reputation_points }}</h3>
+                                    <small class="text-light-50">{% trans "Reputation" %}</small>
+                                </div>
+                                <div class="col-6 col-md-3 mb-3 mb-md-0">
+                                    <h3 class="text-info mb-1 mb-md-2">{{ user_questions }}</h3>
+                                    <small class="text-light-50">{% trans "Questions" %}</small>
+                                </div>
+                                <div class="col-6 col-md-3 mb-3 mb-md-0">
+                                    <h3 class="text-success mb-1 mb-md-2">{{ user_answers }}</h3>
+                                    <small class="text-light-50">{% trans "Answers" %}</small>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <h3 class="text-primary mb-1 mb-md-2">{{ user_reviews }}</h3>
+                                    <small class="text-light-50">{% trans "Reviews" %}</small>
+                                </div>
+                            </div>
+                            <div class="text-center mt-2 mt-md-3">
+                                <small class="text-light-50">
+                                    🏆 {% blocktrans %}Ranked #{{ user_rank }} on leaderboards{% endblocktrans %}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Latest Questions -->
+            <div class="card professional-card border-0 shadow-lg mb-4">
+                <div class="card-header professional-card-header d-flex justify-content-between align-items-center p-3">
+                    <h4 class="mb-0 h5 h4-md">🔥 {% trans "Latest Questions" %}</h4>
+                    <a href="{% url 'forum:question_list' %}" class="btn btn-sm btn-outline-warning">{% trans "View All" %}</a>
+                </div>
+                <div class="card-body p-0">
+                    {% for question in latest_questions %}
+                    <div class="border-bottom border-dark p-3 hover-glow">
+                        <div class="d-flex align-items-start">
+                            <div class="text-center me-3" style="min-width: 50px;">
+                                <div class="text-success fw-bold small">{{ question.vote_count }}</div>
+                                <small class="text-muted">{% trans "votes" %}</small>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1 small">
+                                    <a href="{% url 'forum:question_detail' question.pk %}"
+                                       class="text-decoration-none text-light">
+                                        {{ question.title }}
+                                    </a>
+                                </h6>
+                                <div class="text-muted small">
+                                    <span class="d-block d-sm-inline">👤 {{ question.author.username }}</span>
+                                    <span class="d-none d-sm-inline mx-2">•</span>
+                                    <span class="d-block d-sm-inline">📅 {{ question.created_at|timesince }} {% trans "ago" %}</span>
+                                    <span class="d-none d-sm-inline mx-2">•</span>
+                                    <span class="d-block d-sm-inline">💬 {{ question.answers.count }} {% trans "answers" %}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="text-center py-4 text-muted">
+                        <i class="fas fa-question-circle fa-2x mb-2"></i>
+                        <p class="mb-0">{% trans "No questions yet. Be the first to ask!" %}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Latest Reviews -->
+            <div class="card professional-card border-0 shadow-lg">
+                <div class="card-header professional-card-header d-flex justify-content-between align-items-center p-3">
+                    <h4 class="mb-0 h5 h4-md">⭐ {% trans "Latest Course Reviews" %}</h4>
+                    <a href="{% url 'reviews:review_list' %}" class="btn btn-sm btn-outline-info">{% trans "View All" %}</a>
+                </div>
+                <div class="card-body p-0">
+                    {% for review in latest_reviews %}
+                    <div class="border-bottom border-dark p-3 hover-glow">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="flex-grow-1 me-2">
+                                <h6 class="mb-1 small">{{ review.title }}</h6>
+                                <p class="text-muted small mb-1">📖 {{ review.course_name }}</p>
+                                <div class="text-warning small mb-1">{{ review.get_rating_stars }}</div>
+                                <div class="text-muted small">
+                                    <span class="d-block d-sm-inline">👤 {{ review.author.username }}</span>
+                                    <span class="d-none d-sm-inline mx-2">•</span>
+                                    <span class="d-block d-sm-inline">📅 {{ review.created_at|timesince }} {% trans "ago" %}</span>
+                                </div>
+                            </div>
+                            <div class="text-end flex-shrink-0">
+                                <span class="badge bg-success">{{ review.vote_count }}</span>
+                                <div class="text-muted small">{% trans "votes" %}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="text-center py-4 text-muted">
+                        <i class="fas fa-star fa-2x mb-2"></i>
+                        <p class="mb-0">{% trans "No reviews yet. Share your course experience!" %}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Sidebar -->
+        <div class="col-lg-4">
+            <!-- Leaderboard Widget -->
+            <div class="card professional-card border-0 shadow-lg mb-4">
+                <div class="card-header professional-card-header p-3">
+                    <h5 class="mb-0 h6 h5-md">🏆 {% trans "Top Contributors" %}</h5>
+                </div>
+                <div class="card-body p-0">
+                    {% for profile in top_contributors %}
+                    <div class="border-bottom border-dark p-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-warning me-2">{{ forloop.counter }}</span>
+                                <div>
+                                    <strong class="text-light small">{{ profile.user.username }}</strong>
+                                    <div class="text-muted small">{{ profile.reputation_points }} {% trans "rep" %}</div>
+                                </div>
+                            </div>
+                            <div class="text-muted small text-end">
+                                <div>{{ profile.user.questions.count }} {% trans "Q" %}</div>
+                                <div>{{ profile.user.answers.count }} {% trans "A" %}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="text-center p-3">
+                        <a href="{% url 'leaderboards:leaderboard' %}" class="btn btn-sm btn-outline-warning w-100">
+                            {% trans "View Full Leaderboard" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="card professional-card border-0 shadow-lg">
+                <div class="card-header professional-card-header p-3">
+                    <h5 class="mb-0 h6 h5-md">📊 {% trans "Community Stats" %}</h5>
+                </div>
+                <div class="card-body p-3">
+                    <div class="row text-center">
+                        <div class="col-6 mb-3">
+                            <h4 class="text-primary mb-1">{{ total_users }}</h4>
+                            <small class="text-muted">{% trans "Developers" %}</small>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <h4 class="text-success mb-1">{{ total_questions }}</h4>
+                            <small class="text-muted">{% trans "Questions" %}</small>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <h4 class="text-info mb-1">{{ total_answers }}</h4>
+                            <small class="text-muted">{% trans "Answers" %}</small>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <h4 class="text-warning mb-1">{{ total_reviews }}</h4>
+                            <small class="text-muted">{% trans "Reviews" %}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Professional card styling */
+    .professional-card {
+        background-color: #2a2d3e;
+        border: 1px solid #3a3f5c;
+        color: #e9ecef;
+        transition: all 0.3s ease;
+    }
+
+    .professional-card:hover {
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+    }
+
+    .professional-card-header {
+        background-color: #343a50 !important;
+        border-bottom: 1px solid #3a3f5c;
+        color: #ffffff;
+    }
+
+    /* Enhanced hover effects */
+    .hover-glow:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        transition: background-color 0.2s ease;
+    }
+
+    /* Improved button styling */
+    .btn-outline-warning {
+        border-color: #ffc107;
+        color: #ffc107;
+    }
+
+    .btn-outline-warning:hover {
+        background-color: #ffc107;
+        color: #212529;
+    }
+
+    .btn-outline-info {
+        border-color: #17a2b8;
+        color: #17a2b8;
+    }
+
+    .btn-outline-info:hover {
+        background-color: #17a2b8;
+        color: #ffffff;
+    }
+
+    /* Enhanced night gradient */
+    .night-gradient {
+        background: linear-gradient(135deg, #1a1e2e 0%, #2d3748 100%);
+    }
+
+    /* Improved stat card */
+    .stat-card {
+        background: linear-gradient(135deg, #2a2d3e 0%, #343a50 100%);
+        border: 1px solid #3a3f5c;
+    }
+
+    /* Responsive typography */
+    .h4-md {
+        font-size: 1.5rem;
+    }
+
+    .h5-md {
+        font-size: 1.25rem;
+    }
+
+    /* Mobile-specific adjustments */
+    @media (max-width: 768px) {
+        .display-md-4 {
+            font-size: 2rem;
+        }
+
+        .btn-lg {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .card-body {
+            padding: 1rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .row {
+            margin-left: -8px;
+            margin-right: -8px;
+        }
+
+        .col-6, .col-md-3 {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .d-flex.gap-2 {
+            gap: 8px !important;
+        }
+    }
+</style>
+{% endblock %}
