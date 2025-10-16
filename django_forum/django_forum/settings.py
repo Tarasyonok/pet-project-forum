@@ -21,7 +21,7 @@ INSTALLED_APPS = [
     "core.apps.CoreConfig",
     "forum.apps.ForumConfig",
     "reviews.apps.ReviewsConfig",
-    # "votes.apps.VotesConfig",
+    "votes.apps.VotesConfig",
     # "home.apps.HomeConfig",
 ]
 
