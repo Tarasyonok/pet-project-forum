@@ -11,7 +11,7 @@ urlpatterns += i18n_patterns(
     path("users/", include("users.urls")),
     path("auth/", include("django.contrib.auth.urls")),
     # path("", include("home.urls")),
-    # path("forum/", include("forum.urls")),
+    path("forum/", include("forum.urls")),
     # path("reviews/", include("reviews.urls")),
     # path("votes/", include("votes.urls")),
     # path("leaderboards/", include("leaderboards.urls")),

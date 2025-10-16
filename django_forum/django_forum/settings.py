@@ -19,7 +19,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "core.apps.CoreConfig",
-    # "forum.apps.ForumConfig",
+    "forum.apps.ForumConfig",
     # "reviews.apps.ReviewsConfig",
     # "votes.apps.VotesConfig",
     # "home.apps.HomeConfig",
