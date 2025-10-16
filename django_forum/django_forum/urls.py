@@ -8,15 +8,15 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    path("", include("home.urls")),
     path("users/", include("users.urls")),
     path("auth/", include("django.contrib.auth.urls")),
-    path("forum/", include("forum.urls")),
-    path("reviews/", include("reviews.urls")),
-    path("votes/", include("votes.urls")),
-    path("leaderboards/", include("leaderboards.urls")),
+    # path("", include("home.urls")),
+    # path("forum/", include("forum.urls")),
+    # path("reviews/", include("reviews.urls")),
+    # path("votes/", include("votes.urls")),
+    # path("leaderboards/", include("leaderboards.urls")),
     path("admin/", django.contrib.admin.site.urls),
     *static(django.conf.settings.STATIC_URL, document_root=django.conf.settings.STATIC_ROOT),
 )
 
-handler404 = 'home.views.custom_404_view'
+# handler404 = 'home.views.custom_404_view'
