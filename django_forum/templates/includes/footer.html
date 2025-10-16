@@ -1,0 +1,81 @@
+{% load i18n %}
+<footer class="night-gradient text-light py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <!-- Brand -->
+            <div class="col-lg-4 mb-4">
+                <h3 class="fw-bold">🌙 {% trans "Night Coder" %}</h3>
+                <p class="text-light-50">
+                    {% trans "Where night owls code together. Ask questions, share reviews, and grow as developers in the quiet hours." %}
+                </p>
+                <div class="mt-3">
+                    <span class="badge bg-warning text-dark pulse">
+                        🚀 {{ total_users }}+ {% trans "Developers" %}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-2 col-6 mb-4">
+                <h5>{% trans "Explore" %}</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'forum:question_list' %}" class="text-light-50 text-decoration-none">💬 {% trans "Forum" %}</a></li>
+                    <li><a href="{% url 'reviews:review_list' %}" class="text-light-50 text-decoration-none">📚 {% trans "Reviews" %}</a></li>
+                    <li><a href="{% url 'leaderboards:leaderboard' %}" class="text-light-50 text-decoration-none">🏆 {% trans "Leaderboards" %}</a></li>
+                </ul>
+            </div>
+
+            <!-- Community -->
+            <div class="col-lg-3 col-6 mb-4">
+                <h5>{% trans "Community" %}</h5>
+                <ul class="list-unstyled">
+                    <li class="text-light-50">👑 {{ top_user }} - {{ top_reputation }} {% trans "rep" %}</li>
+                    <li class="text-light-50">📊 {{ total_questions }} {% trans "questions" %}</li>
+                    <li class="text-light-50">💡 {{ total_answers }} {% trans "answers" %}</li>
+                    <li class="text-light-50">⭐ {{ total_reviews }} {% trans "reviews" %}</li>
+                </ul>
+            </div>
+
+            <!-- Night Stats -->
+            <div class="col-lg-3 mb-4">
+                <h5>🌃 {% trans "Night Stats" %}</h5>
+                <div class="row text-center">
+                    <div class="col-6">
+                        <h4 class="text-warning">{{ active_night_users }}</h4>
+                        <small class="text-light-50">{% trans "Online Now" %}</small>
+                    </div>
+                    <div class="col-6">
+                        <h4 class="text-info">{{ questions_tonight }}</h4>
+                        <small class="text-light-50">{% trans "Questions Tonight" %}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="bg-light">
+
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <p class="mb-0 text-light-50">
+                    {% blocktrans %}&copy; 2025 Night Coder. Built with ☕ and 🌙 by developers, for developers.{% endblocktrans %}
+                </p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <span class="text-light-50">
+                    {% trans "Current Time:" %} <span id="current-time"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Live time in footer
+    function updateTime() {
+        const now = new Date();
+        document.getElementById('current-time').textContent = 
+            now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+</script>

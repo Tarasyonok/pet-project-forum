@@ -1,0 +1,120 @@
+{% load i18n %}
+<nav class="navbar navbar-expand-lg navbar-dark night-gradient shadow-lg">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold fs-3 hover-glow" href="{% url 'home:home' %}">
+            🌙 {% trans "Night Coder" %}
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navigation Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link hover-glow" href="{% url 'forum:question_list' %}">
+                        💬 {% trans "Forum" %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link hover-glow" href="{% url 'reviews:review_list' %}">
+                        📚 {% trans "Reviews" %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link hover-glow" href="{% url 'leaderboards:leaderboard' %}">
+                        🏆 {% trans "Leaderboards" %}
+                    </a>
+                </li>
+            </ul>
+
+            <!-- User Section -->
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle hover-glow" href="#" role="button" data-bs-toggle="dropdown">
+                            👤 {{ user.username }}
+                            <span class="badge bg-success ms-1">{{ user.profile.reputation_points }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li>
+                                <a class="dropdown-item" href="{% url 'users:profile' user.username %}">
+                                    <i class="fas fa-user me-2"></i>{% trans "My Profile" %}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'users:edit-profile' %}">
+                                    <i class="fas fa-edit me-2"></i>{% trans "Edit Profile" %}
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-warning" href="{% url 'forum:question_create' %}">
+                                    <i class="fas fa-question-circle me-2"></i>{% trans "Ask Question" %}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-info" href="{% url 'reviews:review_create' %}">
+                                    <i class="fas fa-star me-2"></i>{% trans "Write Review" %}
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="{% url 'users:logout' %}" method="post" class="dropdown-item d-inline-block">
+                                    {% csrf_token %}
+                                    <button type="submit" class="text-danger border-0 bg-transparent">
+                                        <i class="fas fa-sign-out-alt me-2"></i>{% trans "Logout" %}
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link hover-glow" href="{% url 'users:login' %}">
+                            🔐 {% trans "Login" %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light ms-2 hover-glow" href="{% url 'users:signup' %}">
+                            {% trans "Join Free" %}
+                        </a>
+                    </li>
+                {% endif %}
+
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <button class="nav-link ms-3 hover-glow" type="button" data-bs-toggle="dropdown">
+                            🌐 ({% if request.LANGUAGE_CODE == 'en' %}🇺🇸{% elif request.LANGUAGE_CODE == 'ru' %}🇷🇺{% endif %})
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li>
+                                <form action="{% url 'set_language' %}" method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                                    <input name="language" type="hidden" value="en">
+                                    <button type="submit" class="dropdown-item {% if request.LANGUAGE_CODE == 'en' %}active{% endif %}">
+                                        🦅 English
+                                    </button>
+                                </form>
+                            </li>
+                            <li>
+                                <form action="{% url 'set_language' %}" method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                                    <input name="language" type="hidden" value="ru">
+                                    <button type="submit" class="dropdown-item {% if request.LANGUAGE_CODE == 'ru' %}active{% endif %}">
+                                        🐻 Русский
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
