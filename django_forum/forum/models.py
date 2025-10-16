@@ -3,7 +3,8 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 import django.urls
 
-import core.rep_rules
+from core.rep_rules import REPUTATION_RULES
+from votes.models import Vote
 
 
 class Question(models.Model):
@@ -17,6 +18,7 @@ class Question(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_solved = models.BooleanField(default=False)
+    votes = GenericRelation(Vote)
 
     class Meta:
         ordering = ["-created_at"]
@@ -42,6 +44,7 @@ class Answer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_accepted = models.BooleanField(default=False)
+    votes = GenericRelation(Vote)
 
     class Meta:
         ordering = ["-is_accepted", "created_at"]
@@ -57,6 +60,6 @@ class Answer(models.Model):
             self.question.is_solved = True
             self.question.save()
 
-            points = core.rep_rules.REPUTATION_RULES["answer_accepted"]
+            points = REPUTATION_RULES["answer_accepted"]
             self.author.profile.reputation_points += points
             self.author.profile.save()

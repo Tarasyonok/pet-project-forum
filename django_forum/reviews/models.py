@@ -3,6 +3,9 @@ from django.db import models
 import django.urls
 import django.utils.timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.contenttypes.fields import GenericRelation
+
+from votes.models import Vote
 
 
 class CourseReview(models.Model):
@@ -28,6 +31,7 @@ class CourseReview(models.Model):
     course_name = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    votes = GenericRelation(Vote)
 
     class Meta:
         ordering = ["-created_at"]
