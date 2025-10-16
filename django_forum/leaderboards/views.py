@@ -1,7 +1,7 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.utils import timezone
-from django.db.models import Q
-from users.models import UserProfile, User
+from users.models import User, UserProfile
 
 
 def leaderboard_view(request):
