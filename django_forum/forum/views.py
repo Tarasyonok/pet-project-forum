@@ -4,7 +4,7 @@ import django.urls
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_POST
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 
 from forum.forms import AnswerForm, QuestionForm
@@ -145,7 +145,7 @@ class AnswerDeleteView(LoginRequiredMixin, DeleteView):
         return self.object.question.get_absolute_url()
 
 
-@require_http_methods(["POST"])
+@require_POST
 @login_required
 def accept_answer(request, pk):
     answer = get_object_or_404(Answer, pk=pk)
