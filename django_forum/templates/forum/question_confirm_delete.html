@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Delete Question - Night Coder" %}{% endblock %}
+
+{% block main_class %}bg-dark{% endblock %}
+
+{% block content %}
+<div class="container py-4 py-md-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <!-- Delete Confirmation -->
+            <div class="card professional-card border-0 shadow-lg">
+                <div class="card-header professional-card-header p-3 p-md-4">
+                    <h5 class="mb-0 h5 h4-md text-light">
+                        🗑️ {% trans "Delete Question" %}
+                    </h5>
+                </div>
+                <div class="card-body p-3 p-md-4 text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+                        <h4 class="text-light mb-3">{% trans "Are you sure you want to delete this question?" %}</h4>
+                        <div class="card bg-dark border-danger mb-4">
+                            <div class="card-body">
+                                <h6 class="text-light">{{ object.title }}</h6>
+                                <p class="text-muted small mb-0">
+                                    👤 {{ object.author.username }} • 📅 {{ object.created_at|date:"M d, Y" }}
+                                </p>
+                            </div>
+                        </div>
+                        <p class="text-light-50">
+                            {% trans "This action cannot be undone. All answers and votes associated with this question will also be permanently deleted." %}
+                        </p>
+                    </div>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="{% url 'forum:question_detail' object.pk %}"
+                               class="btn btn-outline-light px-4">
+                                ← {% trans "Cancel" %}
+                            </a>
+                            <button type="submit" class="btn btn-danger fw-bold px-4">
+                                🗑️ {% trans "Delete Question" %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.professional-card {
+    background-color: #2a2d3e;
+    border: 1px solid #3a3f5c;
+    color: #e9ecef;
+}
+
+.professional-card-header {
+    background-color: #343a50 !important;
+    border-bottom: 1px solid #3a3f5c;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+</style>
+{% endblock %}
