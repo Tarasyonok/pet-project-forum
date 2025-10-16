@@ -12,7 +12,7 @@ urlpatterns += i18n_patterns(
     path("auth/", include("django.contrib.auth.urls")),
     # path("", include("home.urls")),
     path("forum/", include("forum.urls")),
-    # path("reviews/", include("reviews.urls")),
+    path("reviews/", include("reviews.urls")),
     # path("votes/", include("votes.urls")),
     # path("leaderboards/", include("leaderboards.urls")),
     path("admin/", django.contrib.admin.site.urls),
