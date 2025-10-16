@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "core.apps.CoreConfig",
     "forum.apps.ForumConfig",
-    # "reviews.apps.ReviewsConfig",
+    "reviews.apps.ReviewsConfig",
     # "votes.apps.VotesConfig",
     # "home.apps.HomeConfig",
 ]
