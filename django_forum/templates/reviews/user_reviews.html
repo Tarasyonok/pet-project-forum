@@ -1,0 +1,293 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load votes_tags %}
+{% load i18n %}
+
+{% block title %}{% blocktrans %}{{ profile_user.username }}'s Reviews - Night Coder{% endblocktrans %}{% endblock %}
+
+{% block main_class %}bg-dark{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<section class="night-gradient text-white py-4 py-md-5">
+    <div class="container py-3 py-md-4">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 display-md-4 fw-bold mb-3">
+                    👤 {% blocktrans %}{{ profile_user.username }}'s Reviews{% endblocktrans %}
+                </h1>
+                <p class="lead mb-4">
+                    {% blocktrans %}Course reviews and learning experiences shared by {{ profile_user.username }}.{% endblocktrans %}
+                </p>
+
+                <!-- User Stats -->
+                <div class="d-flex flex-wrap gap-4 text-light">
+                    <div class="text-center">
+                        <h3 class="text-warning mb-1">{{ reviews.count }}</h3>
+                        <small class="text-light-50">{% trans "Total Reviews" %}</small>
+                    </div>
+                    {% if average_rating %}
+                    <div class="text-center">
+                        <h3 class="text-warning mb-1">{{ average_rating }}/5</h3>
+                        <small class="text-light-50">{% trans "Average Rating" %}</small>
+                    </div>
+                    {% endif %}
+                    <div class="text-center">
+                        <h3 class="text-warning mb-1">{{ profile_user.profile.reputation_points }}</h3>
+                        <small class="text-light-50">{% trans "Reputation" %}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center">
+                <a href="{% url 'reviews:review_list' %}" class="btn btn-outline-light btn-lg">
+                    ← {% trans "All Reviews" %}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- User Reviews -->
+<div class="container py-4 py-md-5">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-lg-8 mb-4 mb-lg-0">
+            <!-- Reviews List -->
+            <div class="card professional-card border-0 shadow-lg">
+                <div class="card-header professional-card-header d-flex justify-content-between align-items-center p-3">
+                    <h4 class="mb-0 h5 h4-md">
+                        📚 {% trans "Course Reviews" %} ({{ reviews.count }})
+                    </h4>
+                    <div class="text-light-50 small">
+                        {% trans "Sorted by Latest" %}
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    {% for review in reviews %}
+                    <div class="border-bottom border-dark p-3 hover-glow">
+                        <div class="d-flex align-items-start">
+                            <!-- Vote Count -->
+                            <div class="text-center me-3" style="min-width: 60px;">
+                                <div class="fw-bold h5 mb-1
+                                    {% if review.vote_count > 0 %}text-success
+                                    {% elif review.vote_count < 0 %}text-danger
+                                    {% else %}text-muted{% endif %}">
+                                    {{ review.vote_count }}
+                                </div>
+                                <small class="text-muted">{% trans "votes" %}</small>
+                            </div>
+
+                            <!-- Rating -->
+                            <div class="text-center me-3" style="min-width: 80px;">
+                                <div class="fw-bold h5 mb-1 text-warning">
+                                    {{ review.rating }}/5
+                                </div>
+                                <div class="text-warning small">
+                                    {{ review.get_rating_stars }}
+                                </div>
+                            </div>
+
+                            <!-- Review Content -->
+                            <div class="flex-grow-1">
+                                <h5 class="mb-2">
+                                    <a href="{% url 'reviews:review_detail' review.pk %}"
+                                       class="text-decoration-none text-light hover-underline">
+                                        {{ review.title }}
+                                    </a>
+                                </h5>
+
+                                <p class="text-info mb-2 small">
+                                    📖 <strong>{{ review.course_name }}</strong>
+                                </p>
+
+                                <p class="text-muted small mb-2">
+                                    {{ review.content|truncatewords:25 }}
+                                </p>
+
+                                <div class="d-flex flex-wrap gap-2 text-muted small">
+                                    <span class="d-flex align-items-center">
+                                        📅 {{ review.created_at|timesince }} {% trans "ago" %}
+                                    </span>
+                                    <span class="d-flex align-items-center">
+                                        💬 {{ review.vote_count }} {% trans "votes" %}
+                                    </span>
+                                    {% if user == review.author %}
+                                    <span class="d-flex align-items-center">
+                                        <a href="{% url 'reviews:review_update' review.pk %}" class="text-decoration-none text-warning">
+                                            ✏️ {% trans "Edit" %}
+                                        </a>
+                                    </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="text-center py-5 text-muted">
+                        <i class="fas fa-star fa-3x mb-3"></i>
+                        <h5>{% trans "No reviews yet" %}</h5>
+                        <p class="mb-0">
+                            {% if user == profile_user %}
+                            {% trans "You haven't written any course reviews yet." %}
+                            {% else %}
+                            {% blocktrans %}{{ profile_user.username }} hasn't written any course reviews yet.{% endblocktrans %}
+                            {% endif %}
+                        </p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            {% if page_obj.paginator.num_pages > 1 %}
+            <nav aria-label="{% trans 'User reviews pagination' %}" class="mt-4">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link bg-dark text-white border-secondary"
+                           href="?page={{ page_obj.previous_page_number }}">
+                            ← {% trans "Previous" %}
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    <li class="page-item active">
+                        <span class="page-link bg-warning border-warning text-dark">{{ num }}</span>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link bg-dark text-white border-secondary"
+                           href="?page={{ num }}">
+                            {{ num }}
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link bg-dark text-white border-secondary"
+                           href="?page={{ page_obj.next_page_number }}">
+                            {% trans "Next" %} →
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- User Info Card -->
+            <div class="card professional-card border-0 shadow-lg mb-4">
+                <div class="card-header professional-card-header p-3">
+                    <h5 class="mb-0 h6 h5-md">👤 {% trans "User Profile" %}</h5>
+                </div>
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="fas fa-user-circle fa-3x text-warning"></i>
+                    </div>
+                    <h5 class="text-light mb-2">{{ profile_user.username }}</h5>
+                    <div class="text-light-50 small mb-3">
+                        🏆 {{ profile_user.profile.reputation_points }} {% trans "reputation" %}
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <h6 class="text-primary mb-1">{{ reviews.count }}</h6>
+                            <small class="text-muted">{% trans "Reviews" %}</small>
+                        </div>
+                        <div class="col-6">
+                            <h6 class="text-success mb-1">
+                                {% if average_rating %}{{ average_rating }}{% else %}0{% endif %}
+                            </h6>
+                            <small class="text-muted">{% trans "Avg Rating" %}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Write Review Card -->
+            {% if user.is_authenticated and user == profile_user %}
+            <div class="card professional-card border-0 shadow-lg">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-plus-circle fa-2x text-warning mb-3"></i>
+                    <h5 class="text-light mb-3">{% trans "Write Another Review" %}</h5>
+                    <p class="text-light-50 small mb-3">
+                        {% trans "Share your experience with another course." %}
+                    </p>
+                    <a href="{% url 'reviews:review_create' %}" class="btn btn-warning w-100">
+                        ✍️ {% trans "Write Review" %}
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+.professional-card {
+    background-color: #2a2d3e;
+    border: 1px solid #3a3f5c;
+    color: #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.professional-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.professional-card-header {
+    background-color: #343a50 !important;
+    border-bottom: 1px solid #3a3f5c;
+    color: #ffffff;
+}
+
+.hover-glow:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: background-color 0.2s ease;
+}
+
+.hover-underline:hover {
+    text-decoration: underline !important;
+}
+
+.night-gradient {
+    background: linear-gradient(135deg, #1a1e2e 0%, #2d3748 100%);
+}
+
+.page-link {
+    transition: all 0.2s ease;
+}
+
+.page-link:hover {
+    background-color: #3a3f5c !important;
+    border-color: #ffc107 !important;
+}
+
+@media (max-width: 768px) {
+    .display-md-4 {
+        font-size: 2rem;
+    }
+
+    .d-flex.gap-4 {
+        gap: 2rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .text-muted.small {
+        font-size: 0.75rem;
+    }
+}
+</style>
+{% endblock %}
