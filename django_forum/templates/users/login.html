@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}
+  Вход в аккаунт
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h2 class="text-center mb-3">Вход</h2>
+            {% with submit_btn_label='Войти' %}
+              {% include 'users/form.html' %}
+            {% endwith %}
+            <p class="mt-2 mb-1">
+              <a href="{% url 'users:signup' %}">Нет аккаунта? Зарегистрироваться</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll('form input, form select, form textarea').forEach(function (element) {
+      element.classList.add('form-control')
+    })
+  </script>
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Profile - Night Coder{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card stat-card shadow-lg border-0">
+                <div class="card-header bg-dark">
+                    <h2 class="h4 mb-0">✏️ Edit Your Profile</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <!-- Avatar Upload -->
+                        <div class="row mb-4">
+                            <div class="col-md-3 text-center">
+                                {% if user.profile.avatar %}
+                                    <img src="{{ user.profile.avatar.url }}"
+                                         class="rounded-circle border border-3 border-warning mb-3"
+                                         width="100" height="100" alt="Current avatar">
+                                {% else %}
+                                    <div class="rounded-circle bg-secondary d-inline-flex align-items-center justify-content-center border border-3 border-warning mb-3"
+                                         style="width: 100px; height: 100px;">
+                                        <span class="fs-3 text-light">👤</span>
+                                    </div>
+                                {% endif %}
+                                <div class="form-group">
+                                    <label for="{{ form.avatar.id_for_label }}" class="form-label small text-muted">
+                                        Profile Picture
+                                    </label>
+                                    {{ form.avatar }}
+                                    {% if form.avatar.errors %}
+                                        <div class="text-danger small">{{ form.avatar.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <!-- User Info -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="{{ form.user_form.email.id_for_label }}" class="form-label">
+                                                📧 Email Address
+                                            </label>
+                                            {{ form.user_form.email }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="{{ form.user_form.first_name.id_for_label }}" class="form-label">
+                                                👤 First Name
+                                            </label>
+                                            {{ form.user_form.first_name }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="{{ form.user_form.last_name.id_for_label }}" class="form-label">
+                                                👤 Last Name
+                                            </label>
+                                            {{ form.user_form.last_name }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="{{ form.birthday.id_for_label }}" class="form-label">
+                                                🎂 Birthday
+                                            </label>
+                                            {{ form.birthday }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bio -->
+                        <div class="form-group mb-4">
+                            <label for="{{ form.bio.id_for_label }}" class="form-label">
+                                📝 Bio
+                            </label>
+                            {{ form.bio }}
+                            <div class="form-text">Tell other developers about yourself, your interests, and what you're learning.</div>
+                        </div>
+
+                        <!-- Stats Preview -->
+                        <div class="card bg-dark mb-4">
+                            <div class="card-body">
+                                <h6 class="card-title">🏆 Your Current Stats</h6>
+                                <div class="row text-center">
+                                    <div class="col-3">
+                                        <div class="text-warning fw-bold">{{ user.profile.reputation_points }}</div>
+                                        <small class="text-muted">Reputation</small>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="text-primary fw-bold">{{ user.questions.count }}</div>
+                                        <small class="text-muted">Questions</small>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="text-success fw-bold">{{ user.answers.count }}</div>
+                                        <small class="text-muted">Answers</small>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="text-info fw-bold">{{ user.reviews.count }}</div>
+                                        <small class="text-muted">Reviews</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-save me-1"></i>Save Changes
+                            </button>
+                            <a href="{% url 'users:profile' user.username %}" class="btn btn-outline-secondary">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}
+  Регистрация
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h2 class="text-center mb-3">Регистрация</h2>
+            <form method="post">
+              {% csrf_token %}
+              {% with submit_btn_label='Создать аккаунт' %}
+                {% include 'users/form.html' %}
+              {% endwith %}
+            </form>
+            {% if messages %}
+              <div class="messages mt-4 text-center">
+                {% for message in messages %}
+                  <div class="alert
+                      {% if message.tags %}
+                        {{ message.tags }}
+                      {% else %}
+                        alert-info
+                      {% endif %}"
+                      role="alert">
+                    {{ message|safe }}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {% if form.errors %}
+              <div class="errors mt-4 text-center">
+                {% for field, errors in form.errors.items %}
+                  {% for msg in errors %}
+                    <div class="alert alert-danger" role="alert">{{ field }}: {{ msg }}</div>
+                  {% endfor %}
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {% if form.non_field_errors %}
+              <div class="non-field-errors mt-4 text-center">
+                {% for error in form.non_field_errors %}
+                  <div class="alert alert-danger" role="alert">{{ error|escape }}</div>
+                {% endfor %}
+              </div>
+            {% endif %}
+            <p class="mt-2 mb-1">
+              <a href="{% url 'users:login' %}">Есть аккаунт? Войти</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

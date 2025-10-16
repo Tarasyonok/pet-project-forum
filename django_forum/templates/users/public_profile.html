@@ -1,0 +1,316 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ profile_user.username }} - Night Coder{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Left Column - User Info & Stats -->
+        <div class="col-lg-4 mb-4">
+            <!-- Profile Card -->
+            <div class="card stat-card shadow-lg border-0">
+                <div class="card-body text-center">
+                    <!-- Avatar -->
+                    <div class="mb-4">
+                        {% if profile_user.profile.avatar %}
+                            <img src="{{ profile_user.profile.avatar.url }}"
+                                 class="rounded-circle border border-3 border-warning"
+                                 width="120" height="120" alt="{{ profile_user.username }}">
+                        {% else %}
+                            <div class="rounded-circle bg-secondary d-inline-flex align-items-center justify-content-center border border-3 border-warning"
+                                 style="width: 120px; height: 120px;">
+                                <span class="fs-1 text-light">👤</span>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Username & Reputation -->
+                    <h2 class="h3 mb-2">{{ profile_user.username }}</h2>
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <span class="badge bg-warning text-dark fs-6 me-2">
+                            🏆 {{ profile_user.profile.reputation_points }} Reputation
+                        </span>
+                        {% if profile_user.role == 'A' %}
+                            <span class="badge bg-danger fs-6">👑 Admin</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Member Since -->
+                    <p class="text-muted mb-3">
+                        <i class="fas fa-calendar me-1"></i>
+                        Member since {{ profile_user.date_joined|date:"F Y" }}
+                    </p>
+
+                    <!-- Bio -->
+                    {% if profile_user.profile.bio %}
+                        <div class="bg-dark rounded p-3 mb-3">
+                            <p class="mb-0 text-light-50">{{ profile_user.profile.bio }}</p>
+                        </div>
+                    {% endif %}
+
+                    <!-- Action Buttons -->
+                    {% if user == profile_user %}
+                        <div class="d-grid gap-2">
+                            <a href="{% url 'users:edit-profile' %}" class="btn btn-outline-warning">
+                                <i class="fas fa-edit me-1"></i>Edit Profile
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="card stat-card shadow-lg border-0 mt-4">
+                <div class="card-header bg-dark">
+                    <h5 class="mb-0">📊 Quick Stats</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-6 mb-3">
+                            <div class="text-primary fw-bold fs-4">{{ questions_count }}</div>
+                            <small class="text-muted">Questions</small>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="text-success fw-bold fs-4">{{ answers_count }}</div>
+                            <small class="text-muted">Answers</small>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="text-info fw-bold fs-4">{{ reviews_count }}</div>
+                            <small class="text-muted">Reviews</small>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="text-warning fw-bold fs-4">{{ accepted_answers }}</div>
+                            <small class="text-muted">Accepted</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reputation Breakdown -->
+            <div class="card stat-card shadow-lg border-0 mt-4">
+                <div class="card-header bg-dark">
+                    <h5 class="mb-0">🎯 Reputation Sources</h5>
+                </div>
+                <div class="card-body">
+                    <div class="small">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Question upvotes</span>
+                            <span class="text-success">+{{ question_upvotes }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Answer upvotes</span>
+                            <span class="text-success">+{{ answer_upvotes }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Accepted answers</span>
+                            <span class="text-success">+{{ accepted_points }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Review upvotes</span>
+                            <span class="text-success">+{{ review_upvotes }}</span>
+                        </div>
+                        <hr class="my-2">
+                        <div class="d-flex justify-content-between fw-bold">
+                            <span>Total earned</span>
+                            <span class="text-warning">+{{ total_earned }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Activity & Content -->
+        <div class="col-lg-8">
+            <!-- Navigation Tabs -->
+            <ul class="nav nav-tabs nav-justified mb-4" id="profileTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="questions-tab" data-bs-toggle="tab"
+                            data-bs-target="#questions" type="button" role="tab">
+                        💬 Questions ({{ questions_count }})
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="answers-tab" data-bs-toggle="tab"
+                            data-bs-target="#answers" type="button" role="tab">
+                        💡 Answers ({{ answers_count }})
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="reviews-tab" data-bs-toggle="tab"
+                            data-bs-target="#reviews" type="button" role="tab">
+                        ⭐ Reviews ({{ reviews_count }})
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="profileTabsContent">
+                <!-- Questions Tab -->
+                <div class="tab-pane fade show active" id="questions" role="tabpanel">
+                    {% if user_questions %}
+                        {% for question in user_questions %}
+                            <div class="card bg-secondary border-0 shadow-sm mb-3 hover-glow">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start">
+                                        <div class="text-center me-3" style="min-width: 60px;">
+                                            <div class="fw-bold fs-5 {% if question.vote_count > 0 %}text-success{% elif question.vote_count < 0 %}text-danger{% else %}text-muted{% endif %}">
+                                                {{ question.vote_count }}
+                                            </div>
+                                            <small class="text-muted">votes</small>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h5 class="card-title">
+                                                <a href="{% url 'forum:question_detail' question.pk %}"
+                                                   class="text-decoration-none text-light">
+                                                    {{ question.title }}
+                                                </a>
+                                            </h5>
+                                            <p class="card-text text-muted small">
+                                                {{ question.content|truncatewords:30 }}
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center text-muted small">
+                                                <div>
+                                                    <span class="badge bg-dark">📅 {{ question.created_at|timesince }} ago</span>
+                                                    <span class="badge bg-dark">💬 {{ question.answers.count }} answers</span>
+                                                    {% if question.is_solved %}
+                                                        <span class="badge bg-success">✅ Solved</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center py-5 text-muted">
+                            <i class="fas fa-question-circle fa-3x mb-3"></i>
+                            <h5>No questions yet</h5>
+                            <p>{% if user == profile_user %}You haven't{% else %}{{ profile_user.username }} hasn't{% endif %} asked any questions yet.</p>
+                            {% if user == profile_user %}
+                                <a href="{% url 'forum:question_create' %}" class="btn btn-warning">Ask Your First Question</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Answers Tab -->
+                <div class="tab-pane fade" id="answers" role="tabpanel">
+                    {% if user_answers %}
+                        {% for answer in user_answers %}
+                            <div class="card bg-secondary border-0 shadow-sm mb-3 hover-glow {% if answer.is_accepted %}border-success{% endif %}">
+                                <div class="card-body">
+                                    {% if answer.is_accepted %}
+                                        <div class="badge bg-success mb-2">✅ Accepted Answer</div>
+                                    {% endif %}
+                                    <div class="d-flex align-items-start">
+                                        <div class="text-center me-3" style="min-width: 60px;">
+                                            <div class="fw-bold fs-5 {% if answer.vote_count > 0 %}text-success{% elif answer.vote_count < 0 %}text-danger{% else %}text-muted{% endif %}">
+                                                {{ answer.vote_count }}
+                                            </div>
+                                            <small class="text-muted">votes</small>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="card-title">
+                                                <a href="{% url 'forum:question_detail' answer.question.pk %}"
+                                                   class="text-decoration-none text-light">
+                                                    Re: {{ answer.question.title }}
+                                                </a>
+                                            </h6>
+                                            <p class="card-text text-muted small">
+                                                {{ answer.content|truncatewords:40 }}
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center text-muted small">
+                                                <div>
+                                                    <span class="badge bg-dark">📅 {{ answer.created_at|timesince }} ago</span>
+                                                    <span class="badge bg-dark">👤 {{ answer.question.author.username }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center py-5 text-muted">
+                            <i class="fas fa-lightbulb fa-3x mb-3"></i>
+                            <h5>No answers yet</h5>
+                            <p>{% if user == profile_user %}You haven't{% else %}{{ profile_user.username }} hasn't{% endif %} answered any questions yet.</p>
+                            {% if user == profile_user %}
+                                <a href="{% url 'forum:question_list' %}" class="btn btn-warning">Help Other Developers</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Reviews Tab -->
+                <div class="tab-pane fade" id="reviews" role="tabpanel">
+                    {% if user_reviews %}
+                        {% for review in user_reviews %}
+                            <div class="card bg-secondary border-0 shadow-sm mb-3 hover-glow">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start">
+                                        <div class="text-center me-3" style="min-width: 60px;">
+                                            <div class="fw-bold fs-5 {% if review.vote_count > 0 %}text-success{% elif review.vote_count < 0 %}text-danger{% else %}text-muted{% endif %}">
+                                                {{ review.vote_count }}
+                                            </div>
+                                            <small class="text-muted">votes</small>
+                                            <div class="text-warning small mt-1">
+                                                {{ review.get_rating_stars }}
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="card-title">{{ review.title }}</h6>
+                                            <h6 class="card-subtitle mb-2 text-info">📖 {{ review.course_name }}</h6>
+                                            <p class="card-text text-muted small">
+                                                {{ review.content|truncatewords:40 }}
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center text-muted small">
+                                                <div>
+                                                    <span class="badge bg-dark">📅 {{ review.created_at|timesince }} ago</span>
+                                                {% if review.updated_at != review.created_at %}
+                                                    <span class="badge bg-dark">✏️ Edited</span>
+                                                {% endif %}
+                                                </div>
+                                                <a href="{% url 'reviews:review_detail' review.pk %}" class="text-success text-decoration-none">
+                                                    Read full review →
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center py-5 text-muted">
+                            <i class="fas fa-star fa-3x mb-3"></i>
+                            <h5>No reviews yet</h5>
+                            <p>{% if user == profile_user %}You haven't{% else %}{{ profile_user.username }} hasn't{% endif %} written any reviews yet.</p>
+                            {% if user == profile_user %}
+                                <a href="{% url 'reviews:review_create' %}" class="btn btn-success">Write Your First Review</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Smooth tab transitions
+    document.addEventListener('DOMContentLoaded', function() {
+        const triggerTabList = [].slice.call(document.querySelectorAll('#profileTabs button'))
+        triggerTabList.forEach(function (triggerEl) {
+            const tabTrigger = new bootstrap.Tab(triggerEl)
+            triggerEl.addEventListener('click', function (event) {
+                event.preventDefault()
+                tabTrigger.show()
+            })
+        })
+    })
+</script>
+{% endblock %}
