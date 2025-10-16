@@ -1,0 +1,40 @@
+[project]
+name = "django-forum"
+version = "0.1.0"
+description = ""
+authors = [
+    { name = "Kirill Tarasov", email = "bravekirty@gmail.com" }
+]
+readme = "README.md"
+requires-python = ">=3.13,<4.0"
+# PROD
+dependencies = [
+    "aiohttp>=3.11.16,<4.0.0",
+    "django>=5.2,<6.0",
+    "pillow>=11.1.0,<12.0.0",
+    "python-decouple>=3.8,<4.0",
+    "requests>=2.32.3,<3.0.0",
+]
+
+[project.urls]
+Homepage = "https://pet-forum-temp.onrender.com/"
+Documentation = "https://github.com/Tarasyonok/pet-forum-temp"
+Repository = "https://github.com/Tarasyonok/pet-forum-temp"
+
+[tool.django]
+settings_module = "django_forum.settings"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+# DEV
+[tool.poetry.group.dev.dependencies]
+django-debug-toolbar = "~5.1.0"
+isort = "~6.0.1"
+ruff = "~0.14.0"
+faker = "~37.11.0"
+
+# SECURITY
+[tool.poetry.group.security.dependencies]
+bandit = "~1.8.3"
