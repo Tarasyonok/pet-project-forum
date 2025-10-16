@@ -1,11 +1,10 @@
 from django.contrib.contenttypes.models import ContentType
-
 from votes.models import Vote
+
 from core.rep_rules import REPUTATION_RULES
 
 
 class VoteableMixin:
-
     def get_votes(self):
         content_type = ContentType.objects.get_for_model(self)
         return Vote.objects.filter(content_type=content_type, object_id=self.pk)

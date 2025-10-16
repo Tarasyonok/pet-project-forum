@@ -2,7 +2,6 @@ import datetime
 
 import django.utils.deconstruct
 import django.utils.timezone
-from django.core.exceptions import ValidationError
 
 
 @django.utils.deconstruct.deconstructible

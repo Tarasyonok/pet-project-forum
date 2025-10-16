@@ -1,9 +1,10 @@
 import django.conf
+import django.core.exceptions
+import django.utils.timezone
+from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-import django.core.exceptions
-from django import forms
-import django.utils.timezone
+
 from users.models import UserProfile
 
 User = get_user_model()

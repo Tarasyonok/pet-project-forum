@@ -1,9 +1,8 @@
 import django.conf
+import django.urls
+from core.rep_rules import REPUTATION_RULES
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
-import django.urls
-
-from core.rep_rules import REPUTATION_RULES
 from votes.models import Vote
 
 

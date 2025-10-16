@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.urls import include, path
 
 urlpatterns = [
-    path('i18n/', include('django.conf.urls.i18n')),
+    path("i18n/", include("django.conf.urls.i18n")),
 ]
 
 urlpatterns += i18n_patterns(

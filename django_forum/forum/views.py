@@ -1,11 +1,11 @@
+import django.urls
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-import django.urls
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_POST
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from forum.forms import AnswerForm, QuestionForm
 from forum.models import Answer, Question

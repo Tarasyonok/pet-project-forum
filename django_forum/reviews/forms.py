@@ -1,5 +1,5 @@
-from django import forms
 import django.urls
+from django import forms
 
 from reviews.models import CourseReview
 

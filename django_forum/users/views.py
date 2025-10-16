@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.views.generic import DetailView, FormView, UpdateView
+
 from users.forms import ProfileEditForm, SignUpForm
 
 User = get_user_model()

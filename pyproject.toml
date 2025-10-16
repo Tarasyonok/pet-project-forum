@@ -31,7 +31,6 @@ build-backend = "poetry.core.masonry.api"
 # DEV
 [tool.poetry.group.dev.dependencies]
 django-debug-toolbar = "~5.1.0"
-isort = "~6.0.1"
 ruff = "~0.14.0"
 faker = "~37.11.0"
 
@@ -45,7 +44,7 @@ target-version = "py313"
 line-length = 120
 
 # Linting rules
-select = [
+lint.select = [
     "E", # pycodestyle errors
     "W", # pycodestyle warnings
     "F", # pyflakes
@@ -57,29 +56,15 @@ select = [
     "YTT", # flake8-2020
     "FBT", # flake8-boolean-trap
     "Q", # flake8-quotes
-    "COM", # flake8-commas
     "RUF", # ruff-specific rules
 ]
 
-ignore = [
+lint.ignore = [
     "E501", # line-too-long - handled by formatter
     "RUF012", # mutable-class-default
 ]
 
-# Formatting configuration (replaces Black)
-quote-style = "double"
-skip-magic-trailing-comma = false
-indent-style = "space"
-
-# isort configuration (integrated into Ruff)
-[tool.ruff.isort]
-known-first-party = ["core", "forum", "home", "leaderboards", "reviews", "users", "votes"]
-combine-as-imports = true
-force-sort-within-sections = true
-order-by-type = true
-
-
 # File exclusions
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]  # allow unused imports in __init__.py
 "migrations/*.py" = ["F401"]  # allow unused imports in migrations

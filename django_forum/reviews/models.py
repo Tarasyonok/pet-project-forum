@@ -1,10 +1,9 @@
 import django.conf
-from django.db import models
 import django.urls
 import django.utils.timezone
-from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.contenttypes.fields import GenericRelation
-
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
 from votes.models import Vote
 
 
