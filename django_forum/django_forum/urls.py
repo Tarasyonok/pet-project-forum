@@ -19,4 +19,4 @@ urlpatterns += i18n_patterns(
     *static(django.conf.settings.STATIC_URL, document_root=django.conf.settings.STATIC_ROOT),
 )
 
-handler404 = 'home.views.custom_404_view'
+handler404 = "home.views.custom_404_view"

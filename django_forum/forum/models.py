@@ -1,6 +1,5 @@
 import django.conf
 import django.urls
-
 from core.mixins import VoteableMixin
 from core.rep_rules import REPUTATION_RULES
 from django.contrib.contenttypes.fields import GenericRelation

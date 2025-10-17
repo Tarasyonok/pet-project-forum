@@ -6,9 +6,7 @@ from users.models import User, UserProfile
 
 def leaderboard_view(request):
     all_time_leaders = (
-        UserProfile.objects.select_related("user")
-        .filter(reputation_points__gt=0)
-        .order_by("-reputation_points")[:20]
+        UserProfile.objects.select_related("user").filter(reputation_points__gt=0).order_by("-reputation_points")[:20]
     )
 
     month_start = timezone.now().replace(day=1, hour=0, minute=0, second=0, microsecond=0)

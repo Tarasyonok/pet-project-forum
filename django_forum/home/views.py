@@ -29,9 +29,7 @@ def home_view(request):
     )[:6]
 
     context["top_contributors"] = (
-        UserProfile.objects.select_related("user")
-        .filter(reputation_points__gt=0)
-        .order_by("-reputation_points")[:5]
+        UserProfile.objects.select_related("user").filter(reputation_points__gt=0).order_by("-reputation_points")[:5]
     )
 
     three_hours_ago = timezone.now() - timedelta(hours=3)
@@ -54,6 +52,7 @@ def home_view(request):
         context["user_rank"] = user_rank
 
     return render(request, "home/home.html", context)
+
 
 def custom_404_view(request, exception):
     return render(request, "404.html", status=404)

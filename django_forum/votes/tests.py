@@ -1,7 +1,6 @@
 # core/tests/test_votes.py
 import logging
 
-from votes.models import Vote
 from core.rep_rules import REPUTATION_RULES
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
@@ -10,6 +9,8 @@ from django.test import Client, TestCase
 from django.urls import reverse
 from forum.models import Answer, Question
 from reviews.models import CourseReview
+
+from votes.models import Vote
 
 # Get logger for this module
 logger = logging.getLogger(__name__)

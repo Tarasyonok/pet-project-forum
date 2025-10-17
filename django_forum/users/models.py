@@ -1,8 +1,8 @@
 import django.conf
+import django.contrib.auth.models
 from django.db import models
 
 import users.utils.validators
-import django.contrib.auth.models
 
 
 class User(django.contrib.auth.models.AbstractUser):

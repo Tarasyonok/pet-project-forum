@@ -1,11 +1,10 @@
 import django.conf
 import django.urls
 import django.utils.timezone
+from core.mixins import VoteableMixin
 from django.contrib.contenttypes.fields import GenericRelation
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-
-from core.mixins import VoteableMixin
 from votes.models import Vote
 
 
