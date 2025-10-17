@@ -4,10 +4,12 @@ import django.utils.timezone
 from django.contrib.contenttypes.fields import GenericRelation
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+
+from core.mixins import VoteableMixin
 from votes.models import Vote
 
 
-class CourseReview(models.Model):
+class CourseReview(VoteableMixin, models.Model):
     RATING_CHOICES = [
         (1, "⭐"),
         (2, "⭐⭐"),

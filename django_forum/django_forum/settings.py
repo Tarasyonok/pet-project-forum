@@ -122,7 +122,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 LOGIN_URL = django.urls.reverse_lazy("users:login")
-LOGIN_REDIRECT_URL = "users:profile"
 LOGOUT_REDIRECT_URL = django.urls.reverse_lazy("users:login")
 
 LOGGING = {

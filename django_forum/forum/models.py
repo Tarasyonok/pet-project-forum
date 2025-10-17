@@ -1,12 +1,14 @@
 import django.conf
 import django.urls
+
+from core.mixins import VoteableMixin
 from core.rep_rules import REPUTATION_RULES
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from votes.models import Vote
 
 
-class Question(models.Model):
+class Question(VoteableMixin, models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     author = models.ForeignKey(
@@ -32,7 +34,7 @@ class Question(models.Model):
         return self.answers.count()
 
 
-class Answer(models.Model):
+class Answer(VoteableMixin, models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="answers")
     content = models.TextField()
     author = models.ForeignKey(
