@@ -1,0 +1,62 @@
+name: Django CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+env:
+  PYTHON_VERSION: '3.13'
+  POETRY_VERSION: '2.2.1'
+  DJANGO_SETTINGS_MODULE: 'django_forum.settings'
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          .venv/
+          ~/.cache/pip/
+          ~/.cache/pypoetry/
+        key: ${{ runner.os }}-python-${{ env.PYTHON_VERSION }}-${{ hashFiles('**/poetry.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-python-${{ env.PYTHON_VERSION }}-
+
+    - name: Install Poetry
+      run: |
+        pip install poetry==${{ env.POETRY_VERSION }}
+
+    - name: Configure Poetry
+      run: |
+        poetry config virtualenvs.in-project true
+
+    - name: Install dependencies
+      run: |
+        poetry install --no-interaction --no-root
+
+    - name: Check code formatting with Ruff
+      run: |
+        poetry run ruff format --check .
+
+    - name: Lint with Ruff
+      run: |
+        poetry run ruff check .
+
+    - name: Run Tests
+      run: |
+        cd django_forum
+        poetry run python manage.py migrate
+        poetry run python manage.py test
