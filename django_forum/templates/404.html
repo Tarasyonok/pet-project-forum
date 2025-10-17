@@ -1,0 +1,12 @@
+<!-- templates/404.html -->
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="container text-center py-5">
+    <div class="display-1">🐼</div>
+    <h1>{% trans "Page Not Found" %}</h1>
+    <p class="lead">{% trans "The panda couldn't find this page. Maybe it's eating bamboo somewhere else?" %}</p>
+    <a href="{% url 'home:home' %}" class="btn btn-warning">{% trans "Back to Home" %}</a>
+</div>
+{% endblock %}
