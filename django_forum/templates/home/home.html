@@ -22,7 +22,7 @@
                 {% if not user.is_authenticated %}
                 <div class="d-flex gap-2 gap-md-3 flex-wrap">
                     <a href="{% url 'users:signup' %}" class="btn btn-warning btn-lg fw-bold hover-glow pulse">
-                        🚀 {% trans "Sign Up for Free" %}
+                        🚀 {% trans "Start Coding Free" %}
                     </a>
                     <a href="{% url 'forum:question_list' %}" class="btn btn-outline-light btn-lg hover-glow">
                         💬 {% trans "Browse Questions" %}
@@ -43,11 +43,10 @@
                 <div class="position-relative">
                     <div class="bg-dark rounded-3 p-3 p-md-4 shadow-lg">
                         <div class="text-monospace text-start small">
-                            <span class="text-success">// {% trans "Tonight's activity" %}</span><br>
+                            <span class="text-success">// {% trans "Latest activity" %}</span><br>
                             <span class="text-info">let</span> <span class="text-warning">community</span> = {<br>
                             &nbsp;&nbsp;questions: <span class="text-info">{{ latest_questions.count }}</span>,<br>
                             &nbsp;&nbsp;answers: <span class="text-info">{{ total_answers_tonight }}</span>,<br>
-                            &nbsp;&nbsp;developersOnline: <span class="text-info">{{ active_night_users }}</span><br>
                             };
                         </div>
                     </div>

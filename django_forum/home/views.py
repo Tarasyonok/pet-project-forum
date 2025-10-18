@@ -33,10 +33,9 @@ def home_view(request):
         UserProfile.objects.select_related("user").filter(reputation_points__gt=0).order_by("-reputation_points")[:5]
     )
 
-    three_hours_ago = timezone.now() - timedelta(hours=3)
-    context["active_night_users"] = User.objects.filter(last_login__gte=three_hours_ago).count()
-    context["questions_tonight"] = Question.objects.filter(created_at__gte=three_hours_ago).count()
-    context["total_answers_tonight"] = Answer.objects.filter(created_at__gte=three_hours_ago).count()
+    day_ago = timezone.now() - timedelta(hours=24)
+    context["questions_tonight"] = Question.objects.filter(created_at__gte=day_ago).count()
+    context["total_answers_tonight"] = Answer.objects.filter(created_at__gte=day_ago).count()
 
     top_profile = UserProfile.objects.order_by("-reputation_points").first()
     if top_profile:
