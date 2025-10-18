@@ -15,14 +15,14 @@
                     <span class="text-warning">{% trans "Neither Do We." %} 🌙</span>
                 </h1>
                 <p class="lead mb-3 mb-md-4">
-                    {% trans "Join thousands of night owls who code, learn, and grow together." %}
+                    {% trans "Join thousands of coders, learn, and grow together." %}
                     {% trans "Get unstuck, share knowledge, and build your reputation in the developer community." %}
                 </p>
 
                 {% if not user.is_authenticated %}
                 <div class="d-flex gap-2 gap-md-3 flex-wrap">
                     <a href="{% url 'users:signup' %}" class="btn btn-warning btn-lg fw-bold hover-glow pulse">
-                        🚀 {% trans "Start Coding Free" %}
+                        🚀 {% trans "Sign Up for Free" %}
                     </a>
                     <a href="{% url 'forum:question_list' %}" class="btn btn-outline-light btn-lg hover-glow">
                         💬 {% trans "Browse Questions" %}
@@ -44,7 +44,7 @@
                     <div class="bg-dark rounded-3 p-3 p-md-4 shadow-lg">
                         <div class="text-monospace text-start small">
                             <span class="text-success">// {% trans "Tonight's activity" %}</span><br>
-                            <span class="text-info">const</span> <span class="text-warning">community</span> = {<br>
+                            <span class="text-info">let</span> <span class="text-warning">community</span> = {<br>
                             &nbsp;&nbsp;questions: <span class="text-info">{{ latest_questions.count }}</span>,<br>
                             &nbsp;&nbsp;answers: <span class="text-info">{{ total_answers_tonight }}</span>,<br>
                             &nbsp;&nbsp;developersOnline: <span class="text-info">{{ active_night_users }}</span><br>
@@ -108,7 +108,7 @@
                     <div class="border-bottom border-dark p-3 hover-glow">
                         <div class="d-flex align-items-start">
                             <div class="text-center me-3" style="min-width: 50px;">
-                                <div class="text-success fw-bold small">{{ question.vote_count }}</div>
+                                <div class="text-success fw-bold small">{{ question.get_vote_count }}</div>
                                 <small class="text-muted">{% trans "votes" %}</small>
                             </div>
                             <div class="flex-grow-1">
@@ -158,7 +158,7 @@
                                 </div>
                             </div>
                             <div class="text-end flex-shrink-0">
-                                <span class="badge bg-success">{{ review.vote_count }}</span>
+                                <span class="badge bg-success">{{ review.get_vote_count }}</span>
                                 <div class="text-muted small">{% trans "votes" %}</div>
                             </div>
                         </div>

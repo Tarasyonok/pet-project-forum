@@ -1,6 +1,7 @@
 from datetime import timedelta
 
 from django.contrib.auth import get_user_model
+from django.http import Http404
 from django.shortcuts import render
 from django.utils import timezone
 from forum.models import Answer, Question
@@ -56,3 +57,7 @@ def home_view(request):
 
 def custom_404_view(request, exception):
     return render(request, "404.html", status=404)
+
+
+def panda(request):
+    raise Http404("Page not found")
