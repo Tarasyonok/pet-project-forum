@@ -12,7 +12,7 @@
 
 ## 🎯 What is Night Coder?
 
-**Night Coder** is a full-stack developer community platform built for those magical hours when creativity flows best. It's where students 👨‍🎓, and passionate developers 💻 come together to ask questions, share knowledge, and grow their skills.
+**Night Coder** is a full-stack developer community platform built for those magical hours when creativity flows best. It's where students, and passionate developers come together to ask questions, share knowledge, and grow their skills.
 
 ### ✨ Why Night Coder Exists
 
@@ -39,24 +39,22 @@
 ## 🛠️ Tech Stack
 
 ### **Backend**
-- **Python 3.11** - Core programming language
-- **Django 4.2** - High-level Python Web framework
-- **Django REST Framework** - API development
-- **PostgreSQL** - Production database
-- **SQLite** - Development database
+- **Python 3.13** - Core programming language
+- **Django 5.2** - High-level Python Web framework
+- **SQLite** - Development & production database 
 
 ### **Frontend**
 - **Bootstrap 5** - Responsive CSS framework
-- **JavaScript (ES6+)** - Interactive features
+- **JavaScript** - Interactive features
 - **HTML5 & CSS3** - Modern web standards
 - **Font Awesome** - Icons and emojis
 
 ### **DevOps & Tools**
 - **Render** - Cloud deployment platform
 - **Ruff** - Ultra-fast Python linter and formatter
-- **Pytest** - Testing framework
-- **Git** - Version control
-- **CI/CD** - Automated testing and deployment
+- **Tests** - Unit & Integration tests
+- **Git** - Version control with clean commit history
+- **CI/CD** - Automated linting and testing
 
 ## 🎨 Key Features
 
@@ -65,7 +63,6 @@
 - Vote system with reputation rewards
 - Mark answers as accepted
 - Full-text search across questions and answers
-- Real-time updates without page reloads
 
 ### ⭐ **Course Reviews**
 - Share experiences with programming courses
@@ -76,8 +73,8 @@
 ### 🏆 **Gamification System**
 - **Reputation Points** - Earn through helpful contributions
 - **Leaderboards** - Compete with other developers
-- **Achievement System** - Milestones and badges
 - **Monthly Top Contributors** - Recognition for active members
+- **Footer statistics** - Context processor for community stats on every page
 
 ### 👤 **Rich User Profiles**
 - Avatar upload and personal bios
@@ -87,44 +84,42 @@
 
 ### 🌐 **Internationalization**
 - Full English/Russian language support
+- Language switcher
 - SEO-friendly URL structure
-- Language switcher with user preferences
 
 ### 🎯 **Developer Experience**
 - Dark theme optimized for coding
 - Mobile-responsive design
-- Fast loading times
 - Accessible and keyboard-navigation friendly
 
 ## 📁 Project Structure
 
 ```
 night-coder/
-├── 🏠 home/                 # Homepage app
+├── 🏠 home/                # Homepage app
 ├── 💬 forum/               # Q&A functionality
 ├── ⭐ reviews/             # Course reviews
-├── 👤 users/              # Authentication & profiles
-├── 🏆 leaderboards/       # Gamification system
-├── 🎨 stickers/           # Telegram sticker packs
-├── 🔧 core/               # Shared utilities & mixins
-├── 📁 templates/          # Django templates
-├── 📁 static/            # CSS, JS, images
-└── 📁 locale/            # Translation files
+├── 👤 users/               # Authentication & profiles
+├── 👍 votes/               # Content votes
+├── 🏆 leaderboards/        # Gamification system
+├── 🔧 core/                # Shared utilities & mixins
+├── 📁 templates/           # Django templates
+├── 📁 static/              # CSS, JS, images
+└── 📁 locale/              # Translation files
 ```
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.11+
-- PostgreSQL (optional, SQLite for development)
+- Python 3.13+
 - Git
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/night-coder.git
-   cd night-coder
+   git clone https://github.com/Tarasyonok/pet-project-forum
+   cd pet-project-forum
    ```
 
 2. **Set up virtual environment**
@@ -135,7 +130,8 @@ night-coder/
 
 3. **Install dependencies**
    ```bash
-   pip install -r requirements.txt
+   pip install poetry
+   poetry install
    ```
 
 4. **Configure environment**
@@ -159,19 +155,12 @@ night-coder/
    python manage.py runserver
    ```
 
-Visit `http://localhost:8000` and start coding! 🌙
+Visit `http://localhost:8000` and create your first question! 🌙
 
 ## 🧪 Testing
 
 ```bash
-# Run all tests
-pytest
-
-# Run with coverage
-pytest --cov=.
-
-# Run specific app tests
-pytest forum/ -v
+python manage.py test
 ```
 
 ## 🔧 Code Quality
@@ -180,12 +169,6 @@ pytest forum/ -v
 # Lint and format code
 ruff check .          # Linting
 ruff format .         # Formatting
-
-# Security check
-bandit -r .
-
-# Type checking (if using mypy)
-mypy .
 ```
 
 ## 🌐 Deployment
@@ -193,9 +176,8 @@ mypy .
 Night Coder is deployed on **Render** with automatic CI/CD:
 
 1. **Push to main branch** → Automatic deployment
-2. **Database** → Render PostgreSQL
-3. **Static files** → Whitenoise serving
-4. **Environment** → Production-ready configuration
+2. **build.sh and start.sh** → Automatic deployment
+3. **Environment** → Production-ready configuration
 
 ### Environment Variables
 ```env
@@ -249,8 +231,8 @@ This project demonstrates mastery in:
 
 ## 👨‍💻 About the Developer
 
-**Your Name**  
-*Full-Stack Developer & Night Owl* 🦉
+**Kir Tarasov**  
+*Full-Stack Developer*
 
 - 🌐 **Portfolio**: [your-portfolio.com](https://your-portfolio.com)
 - 💼 **LinkedIn**: [Your LinkedIn](https://linkedin.com/in/your-profile)
@@ -263,55 +245,14 @@ This project demonstrates mastery in:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
-
-- **Django Community** - For an amazing web framework
-- **Bootstrap Team** - For beautiful UI components
-- **Render** - For generous free hosting
-- **All Night Coders** - For being part of this community
-
 ---
 
 <div align="center">
 
 ### **Ready to join our night coding community?** 🌙
 
-[![Deploy on Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
 [![Try Night Coder](https://img.shields.io/badge/Try_Night_Coder-Live_Demo-orange?style=for-the-badge)](https://your-night-coder-app.onrender.com)
 
-*⭐ Don't forget to star this repo if you found it helpful!*
+*⭐ Don't forget to star this repo if you found it interesting/helpful!*
 
 </div>
-
-
-## 🎯 Why This README Works:
-
-### **For Recruiters** 💼:
-- **Immediate understanding** of what the project does
-- **Technical depth** showing your skills
-- **Business impact** with user metrics
-- **Professional presentation** that stands out
-
-### **For Developers** 👨‍💻:
-- **Clear setup instructions**
-- **Technical specifications**
-- **Architecture overview**
-- **Contribution guidelines**
-
-### **Key Psychological Triggers** 🧠:
-- **Social proof** - User numbers and impact
-- **Visual appeal** - Badges, emojis, structure
-- **Credibility** - Live demo, tests, deployment
-- **Storytelling** - Your personal journey
-
-## 🚀 Next Steps:
-
-1. **Replace placeholder URLs** with your actual links
-2. **Add real screenshots** from your deployed app
-3. **Update metrics** with your actual user numbers
-4. **Customize the "About Developer"** section
-5. **Add your actual deployment badge**
-
-This README will make recruiters immediately see you as a senior-level developer who can ship production-ready applications! 🎉
-
-Want me to help you customize any specific section? Or ready to deploy this masterpiece to your GitHub? 😊

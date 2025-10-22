@@ -2,12 +2,16 @@ import django.contrib.auth.views as auth_views
 from django.urls import path, reverse_lazy
 
 from users import views
+from users.forms import CustomLoginForm
 
 app_name = "users"
 urlpatterns = [
     path(
         "login/",
-        views.LoginView.as_view(template_name="users/login.html"),
+        auth_views.LoginView.as_view(
+            template_name="users/login.html",
+            form_class=CustomLoginForm
+        ),
         name="login",
     ),
     path(

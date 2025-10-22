@@ -1,16 +1,86 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
 
-{% block title %}
-  Выход из аккаунта
-{% endblock %}
+{% block title %}{% trans "Signed Out - Night Coder" %}{% endblock %}
 
 {% block content %}
-  <div class="container mt-5">
+<div class="container py-4 py-md-5">
     <div class="row justify-content-center">
-      <div class="col-md-4 text-center">
-        <h2>Вы вышли из системы.</h2>
-        <a href="{% url 'login' %}" class="btn btn-primary mt-3">Войти снова</a>
-      </div>
+        <div class="col-md-8 col-lg-6">
+            <!-- Logout Card -->
+            <div class="card professional-card border-0 shadow-lg text-center">
+                <div class="card-header professional-card-header p-4">
+                    <h1 class="h3 mb-0">👋 {% trans "Signed Out Successfully" %}</h1>
+                </div>
+                <div class="card-body p-4 p-md-5">
+                    <div class="mb-4">
+                        <i class="fas fa-moon fa-4x text-warning mb-3"></i>
+                        <h3 class="text-light mb-3">{% trans "See You Next Time, Coder!" %}</h3>
+                        <p class="text-light-50 mb-4">
+                            {% trans "You've been successfully signed out. The code will be waiting for your return." %}
+                        </p>
+                    </div>
+
+                    <div class="d-flex gap-3 justify-content-center flex-wrap">
+                        <a href="{% url 'users:login' %}" class="btn btn-warning btn-lg fw-bold hover-glow">
+                            🔑 {% trans "Sign Back In" %}
+                        </a>
+                        <a href="{% url 'home' %}" class="btn btn-outline-light btn-lg hover-glow">
+                            🏠 {% trans "Return Home" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community Reminder -->
+            <div class="card professional-card border-0 shadow-lg mt-4">
+                <div class="card-body p-4 text-center">
+                    <h5 class="text-warning mb-3">💫 {% trans "Remember Why You Code" %}</h5>
+                    <p class="text-light-50 mb-0">
+                        {% trans "Every line of code brings us closer to innovation. Rest, recharge, and come back stronger." %}
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
+
+<style>
+    .professional-card {
+        background-color: #2a2d3e;
+        border: 1px solid #3a3f5c;
+        color: #e9ecef;
+        transition: all 0.3s ease;
+    }
+
+    .professional-card:hover {
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+    }
+
+    .professional-card-header {
+        background-color: #343a50 !important;
+        border-bottom: 1px solid #3a3f5c;
+        color: #ffffff;
+    }
+
+    .text-light-50 {
+        color: rgba(255, 255, 255, 0.5) !important;
+    }
+
+    .hover-glow:hover {
+        box-shadow: 0 0 15px rgba(255, 193, 7, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .d-flex.gap-3 {
+            gap: 1rem !important;
+        }
+    }
+</style>
 {% endblock %}
