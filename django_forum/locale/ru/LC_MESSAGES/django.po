@@ -1,0 +1,1904 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-23 10:13+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\forum\forms.py:12
+msgid "What's your question?"
+msgstr "В чём вопрос?"
+
+#: .\forum\forms.py:14
+msgid "Describe your problem in detail..."
+msgstr "Опиши проблему подробнее..."
+
+#: .\forum\forms.py:25
+msgid "Write your answer here..."
+msgstr "Напиши свой ответ здесь..."
+
+#: .\forum\views.py:155
+msgid "Only question author can accept answers"
+msgstr "Только автор вопроса может отметить ответ как верный"
+
+#: .\reviews\forms.py:14
+msgid "e.g., Django Masterclass, Python Basics..."
+msgstr "Например: «Django Masterclass», «Основы Python»..."
+
+#: .\reviews\forms.py:17
+msgid "Brief summary of your review..."
+msgstr "Коротко о впечатлениях..."
+
+#: .\reviews\forms.py:20
+msgid "Share your experience with this course..."
+msgstr "Поделись впечатлениями от курса..."
+
+#: .\reviews\forms.py:42
+#, python-format
+msgid ""
+"You have already reviewed '%(course_name)s'. You can <a "
+"href='%(review_url)s'>view your existing review</a> or <a "
+"href='%(edit_url)s'>edit it</a>."
+msgstr ""
+"Ты уже оставлял отзыв на «%(course_name)s». Можешь <a "
+"href='%(review_url)s'>посмотреть его</a> или <a href='%(edit_url)s'>что-то "
+"изменить</a>."
+
+#: .\templates\404.html:7
+msgid "Page Not Found"
+msgstr "Страница не найдена"
+
+#: .\templates\404.html:8
+msgid ""
+"The panda couldn't find this page. Maybe it's eating bamboo somewhere else?"
+msgstr "Панда не нашла эту страницу. Может, она пошла за бамбуком?"
+
+#: .\templates\404.html:9
+msgid "Back to Home"
+msgstr "На главную"
+
+#: .\templates\base.html:8
+msgid "Night Coder - Code Together, Grow Together"
+msgstr "Night Coder — Программируем вместе, растем вместе"
+
+#: .\templates\base.html:55
+msgid "Night Coder Panda"
+msgstr "Панда Night Coder"
+
+#: .\templates\forum\answer_confirm_delete.html:5
+msgid "Delete Answer - Night Coder"
+msgstr "Удалить ответ — Night Coder"
+
+#: .\templates\forum\answer_confirm_delete.html:17
+#: .\templates\forum\answer_confirm_delete.html:45
+msgid "Delete Answer"
+msgstr "Удалить ответ"
+
+#: .\templates\forum\answer_confirm_delete.html:23
+msgid "Are you sure you want to delete this answer?"
+msgstr "Точно удалить ответ?"
+
+#: .\templates\forum\answer_confirm_delete.html:26
+msgid "Question:"
+msgstr "Вопрос:"
+
+#: .\templates\forum\answer_confirm_delete.html:28
+msgid "Your answer:"
+msgstr "Твой ответ:"
+
+#: .\templates\forum\answer_confirm_delete.html:33
+msgid ""
+"This action cannot be undone. All votes associated with this answer will "
+"also be permanently deleted."
+msgstr ""
+"Это действие необратимо. Все голоса за этот ответ тоже удалятся навсегда."
+
+#: .\templates\forum\answer_confirm_delete.html:42
+#: .\templates\forum\answer_form.html:56
+#: .\templates\forum\question_confirm_delete.html:42
+#: .\templates\forum\question_form.html:84
+#: .\templates\reviews\review_confirm_delete.html:46
+#: .\templates\reviews\review_form.html:141
+#: .\templates\users\password_change.html:90
+#: .\templates\users\profile_edit.html:172
+msgid "Cancel"
+msgstr "Отмена"
+
+#: .\templates\forum\answer_form.html:5
+msgid "Edit Answer - Night Coder"
+msgstr "Редактировать ответ — Night Coder"
+
+#: .\templates\forum\answer_form.html:16
+msgid "Edit Your Answer"
+msgstr "Редактировать ответ"
+
+#: .\templates\forum\answer_form.html:19
+msgid "Improve your answer to better help the community."
+msgstr "Улучши ответ — помоги сообществу."
+
+#: .\templates\forum\answer_form.html:27
+msgid "Edit Answer"
+msgstr "Редактировать ответ"
+
+#: .\templates\forum\answer_form.html:37
+msgid "Your Answer *"
+msgstr "Твой ответ *"
+
+#: .\templates\forum\answer_form.html:59
+msgid "Update Answer"
+msgstr "Обновить ответ"
+
+#: .\templates\forum\answer_form.html:69
+msgid "Writing a Good Answer"
+msgstr "Как дать хороший ответ"
+
+#: .\templates\forum\answer_form.html:73
+msgid "Be clear and concise"
+msgstr "Будь понятным и кратким"
+
+#: .\templates\forum\answer_form.html:73
+msgid "in your explanation"
+msgstr "в объяснении"
+
+#: .\templates\forum\answer_form.html:74
+#: .\templates\forum\question_form.html:106
+msgid "Include code examples"
+msgstr "Добавь примеры кода"
+
+#: .\templates\forum\answer_form.html:74
+msgid "if they help explain"
+msgstr "если они прояснят суть"
+
+#: .\templates\forum\answer_form.html:75
+msgid "Explain why"
+msgstr "Объясни, почему"
+
+#: .\templates\forum\answer_form.html:75
+msgid "your solution works"
+msgstr "решение работает"
+
+#: .\templates\forum\answer_form.html:76
+msgid "Consider edge cases"
+msgstr "Учти крайние случаи"
+
+#: .\templates\forum\answer_form.html:76
+msgid "and limitations"
+msgstr "и ограничения"
+
+#: .\templates\forum\answer_form.html:77
+msgid "Be respectful and helpful"
+msgstr "Будь вежливым и полезным"
+
+#: .\templates\forum\answer_form.html:77
+msgid "to the asker"
+msgstr "для автора вопроса"
+
+#: .\templates\forum\question_confirm_delete.html:5
+msgid "Delete Question - Night Coder"
+msgstr "Удалить вопрос — Night Coder"
+
+#: .\templates\forum\question_confirm_delete.html:17
+#: .\templates\forum\question_confirm_delete.html:45
+#: .\templates\forum\question_detail.html:95
+msgid "Delete Question"
+msgstr "Удалить вопрос"
+
+#: .\templates\forum\question_confirm_delete.html:23
+msgid "Are you sure you want to delete this question?"
+msgstr "Точно удалить вопрос?"
+
+#: .\templates\forum\question_confirm_delete.html:33
+msgid ""
+"This action cannot be undone. All answers and votes associated with this "
+"question will also be permanently deleted."
+msgstr ""
+"Это действие необратимо. Все ответы и голоса за этот вопрос тоже удалятся "
+"навсегда."
+
+#: .\templates\forum\question_detail.html:6 .\templates\includes\footer.html:7
+#: .\templates\includes\header.html:6 .\templates\reviews\review_detail.html:6
+#: .\templates\users\password_reset_email.html:57
+#: .\templates\users\public_profile.html:5
+msgid "Night Coder"
+msgstr "Night Coder"
+
+#: .\templates\forum\question_detail.html:17
+#: .\templates\forum\question_list.html:65
+msgid "Back to All Questions"
+msgstr "Назад к списку вопросов"
+
+#: .\templates\forum\question_detail.html:19
+#: .\templates\forum\question_form.html:37
+msgid "Question Details"
+msgstr "Детали вопроса"
+
+#: .\templates\forum\question_detail.html:23
+msgid "Answer Question"
+msgstr "Ответить"
+
+#: .\templates\forum\question_detail.html:47
+#: .\templates\forum\question_detail.html:62
+#: .\templates\forum\question_detail.html:165
+#: .\templates\forum\question_detail.html:180
+#: .\templates\reviews\review_detail.html:47
+#: .\templates\reviews\review_detail.html:62
+msgid "Can't vote on your own content"
+msgstr "Нельзя голосовать за своё"
+
+#: .\templates\forum\question_detail.html:47
+#: .\templates\forum\question_detail.html:62
+#: .\templates\forum\question_detail.html:165
+#: .\templates\forum\question_detail.html:180
+#: .\templates\reviews\review_detail.html:47
+#: .\templates\reviews\review_detail.html:62
+msgid "Login to vote"
+msgstr "Войди, чтобы голосовать"
+
+#: .\templates\forum\question_detail.html:47
+msgid "Upvote (+5 reputation)"
+msgstr "Лайк (+5 к репутации)"
+
+#: .\templates\forum\question_detail.html:62
+#: .\templates\forum\question_detail.html:180
+msgid "Downvote (-2 reputation)"
+msgstr "Дизлайк (-2 к репутации)"
+
+#: .\templates\forum\question_detail.html:79
+#: .\templates\forum\question_detail.html:149
+#: .\templates\forum\question_list.html:122
+#: .\templates\forum\question_list.html:262
+#: .\templates\users\public_profile.html:181
+msgid "Solved"
+msgstr "Решено"
+
+#: .\templates\forum\question_detail.html:85
+#: .\templates\reviews\review_detail.html:88
+msgid "Actions"
+msgstr "Действия"
+
+#: .\templates\forum\question_detail.html:90
+#: .\templates\forum\question_form.html:6
+#: .\templates\forum\question_form.html:37
+msgid "Edit Question"
+msgstr "Редактировать вопрос"
+
+#: .\templates\forum\question_detail.html:109
+#: .\templates\forum\question_detail.html:225
+#: .\templates\forum\question_list.html:135 .\templates\home\home.html:190
+#: .\templates\includes\footer.html:32
+#: .\templates\leaderboards\leaderboard.html:195
+#: .\templates\reviews\review_detail.html:119
+#: .\templates\reviews\review_list.html:129
+msgid "rep"
+msgstr "реп."
+
+#: .\templates\forum\question_detail.html:112
+#: .\templates\forum\question_detail.html:116
+#: .\templates\forum\question_detail.html:228
+#: .\templates\forum\question_list.html:138 .\templates\home\home.html:123
+#: .\templates\home\home.html:156 .\templates\reviews\review_detail.html:122
+#: .\templates\reviews\review_detail.html:126
+#: .\templates\reviews\review_detail.html:172
+#: .\templates\reviews\review_list.html:132
+#: .\templates\reviews\user_reviews.html:109
+#: .\templates\users\public_profile.html:178
+#: .\templates\users\public_profile.html:238
+#: .\templates\users\public_profile.html:292
+msgid "ago"
+msgstr "назад"
+
+#: .\templates\forum\question_detail.html:116
+#: .\templates\reviews\review_detail.html:126
+#: .\templates\users\public_profile.html:294
+msgid "Edited"
+msgstr "Изменён"
+
+#: .\templates\forum\question_detail.html:120
+msgid "views"
+msgstr "просмотры"
+
+#: .\templates\forum\question_detail.html:146
+#: .\templates\forum\question_list.html:258 .\templates\home\home.html:81
+#: .\templates\home\home.html:225 .\templates\leaderboards\leaderboard.html:238
+#: .\templates\users\profile_edit.html:156
+#: .\templates\users\public_profile.html:77
+#: .\templates\users\public_profile.html:139
+msgid "Answers"
+msgstr "Ответы"
+
+#: .\templates\forum\question_detail.html:165
+msgid "Upvote (+10 reputation)"
+msgstr "Лайк (+10 к репутации)"
+
+#: .\templates\forum\question_detail.html:193
+msgid "Mark as accepted answer (+15 reputation)"
+msgstr "Отметить как верный ответ (+15 к репутации)"
+
+#: .\templates\forum\question_detail.html:194
+msgid "Accept"
+msgstr "Принять"
+
+#: .\templates\forum\question_detail.html:197
+#: .\templates\forum\question_detail.html:202
+msgid "Accepted answer"
+msgstr "Верный ответ"
+
+#: .\templates\forum\question_detail.html:198
+#: .\templates\forum\question_detail.html:203
+#: .\templates\users\public_profile.html:85
+msgid "Accepted"
+msgstr "Принят"
+
+#: .\templates\forum\question_detail.html:212
+#: .\templates\users\public_profile.html:218
+msgid "Accepted Answer"
+msgstr "Верный ответ"
+
+#: .\templates\forum\question_detail.html:240
+#: .\templates\reviews\user_reviews.html:117
+msgid "Edit"
+msgstr "Изменить"
+
+#: .\templates\forum\question_detail.html:245
+msgid "Delete"
+msgstr "Удалить"
+
+#: .\templates\forum\question_detail.html:258
+#: .\templates\users\public_profile.html:250
+msgid "No answers yet"
+msgstr "Пока нет ответов"
+
+#: .\templates\forum\question_detail.html:259
+msgid "Be the first to help solve this problem!"
+msgstr "Стань первым, кто поможет с решением!"
+
+#: .\templates\forum\question_detail.html:269
+msgid "Your Answer"
+msgstr "Твой ответ"
+
+#: .\templates\forum\question_detail.html:279
+msgid "Be specific and include any code examples if relevant"
+msgstr "Будь конкретным, добавь примеры кода, если нужно"
+
+#: .\templates\forum\question_detail.html:282
+msgid "Post Answer"
+msgstr "Опубликовать"
+
+#: .\templates\forum\question_detail.html:292
+msgid "Join the Discussion"
+msgstr "Присоединиться к обсуждению"
+
+#: .\templates\forum\question_detail.html:294
+msgid "Sign in to post your answer and help solve this problem."
+msgstr "Войди, чтобы ответить и помочь с решением."
+
+#: .\templates\forum\question_detail.html:297
+#: .\templates\includes\header.html:78
+#: .\templates\leaderboards\leaderboard.html:269
+msgid "Login"
+msgstr "Войти"
+
+#: .\templates\forum\question_detail.html:300 .\templates\users\login.html:71
+msgid "Sign Up"
+msgstr "Регистрация"
+
+#: .\templates\forum\question_form.html:6
+msgid "Ask Question - Night Coder"
+msgstr "Задать вопрос — Night Coder"
+
+#: .\templates\forum\question_form.html:19
+msgid "Edit Your Question"
+msgstr "Редактировать вопрос"
+
+#: .\templates\forum\question_form.html:21
+#: .\templates\forum\question_list.html:226 .\templates\home\home.html:34
+msgid "Ask a Question"
+msgstr "Задать вопрос"
+
+#: .\templates\forum\question_form.html:26
+msgid "Improve your question to get better answers from the community."
+msgstr "Улучши вопрос, чтобы получить более точные ответы."
+
+#: .\templates\forum\question_form.html:28
+#: .\templates\forum\question_list.html:223
+msgid "Get help from thousands of developers working through the night."
+msgstr "Получи помощь от тысяч разработчиков, которые работают ночами."
+
+#: .\templates\forum\question_form.html:47
+msgid "Question Title *"
+msgstr "Заголовок вопроса *"
+
+#: .\templates\forum\question_form.html:65
+msgid "Detailed Description *"
+msgstr "Подробное описание *"
+
+#: .\templates\forum\question_form.html:88
+msgid "Update Question"
+msgstr "Обновить вопрос"
+
+#: .\templates\forum\question_form.html:90
+msgid "Post Question"
+msgstr "Опубликовать"
+
+#: .\templates\forum\question_form.html:101
+msgid "Writing a Good Question"
+msgstr "Как задать хороший вопрос"
+
+#: .\templates\forum\question_form.html:105
+msgid "Be specific"
+msgstr "Будь конкретным"
+
+#: .\templates\forum\question_form.html:105
+msgid "about your problem"
+msgstr "в описании проблемы"
+
+#: .\templates\forum\question_form.html:106
+msgid "if relevant"
+msgstr "если нужно"
+
+#: .\templates\forum\question_form.html:107
+msgid "Describe what you've tried"
+msgstr "Опиши, что пробовал"
+
+#: .\templates\forum\question_form.html:107
+msgid "already"
+msgstr "сделать"
+
+#: .\templates\forum\question_form.html:108
+msgid "Mention your environment"
+msgstr "Укажи своё окружение"
+
+#: .\templates\forum\question_form.html:108
+msgid "(OS, language version, etc.)"
+msgstr "(ОС, версия языка и т.д.)"
+
+#: .\templates\forum\question_form.html:109
+msgid "Use a clear, descriptive title"
+msgstr "Придумай ясный и понятный заголовок"
+
+#: .\templates\forum\question_list.html:6
+msgid "Night Coder - Questions & Answers"
+msgstr "Night Coder — Вопросы и ответы"
+
+#: .\templates\forum\question_list.html:18
+msgid "Search Results"
+msgstr "Результаты поиска"
+
+#: .\templates\forum\question_list.html:20
+msgid "Community Questions"
+msgstr "Вопросы сообщества"
+
+#: .\templates\forum\question_list.html:25
+#, python-format
+msgid "Found %(count)s results for \"%(query)s\""
+msgstr "Найдено результатов: %(count)s по запросу «%(query)s»"
+
+#: .\templates\forum\question_list.html:27
+msgid ""
+"Ask questions, share knowledge, and help fellow developers grow together."
+msgstr "Задавай вопросы, делись знаниями и помогай другим разработчикам расти."
+
+#: .\templates\forum\question_list.html:38
+msgid "Search questions and answers..."
+msgstr "Искать вопросы и ответы..."
+
+#: .\templates\forum\question_list.html:39
+msgid "Search questions"
+msgstr "Поиск вопросов"
+
+#: .\templates\forum\question_list.html:41
+#: .\templates\reviews\review_list.html:41
+msgid "Search"
+msgstr "Найти"
+
+#: .\templates\forum\question_list.html:61
+msgid "Search Results for"
+msgstr "Результаты поиска по запросу"
+
+#: .\templates\forum\question_list.html:62
+msgid "questions found"
+msgstr "вопросов найдено"
+
+#: .\templates\forum\question_list.html:70
+msgid "Search terms:"
+msgstr "Искали:"
+
+#: .\templates\forum\question_list.html:84
+#: .\templates\reviews\review_list.html:76
+msgid "Results"
+msgstr "Результаты"
+
+#: .\templates\forum\question_list.html:84 .\templates\home\home.html:102
+msgid "Latest Questions"
+msgstr "Свежие вопросы"
+
+#: .\templates\forum\question_list.html:87
+msgid "total"
+msgstr "всего"
+
+#: .\templates\forum\question_list.html:102 .\templates\home\home.html:111
+#: .\templates\home\home.html:161 .\templates\reviews\review_detail.html:174
+#: .\templates\reviews\review_list.html:94
+#: .\templates\reviews\user_reviews.html:77
+#: .\templates\reviews\user_reviews.html:112
+#: .\templates\users\public_profile.html:165
+#: .\templates\users\public_profile.html:225
+#: .\templates\users\public_profile.html:279
+msgid "votes"
+msgstr "голосов"
+
+#: .\templates\forum\question_list.html:111 .\templates\home\home.html:125
+#: .\templates\includes\footer.html:34
+#: .\templates\leaderboards\leaderboard.html:102
+#: .\templates\users\public_profile.html:179
+msgid "answers"
+msgstr "ответов"
+
+#: .\templates\forum\question_list.html:155
+msgid "No questions found"
+msgstr "Вопросы не найдены"
+
+#: .\templates\forum\question_list.html:158
+msgid "Try different search terms or browse all questions."
+msgstr "Попробуй другие слова или посмотри все вопросы."
+
+#: .\templates\forum\question_list.html:160
+msgid "Be the first to ask a question and help build our community!"
+msgstr "Стань первым, задай вопрос и помоги нашему сообществу расти!"
+
+#: .\templates\forum\question_list.html:165
+msgid "Ask First Question"
+msgstr "Задать первый вопрос"
+
+#: .\templates\forum\question_list.html:175
+msgid "Question pagination"
+msgstr "Навигация по вопросам"
+
+#: .\templates\forum\question_list.html:181
+#: .\templates\reviews\review_list.html:167
+#: .\templates\reviews\user_reviews.html:149
+msgid "Previous"
+msgstr "Назад"
+
+#: .\templates\forum\question_list.html:205
+#: .\templates\reviews\review_list.html:191
+#: .\templates\reviews\user_reviews.html:173
+msgid "Next"
+msgstr "Вперёд"
+
+#: .\templates\forum\question_list.html:221
+msgid "Ready to Ask?"
+msgstr "Готов задать вопрос?"
+
+#: .\templates\forum\question_list.html:234
+#: .\templates\reviews\review_list.html:220
+msgid "Join the Community"
+msgstr "Вступи в сообщество"
+
+#: .\templates\forum\question_list.html:236
+msgid "Sign up to ask questions, answer others, and build your reputation."
+msgstr ""
+"Зарегистрируйся, чтобы задавать вопросы, помогать другим и зарабатывать "
+"репутацию."
+
+#: .\templates\forum\question_list.html:239 .\templates\home\home.html:25
+#: .\templates\leaderboards\leaderboard.html:266
+#: .\templates\reviews\review_list.html:225
+msgid "Start Coding Free"
+msgstr "Начать бесплатно"
+
+#: .\templates\forum\question_list.html:248
+msgid "Forum Stats"
+msgstr "Статистика форума"
+
+#: .\templates\forum\question_list.html:254 .\templates\home\home.html:77
+#: .\templates\home\home.html:221 .\templates\leaderboards\leaderboard.html:234
+#: .\templates\users\profile_edit.html:152
+#: .\templates\users\public_profile.html:73
+#: .\templates\users\public_profile.html:133
+msgid "Questions"
+msgstr "Вопросы"
+
+#: .\templates\forum\question_list.html:266
+msgid "Active"
+msgstr "Активные"
+
+#: .\templates\home\home.html:5
+msgid "Night Coder - Where Developers Grow Together"
+msgstr "Night Coder — Здесь разработчики растут вместе"
+
+#: .\templates\home\home.html:14
+msgid "Code Doesn't Sleep."
+msgstr "Код не спит."
+
+#: .\templates\home\home.html:15
+msgid "Neither Do We."
+msgstr "Как и мы."
+
+#: .\templates\home\home.html:18
+msgid "Join thousands of coders, learn, and grow together."
+msgstr "Присоединяйся к тысячам программистов, учись и расти вместе с нами."
+
+#: .\templates\home\home.html:19
+msgid ""
+"Get unstuck, share knowledge, and build your reputation in the developer "
+"community."
+msgstr ""
+"Получи помощь, делись знаниями и зарабатывай репутацию в сообществе "
+"разработчиков."
+
+#: .\templates\home\home.html:28 .\templates\leaderboards\leaderboard.html:283
+msgid "Browse Questions"
+msgstr "Смотреть вопросы"
+
+#: .\templates\home\home.html:37
+msgid "Help Others"
+msgstr "Помочь другим"
+
+#: .\templates\home\home.html:46
+msgid "Latest activity"
+msgstr "Недавняя активность"
+
+#: .\templates\home\home.html:73 .\templates\reviews\user_reviews.html:37
+#: .\templates\users\profile_edit.html:148
+#: .\templates\users\public_profile.html:33
+msgid "Reputation"
+msgstr "Репутация"
+
+#: .\templates\home\home.html:85 .\templates\home\home.html:229
+#: .\templates\includes\footer.html:23 .\templates\includes\header.html:24
+#: .\templates\leaderboards\leaderboard.html:242
+#: .\templates\reviews\review_list.html:240
+#: .\templates\reviews\user_reviews.html:200
+#: .\templates\users\profile_edit.html:160
+#: .\templates\users\public_profile.html:81
+#: .\templates\users\public_profile.html:145
+msgid "Reviews"
+msgstr "Отзывы"
+
+#: .\templates\home\home.html:90
+#, python-format
+msgid "Ranked #%(user_rank)s on leaderboards"
+msgstr "Ты на %(user_rank)s-м месте в рейтинге"
+
+#: .\templates\home\home.html:103 .\templates\home\home.html:143
+msgid "View All"
+msgstr "Смотреть все"
+
+#: .\templates\home\home.html:133
+msgid "No questions yet. Be the first to ask!"
+msgstr "Пока нет вопросов. Стань первым!"
+
+#: .\templates\home\home.html:142
+msgid "Latest Course Reviews"
+msgstr "Свежие отзывы о курсах"
+
+#: .\templates\home\home.html:168
+msgid "No reviews yet. Share your course experience!"
+msgstr "Пока нет отзывов. Поделись впечатлениями о курсе!"
+
+#: .\templates\home\home.html:180 .\templates\leaderboards\leaderboard.html:26
+msgid "Top Contributors"
+msgstr "Лучшие участники"
+
+#: .\templates\home\home.html:194 .\templates\leaderboards\leaderboard.html:199
+msgid "Q"
+msgstr "В"
+
+#: .\templates\home\home.html:195 .\templates\leaderboards\leaderboard.html:200
+msgid "A"
+msgstr "О"
+
+#: .\templates\home\home.html:202
+msgid "View Full Leaderboard"
+msgstr "Весь рейтинг"
+
+#: .\templates\home\home.html:211
+msgid "Community Stats"
+msgstr "Статистика сообщества"
+
+#: .\templates\home\home.html:217 .\templates\includes\footer.html:13
+msgid "Developers"
+msgstr "Разработчики"
+
+#: .\templates\includes\footer.html:9
+msgid ""
+"Ask questions, share reviews, <br> and grow as developers in the quiet hours."
+msgstr ""
+"Задавай вопросы, пиши отзывы <br> и расти как разработчик в тихие часы."
+
+#: .\templates\includes\footer.html:20
+msgid "Explore"
+msgstr "Разделы"
+
+#: .\templates\includes\footer.html:22 .\templates\includes\header.html:19
+msgid "Forum"
+msgstr "Форум"
+
+#: .\templates\includes\footer.html:24 .\templates\includes\header.html:29
+msgid "Leaderboards"
+msgstr "Рейтинг"
+
+#: .\templates\includes\footer.html:30
+msgid "Community"
+msgstr "Сообщество"
+
+#: .\templates\includes\footer.html:33
+#: .\templates\leaderboards\leaderboard.html:99
+msgid "questions"
+msgstr "вопросов"
+
+#: .\templates\includes\footer.html:35
+#: .\templates\leaderboards\leaderboard.html:105
+msgid "reviews"
+msgstr "отзывов"
+
+#: .\templates\includes\footer.html:42
+msgid "Night Stats"
+msgstr "Ночная статистика"
+
+#: .\templates\includes\footer.html:46
+msgid "Online Now"
+msgstr "Сейчас онлайн"
+
+#: .\templates\includes\footer.html:50
+msgid "Questions Tonight"
+msgstr "Вопросов за ночь"
+
+#: .\templates\includes\footer.html:62
+msgid ""
+"&copy; 2025 Night Coder. Built with ☕ and 🌙 by developers, for developers."
+msgstr ""
+"&copy; 2025 Night Coder. Сделано с ☕ и 🌙 разработчиками для разработчиков."
+
+#: .\templates\includes\footer.html:67
+msgid "Current Time:"
+msgstr "Текущее время:"
+
+#: .\templates\includes\header.html:45
+msgid "My Profile"
+msgstr "Мой профиль"
+
+#: .\templates\includes\header.html:50 .\templates\users\public_profile.html:57
+msgid "Edit Profile"
+msgstr "Редактировать профиль"
+
+#: .\templates\includes\header.html:56
+#: .\templates\leaderboards\leaderboard.html:248
+#: .\templates\leaderboards\leaderboard.html:289
+msgid "Ask Question"
+msgstr "Задать вопрос"
+
+#: .\templates\includes\header.html:61
+#: .\templates\leaderboards\leaderboard.html:251
+#: .\templates\reviews\review_detail.html:23
+#: .\templates\reviews\review_list.html:212
+#: .\templates\reviews\user_reviews.html:222
+msgid "Write Review"
+msgstr "Написать отзыв"
+
+#: .\templates\includes\header.html:69
+msgid "Logout"
+msgstr "Выйти"
+
+#: .\templates\includes\header.html:83
+msgid "Join Free"
+msgstr "Зарегистрироваться"
+
+#: .\templates\leaderboards\leaderboard.html:5
+msgid "Night Coder - Leaderboards"
+msgstr "Night Coder — Рейтинг участников"
+
+#: .\templates\leaderboards\leaderboard.html:16
+msgid "Developer Leaderboards"
+msgstr "Рейтинг разработчиков"
+
+#: .\templates\leaderboards\leaderboard.html:19
+msgid ""
+"Celebrate the most active and helpful developers in our community. Earn "
+"reputation by asking questions, answering others, and writing helpful "
+"reviews."
+msgstr ""
+"Знакомься с самыми активными и полезными разработчиками нашего сообщества. "
+"Зарабатывай репутацию, задавая вопросы, помогая другим и оставляя полезные "
+"отзывы."
+
+#: .\templates\leaderboards\leaderboard.html:30
+msgid "This Month"
+msgstr "В этом месяце"
+
+#: .\templates\leaderboards\leaderboard.html:34
+msgid "Active Community"
+msgstr "Активное сообщество"
+
+#: .\templates\leaderboards\leaderboard.html:41
+msgid "Leaderboard stats"
+msgstr "Статистика рейтинга"
+
+#: .\templates\leaderboards\leaderboard.html:45
+msgid "Just now"
+msgstr "Только что"
+
+#: .\templates\leaderboards\leaderboard.html:63
+msgid "All-Time Reputation Leaders"
+msgstr "Лидеры репутации за всё время"
+
+#: .\templates\leaderboards\leaderboard.html:66
+msgid "Top 20 Developers"
+msgstr "Топ-20 разработчиков"
+
+#: .\templates\leaderboards\leaderboard.html:87
+msgid "rank"
+msgstr "место"
+
+#: .\templates\leaderboards\leaderboard.html:96
+#: .\templates\reviews\user_reviews.html:195
+msgid "reputation"
+msgstr "репутация"
+
+#: .\templates\leaderboards\leaderboard.html:114
+msgid "total rep"
+msgstr "вся реп."
+
+#: .\templates\leaderboards\leaderboard.html:130
+msgid "No leaders yet"
+msgstr "Пока нет лидеров"
+
+#: .\templates\leaderboards\leaderboard.html:131
+msgid "Be the first to earn reputation and top the leaderboard!"
+msgstr "Стань первым, заработай репутацию и возглавь рейтинг!"
+
+#: .\templates\leaderboards\leaderboard.html:140
+msgid "How to Earn Reputation"
+msgstr "Как заработать репутацию"
+
+#: .\templates\leaderboards\leaderboard.html:146
+msgid "Question upvoted"
+msgstr "За вопрос проголосовали"
+
+#: .\templates\leaderboards\leaderboard.html:150
+msgid "Answer upvoted"
+msgstr "За ответ проголосовали"
+
+#: .\templates\leaderboards\leaderboard.html:154
+msgid "Answer accepted"
+msgstr "Ответ принят"
+
+#: .\templates\leaderboards\leaderboard.html:158
+msgid "Review upvoted"
+msgstr "За отзыв проголосовали"
+
+#: .\templates\leaderboards\leaderboard.html:163
+msgid "Reputation helps build trust and recognition in the community"
+msgstr "Репутация помогает завоевать доверие и признание в сообществе"
+
+#: .\templates\leaderboards\leaderboard.html:175
+msgid "This Month's Top Contributors"
+msgstr "Лучшие участники месяца"
+
+#: .\templates\leaderboards\leaderboard.html:206
+msgid "No monthly leaders yet"
+msgstr "Пока нет лидеров за месяц"
+
+#: .\templates\leaderboards\leaderboard.html:211
+msgid "Updated monthly • Based on recent activity"
+msgstr "Обновляется ежемесячно • На основе недавней активности"
+
+#: .\templates\leaderboards\leaderboard.html:221
+msgid "Your Ranking"
+msgstr "Твоё место"
+
+#: .\templates\leaderboards\leaderboard.html:229
+msgid "reputation points"
+msgstr "очков репутации"
+
+#: .\templates\leaderboards\leaderboard.html:261
+msgid "Join the Leaderboard"
+msgstr "Войти в рейтинг"
+
+#: .\templates\leaderboards\leaderboard.html:263
+msgid "Sign up to start earning reputation and climb the ranks!"
+msgstr ""
+"Зарегистрируйся, чтобы начать зарабатывать репутацию и подниматься в "
+"рейтинге!"
+
+#: .\templates\leaderboards\leaderboard.html:278
+msgid "Quick Actions"
+msgstr "Быстрые действия"
+
+#: .\templates\leaderboards\leaderboard.html:286
+msgid "Read Reviews"
+msgstr "Читать отзывы"
+
+#: .\templates\reviews\review_confirm_delete.html:5
+msgid "Delete Review - Night Coder"
+msgstr "Удалить отзыв — Night Coder"
+
+#: .\templates\reviews\review_confirm_delete.html:17
+#: .\templates\reviews\review_confirm_delete.html:49
+#: .\templates\reviews\review_detail.html:98
+msgid "Delete Review"
+msgstr "Удалить отзыв"
+
+#: .\templates\reviews\review_confirm_delete.html:23
+msgid "Are you sure you want to delete this review?"
+msgstr "Точно удалить отзыв?"
+
+#: .\templates\reviews\review_confirm_delete.html:37
+msgid ""
+"This action cannot be undone. All votes associated with this review will "
+"also be permanently deleted."
+msgstr ""
+"Это действие необратимо. Все голоса за этот отзыв тоже удалятся навсегда."
+
+#: .\templates\reviews\review_confirm_delete.html:62
+msgid "Before you delete..."
+msgstr "Прежде чем удалить..."
+
+#: .\templates\reviews\review_confirm_delete.html:64
+#, python-format
+msgid ""
+"• This review has <strong class=\"text-warning\">%(review.vote_count)s</"
+"strong> votes"
+msgstr ""
+"• У этого отзыва <strong class=\"text-warning\">%(review.vote_count)s</"
+"strong> голосов"
+
+#: .\templates\reviews\review_confirm_delete.html:65
+msgid "It was viewed by other developers seeking course recommendations"
+msgstr "Его видели другие разработчики в поисках рекомендаций по курсам"
+
+#: .\templates\reviews\review_confirm_delete.html:66
+msgid "Consider editing instead if you want to improve the content"
+msgstr "Если хочешь что-то улучшить, лучше отредактируй отзыв"
+
+#: .\templates\reviews\review_detail.html:17
+#: .\templates\reviews\review_list.html:65
+msgid "Back to All Reviews"
+msgstr "Назад к списку отзывов"
+
+#: .\templates\reviews\review_detail.html:19
+#: .\templates\reviews\review_form.html:37
+msgid "Review Details"
+msgstr "Детали отзыва"
+
+#: .\templates\reviews\review_detail.html:47
+msgid "Upvote this review"
+msgstr "Лайкнуть отзыв"
+
+#: .\templates\reviews\review_detail.html:62
+msgid "Downvote this review"
+msgstr "Дизлайкнуть отзыв"
+
+#: .\templates\reviews\review_detail.html:93
+#: .\templates\reviews\review_form.html:6
+#: .\templates\reviews\review_form.html:37
+msgid "Edit Review"
+msgstr "Редактировать отзыв"
+
+#: .\templates\reviews\review_detail.html:141
+#, python-format
+msgid ""
+"Was this review helpful? <strong class=\"text-"
+"warning\">%(review.vote_count)s</strong> developers found it useful."
+msgstr ""
+"Был ли отзыв полезен? <strong class=\"text-warning\">%(review.vote_count)s</"
+"strong> разработчикам он помог."
+
+#: .\templates\reviews\review_detail.html:154
+#, python-format
+msgid "More Reviews by %(review.author.username)s"
+msgstr "Ещё отзывы от %(review.author.username)s"
+
+#: .\templates\reviews\review_detail.html:185
+msgid "No other reviews from this author yet."
+msgstr "Пока нет других отзывов от этого автора."
+
+#: .\templates\reviews\review_detail.html:192
+#, python-format
+msgid "View All Reviews by %(review.author.username)s"
+msgstr "Все отзывы от %(review.author.username)s"
+
+#: .\templates\reviews\review_detail.html:224
+msgid "Error:"
+msgstr "Ошибка:"
+
+#: .\templates\reviews\review_form.html:6
+msgid "Write Review - Night Coder"
+msgstr "Написать отзыв — Night Coder"
+
+#: .\templates\reviews\review_form.html:19
+msgid "Edit Your Review"
+msgstr "Редактировать отзыв"
+
+#: .\templates\reviews\review_form.html:21
+msgid "Write a Course Review"
+msgstr "Написать отзыв о курсе"
+
+#: .\templates\reviews\review_form.html:26
+msgid "Improve your review to better help the community."
+msgstr "Улучши отзыв — помоги сообществу."
+
+#: .\templates\reviews\review_form.html:28
+msgid ""
+"Share your learning experience and help fellow developers choose the right "
+"courses."
+msgstr ""
+"Поделись опытом обучения и помоги другим разработчикам выбрать подходящие "
+"курсы."
+
+#: .\templates\reviews\review_form.html:47
+msgid "Course Name"
+msgstr "Название курса"
+
+#: .\templates\reviews\review_form.html:65
+msgid "Review Title"
+msgstr "Заголовок отзыва"
+
+#: .\templates\reviews\review_form.html:83
+msgid "Rating"
+msgstr "Оценка"
+
+#: .\templates\reviews\review_form.html:102
+#: .\templates\reviews\review_form.html:183
+msgid "Poor"
+msgstr "Плохо"
+
+#: .\templates\reviews\review_form.html:103
+#: .\templates\reviews\review_form.html:184
+msgid "Fair"
+msgstr "Нормально"
+
+#: .\templates\reviews\review_form.html:104
+#: .\templates\reviews\review_form.html:185
+msgid "Good"
+msgstr "Хорошо"
+
+#: .\templates\reviews\review_form.html:105
+#: .\templates\reviews\review_form.html:186
+msgid "Very Good"
+msgstr "Очень хорошо"
+
+#: .\templates\reviews\review_form.html:106
+#: .\templates\reviews\review_form.html:187
+msgid "Excellent"
+msgstr "Отлично"
+
+#: .\templates\reviews\review_form.html:109
+#: .\templates\reviews\review_form.html:208
+msgid "Select your rating"
+msgstr "Поставь оценку"
+
+#: .\templates\reviews\review_form.html:122
+msgid "Detailed Review"
+msgstr "Подробный отзыв"
+
+#: .\templates\reviews\review_form.html:145
+msgid "Update Review"
+msgstr "Обновить отзыв"
+
+#: .\templates\reviews\review_form.html:147
+msgid "Post Review"
+msgstr "Опубликовать"
+
+#: .\templates\reviews\review_form.html:158
+msgid "Writing a Helpful Review"
+msgstr "Как написать полезный отзыв"
+
+#: .\templates\reviews\review_form.html:162
+msgid "Be honest and balanced in your assessment"
+msgstr "Будь честным и объективным"
+
+#: .\templates\reviews\review_form.html:163
+msgid "Mention the instructor's teaching style"
+msgstr "Отметь стиль преподавания"
+
+#: .\templates\reviews\review_form.html:164
+msgid "Discuss course content quality and relevance"
+msgstr "Оцени качество и актуальность материалов"
+
+#: .\templates\reviews\review_form.html:165
+msgid "Note the difficulty level and prerequisites"
+msgstr "Укажи уровень сложности и требования"
+
+#: .\templates\reviews\review_form.html:166
+msgid "Share what you gained from the course"
+msgstr "Расскажи, что узнал нового"
+
+#: .\templates\reviews\review_form.html:250
+msgid "Please select a rating between 1 and 5 stars."
+msgstr "Поставь оценку от 1 до 5 звёзд."
+
+#: .\templates\reviews\review_list.html:6
+msgid "Night Coder - Course Reviews"
+msgstr "Night Coder — Отзывы о курсах"
+
+#: .\templates\reviews\review_list.html:18
+msgid "Search Reviews"
+msgstr "Поиск отзывов"
+
+#: .\templates\reviews\review_list.html:20
+#: .\templates\reviews\user_reviews.html:59
+msgid "Course Reviews"
+msgstr "Отзывы о курсах"
+
+#: .\templates\reviews\review_list.html:25
+#, python-format
+msgid "Found %(results_count)s reviews for \"%(query)s\""
+msgstr "Найдено отзывов: %(results_count)s по запросу «%(query)s»"
+
+#: .\templates\reviews\review_list.html:27
+msgid ""
+"Share your learning experience and help others choose the right courses."
+msgstr "Делись опытом обучения и помогай другим выбирать подходящие курсы."
+
+#: .\templates\reviews\review_list.html:38
+msgid "Search courses, titles, or content..."
+msgstr "Искать курсы, заголовки или текст..."
+
+#: .\templates\reviews\review_list.html:39
+msgid "Search reviews"
+msgstr "Поиск отзывов"
+
+#: .\templates\reviews\review_list.html:61
+#, python-format
+msgid "Search Results for \"%(query)s\""
+msgstr "Результаты поиска по запросу «%(query)s»"
+
+#: .\templates\reviews\review_list.html:62
+#, python-format
+msgid "%(results_count)s reviews found"
+msgstr "Найдено отзывов: %(results_count)s"
+
+#: .\templates\reviews\review_list.html:76
+msgid "Latest Reviews"
+msgstr "Свежие отзывы"
+
+#: .\templates\reviews\review_list.html:79
+#, python-format
+msgid "%(page_obj.paginator.count)s total"
+msgstr "Всего: %(page_obj.paginator.count)s"
+
+#: .\templates\reviews\review_list.html:141
+msgid "No reviews found"
+msgstr "Отзывы не найдены"
+
+#: .\templates\reviews\review_list.html:144
+msgid "Try different search terms or browse all reviews."
+msgstr "Попробуй другие слова или посмотри все отзывы."
+
+#: .\templates\reviews\review_list.html:146
+msgid "Be the first to share your course experience!"
+msgstr "Стань первым, поделись впечатлениями о курсе!"
+
+#: .\templates\reviews\review_list.html:151
+msgid "Write First Review"
+msgstr "Написать первый отзыв"
+
+#: .\templates\reviews\review_list.html:161
+msgid "Review pagination"
+msgstr "Навигация по отзывам"
+
+#: .\templates\reviews\review_list.html:207
+msgid "Share Your Experience"
+msgstr "Поделись опытом"
+
+#: .\templates\reviews\review_list.html:209
+msgid "Help fellow developers by reviewing courses you've taken."
+msgstr "Помоги другим разработчикам — оставь отзыв о пройденных курсах."
+
+#: .\templates\reviews\review_list.html:222
+msgid "Sign up to write reviews and help others make better learning choices."
+msgstr "Зарегистрируйся, чтобы писать отзывы и помогать другим выбирать курсы."
+
+#: .\templates\reviews\review_list.html:234
+msgid "Reviews Stats"
+msgstr "Статистика отзывов"
+
+#: .\templates\reviews\review_list.html:244
+#: .\templates\reviews\user_reviews.html:206
+msgid "Avg Rating"
+msgstr "Средняя оценка"
+
+#: .\templates\reviews\review_list.html:248
+msgid "Courses"
+msgstr "Курсы"
+
+#: .\templates\reviews\review_list.html:252
+msgid "Helpful Votes"
+msgstr "Полезные голоса"
+
+#: .\templates\reviews\user_reviews.html:6
+#, python-format
+msgid "%(profile_user.username)s's Reviews - Night Coder"
+msgstr "Отзывы %(profile_user.username)s — Night Coder"
+
+#: .\templates\reviews\user_reviews.html:17
+#, python-format
+msgid "%(profile_user.username)s's Reviews"
+msgstr "Отзывы %(profile_user.username)s"
+
+#: .\templates\reviews\user_reviews.html:20
+#, python-format
+msgid ""
+"Course reviews and learning experiences shared by %(profile_user.username)s."
+msgstr "Отзывы о курсах и опыт обучения от %(profile_user.username)s."
+
+#: .\templates\reviews\user_reviews.html:27
+msgid "Total Reviews"
+msgstr "Всего отзывов"
+
+#: .\templates\reviews\user_reviews.html:32
+msgid "Average Rating"
+msgstr "Средний рейтинг"
+
+#: .\templates\reviews\user_reviews.html:43
+msgid "All Reviews"
+msgstr "Все отзывы"
+
+#: .\templates\reviews\user_reviews.html:62
+msgid "Sorted by Latest"
+msgstr "Сначала новые"
+
+#: .\templates\reviews\user_reviews.html:128
+#: .\templates\users\public_profile.html:310
+msgid "No reviews yet"
+msgstr "Пока нет отзывов"
+
+#: .\templates\reviews\user_reviews.html:131
+msgid "You haven't written any course reviews yet."
+msgstr "Ты ещё не написал ни одного отзыва о курсах."
+
+#: .\templates\reviews\user_reviews.html:133
+#, python-format
+msgid "%(profile_user.username)s hasn't written any course reviews yet."
+msgstr "%(profile_user.username)s ещё не написал ни одного отзыва о курсах."
+
+#: .\templates\reviews\user_reviews.html:143
+msgid "User reviews pagination"
+msgstr "Навигация по отзывам пользователя"
+
+#: .\templates\reviews\user_reviews.html:187
+msgid "User Profile"
+msgstr "Профиль пользователя"
+
+#: .\templates\reviews\user_reviews.html:217
+msgid "Write Another Review"
+msgstr "Написать ещё отзыв"
+
+#: .\templates\reviews\user_reviews.html:219
+msgid "Share your experience with another course."
+msgstr "Поделись впечатлениями о другом курсе."
+
+#: .\templates\users\login.html:5
+msgid "Sign In - Night Coder"
+msgstr "Вход — Night Coder"
+
+#: .\templates\users\login.html:14
+msgid "Welcome Back"
+msgstr "С возвращением"
+
+#: .\templates\users\login.html:15
+msgid "Continue your coding journey with Night Coder"
+msgstr "Продолжи свой путь в программировании с Night Coder"
+
+#: .\templates\users\login.html:30
+msgid "Username or Email"
+msgstr "Логин или email"
+
+#: .\templates\users\login.html:42 .\templates\users\signup.html:55
+msgid "Password"
+msgstr "Пароль"
+
+#: .\templates\users\login.html:55
+msgid "Remember me"
+msgstr "Запомнить меня"
+
+#: .\templates\users\login.html:59 .\templates\users\signup.html:85
+msgid "Sign In"
+msgstr "Войти"
+
+#: .\templates\users\login.html:64
+msgid "Forgot your password?"
+msgstr "Забыли пароль?"
+
+#: .\templates\users\login.html:70
+msgid "Don't have an account?"
+msgstr "Нет аккаунта?"
+
+#: .\templates\users\login.html:81 .\templates\users\signup.html:95
+msgid "Why Join Night Coder?"
+msgstr "Зачем вступать в Night Coder?"
+
+#: .\templates\users\login.html:86 .\templates\users\signup.html:100
+msgid "Ask coding questions"
+msgstr "Задавай вопросы по программированию"
+
+#: .\templates\users\login.html:92 .\templates\users\signup.html:106
+msgid "Help other developers"
+msgstr "Помогай другим разработчикам"
+
+#: .\templates\users\login.html:98 .\templates\users\signup.html:112
+msgid "Share course reviews"
+msgstr "Делись отзывами о курсах"
+
+#: .\templates\users\login.html:104 .\templates\users\signup.html:118
+msgid "Build your reputation"
+msgstr "Зарабатывай репутацию"
+
+#: .\templates\users\logout.html:5
+msgid "Signed Out - Night Coder"
+msgstr "Выход — Night Coder"
+
+#: .\templates\users\logout.html:14
+msgid "Signed Out Successfully"
+msgstr "Выход выполнен"
+
+#: .\templates\users\logout.html:19
+msgid "See You Next Time, Coder!"
+msgstr "До скорого, программист!"
+
+#: .\templates\users\logout.html:21
+msgid ""
+"You've been successfully signed out. The code will be waiting for your "
+"return."
+msgstr "Ты вышел из аккаунта. Код будет ждать твоего возвращения."
+
+#: .\templates\users\logout.html:27
+msgid "Sign Back In"
+msgstr "Войти снова"
+
+#: .\templates\users\logout.html:30
+msgid "Return Home"
+msgstr "На главную"
+
+#: .\templates\users\logout.html:39
+msgid "Remember Why You Code"
+msgstr "Помни, зачем ты программируешь"
+
+#: .\templates\users\logout.html:41
+msgid ""
+"Every line of code brings us closer to innovation. Rest, recharge, and come "
+"back stronger."
+msgstr ""
+"Каждая строка кода приближает нас к инновациям. Отдохни, перезарядись и "
+"возвращайся с новыми силами."
+
+#: .\templates\users\password_change.html:5
+msgid "Change Password - Night Coder"
+msgstr "Сменить пароль — Night Coder"
+
+#: .\templates\users\password_change.html:14
+#: .\templates\users\password_reset_confirm.html:60
+#: .\templates\users\profile_edit.html:175
+msgid "Change Password"
+msgstr "Сменить пароль"
+
+#: .\templates\users\password_change.html:15
+msgid "Update your account password"
+msgstr "Обнови пароль от аккаунта"
+
+#: .\templates\users\password_change.html:30
+msgid "Current Password"
+msgstr "Текущий пароль"
+
+#: .\templates\users\password_change.html:35
+msgid "Enter your current password"
+msgstr "Введи текущий пароль"
+
+#: .\templates\users\password_change.html:47
+#: .\templates\users\password_reset_confirm.html:31
+msgid "New Password"
+msgstr "Новый пароль"
+
+#: .\templates\users\password_change.html:52
+msgid "Enter your new password"
+msgstr "Введи новый пароль"
+
+#: .\templates\users\password_change.html:69
+#: .\templates\users\password_reset_confirm.html:48
+msgid "Confirm New Password"
+msgstr "Подтверди новый пароль"
+
+#: .\templates\users\password_change.html:74
+msgid "Confirm your new password"
+msgstr "Подтверди новый пароль"
+
+#: .\templates\users\password_change.html:87
+msgid "Update Password"
+msgstr "Обновить пароль"
+
+#: .\templates\users\password_change.html:100
+msgid "Password Tips"
+msgstr "Советы по паролю"
+
+#: .\templates\users\password_change.html:105
+msgid "Use a strong, unique password"
+msgstr "Используй надёжный уникальный пароль"
+
+#: .\templates\users\password_change.html:111
+msgid "Include numbers and symbols"
+msgstr "Добавь цифры и символы"
+
+#: .\templates\users\password_change.html:117
+msgid "Avoid common words"
+msgstr "Избегай простых слов"
+
+#: .\templates\users\password_change.html:123
+msgid "Don't reuse passwords"
+msgstr "Не используй пароли повторно"
+
+#: .\templates\users\password_change_done.html:5
+msgid "Password Changed - Night Coder"
+msgstr "Пароль изменён — Night Coder"
+
+#: .\templates\users\password_change_done.html:14
+msgid "Password Updated"
+msgstr "Пароль обновлён"
+
+#: .\templates\users\password_change_done.html:19
+msgid "Security Enhanced!"
+msgstr "Безопасность усилена!"
+
+#: .\templates\users\password_change_done.html:21
+msgid ""
+"Your password has been successfully changed. Your account is now more secure."
+msgstr "Пароль успешно изменён. Твой аккаунт теперь в большей безопасности."
+
+#: .\templates\users\password_change_done.html:27
+msgid "Back to Profile"
+msgstr "В профиль"
+
+#: .\templates\users\password_change_done.html:30
+msgid "Go Home"
+msgstr "На главную"
+
+#: .\templates\users\password_change_done.html:39
+msgid "Keep Your Account Secure"
+msgstr "Как защитить аккаунт"
+
+#: .\templates\users\password_change_done.html:41
+msgid ""
+"Remember to use a strong, unique password and enable two-factor "
+"authentication for added security."
+msgstr ""
+"Используй надёжный пароль и включи двухфакторную аутентификацию для "
+"дополнительной защиты."
+
+#: .\templates\users\password_reset.html:5
+msgid "Reset Password - Night Coder"
+msgstr "Сброс пароля — Night Coder"
+
+#: .\templates\users\password_reset.html:14
+msgid "Reset Your Password"
+msgstr "Сбросить пароль"
+
+#: .\templates\users\password_reset.html:15
+msgid "Enter your email to receive reset instructions"
+msgstr "Введи email, чтобы получить инструкции по сбросу"
+
+#: .\templates\users\password_reset.html:30
+#: .\templates\users\profile_edit.html:56 .\templates\users\signup.html:43
+msgid "Email Address"
+msgstr "Email"
+
+#: .\templates\users\password_reset.html:35 .\users\forms.py:20
+#: .\users\forms.py:59
+msgid "your_email@example.com"
+msgstr "ваш_email@example.com"
+
+#: .\templates\users\password_reset.html:45
+msgid "We'll send a password reset link to your email"
+msgstr "Мы отправим ссылку для сброса пароля на твой email"
+
+#: .\templates\users\password_reset.html:50
+msgid "Send Reset Link"
+msgstr "Отправить ссылку"
+
+#: .\templates\users\password_reset.html:55
+#: .\templates\users\password_reset_done.html:34
+msgid "Back to Sign In"
+msgstr "Назад ко входу"
+
+#: .\templates\users\password_reset.html:65
+msgid "Need Help?"
+msgstr "Нужна помощь?"
+
+#: .\templates\users\password_reset.html:67
+msgid ""
+"If you're having trouble resetting your password, please check that you're "
+"entering the email address associated with your Night Coder account."
+msgstr ""
+"Если не получается сбросить пароль, проверь, что вводишь email, привязанный "
+"к аккаунту Night Coder."
+
+#: .\templates\users\password_reset.html:70
+msgid "Still having issues? Contact our support team for assistance."
+msgstr "Всё ещё есть проблемы? Обратись в службу поддержки."
+
+#: .\templates\users\password_reset_complete.html:5
+msgid "Password Reset Complete - Night Coder"
+msgstr "Пароль сброшен — Night Coder"
+
+#: .\templates\users\password_reset_complete.html:14
+msgid "Password Reset Complete"
+msgstr "Пароль сброшен"
+
+#: .\templates\users\password_reset_complete.html:19
+msgid "Success!"
+msgstr "Готово!"
+
+#: .\templates\users\password_reset_complete.html:21
+msgid "Your password has been set. You may now sign in with your new password."
+msgstr "Пароль установлен. Теперь можно войти с новым паролем."
+
+#: .\templates\users\password_reset_complete.html:26
+msgid "Sign In Now"
+msgstr "Войти сейчас"
+
+#: .\templates\users\password_reset_complete.html:34
+msgid "Welcome Back, Coder!"
+msgstr "С возвращением, программист!"
+
+#: .\templates\users\password_reset_complete.html:36
+msgid ""
+"The community missed you. Dive back into coding challenges and help fellow "
+"developers."
+msgstr ""
+"Сообщество скучало. Возвращайся к решению задач и помощи другим "
+"разработчикам."
+
+#: .\templates\users\password_reset_confirm.html:5
+msgid "Set New Password - Night Coder"
+msgstr "Задать новый пароль — Night Coder"
+
+#: .\templates\users\password_reset_confirm.html:14
+msgid "Set New Password"
+msgstr "Задать новый пароль"
+
+#: .\templates\users\password_reset_confirm.html:15
+msgid "Create a strong new password for your account"
+msgstr "Придумай надёжный новый пароль для аккаунта"
+
+#: .\templates\users\password_reset_confirm.html:66
+msgid "Invalid Link"
+msgstr "Неверная ссылка"
+
+#: .\templates\users\password_reset_confirm.html:68
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr ""
+"Ссылка для сброса пароля недействительна, возможно, она уже использовалась. "
+"Запроси новую."
+
+#: .\templates\users\password_reset_confirm.html:71
+msgid "Request New Reset Link"
+msgstr "Запросить новую ссылку"
+
+#: .\templates\users\password_reset_done.html:5
+msgid "Check Your Email - Night Coder"
+msgstr "Проверь email — Night Coder"
+
+#: .\templates\users\password_reset_done.html:14
+msgid "Check Your Email"
+msgstr "Проверь email"
+
+#: .\templates\users\password_reset_done.html:19
+msgid "Reset Link Sent!"
+msgstr "Ссылка отправлена!"
+
+#: .\templates\users\password_reset_done.html:21
+msgid ""
+"We've emailed you instructions for setting your password. You should receive "
+"the email shortly!"
+msgstr ""
+"Мы отправили инструкции по смене пароля на твой email. Письмо должно прийти "
+"скоро!"
+
+#: .\templates\users\password_reset_done.html:27
+msgid "Didn't receive the email?"
+msgstr "Не получил письмо?"
+
+#: .\templates\users\password_reset_done.html:28
+msgid "Check your spam folder or"
+msgstr "Проверь папку «Спам» или"
+
+#: .\templates\users\password_reset_done.html:29
+msgid "try again"
+msgstr "попробуй снова"
+
+#: .\templates\users\password_reset_email.html:58
+msgid "Where Developers Grow Together"
+msgstr "Здесь разработчики растут вместе"
+
+#: .\templates\users\password_reset_email.html:62
+msgid "Password Reset Request"
+msgstr "Запрос на сброс пароля"
+
+#: .\templates\users\password_reset_email.html:64
+msgid "Hello"
+msgstr "Привет"
+
+#: .\templates\users\password_reset_email.html:66
+msgid ""
+"We received a request to reset your password for your Night Coder account. "
+"If you didn't make this request, you can safely ignore this email."
+msgstr ""
+"Мы получили запрос на сброс пароля для твоего аккаунта Night Coder. Если это "
+"был не ты, просто проигнорируй это письмо."
+
+#: .\templates\users\password_reset_email.html:68
+msgid "To reset your password, click the button below:"
+msgstr "Чтобы сбросить пароль, нажми на кнопку ниже:"
+
+#: .\templates\users\password_reset_email.html:72
+msgid "Reset Password"
+msgstr "Сбросить пароль"
+
+#: .\templates\users\password_reset_email.html:76
+msgid "Or copy and paste this link in your browser:"
+msgstr "Или скопируй и вставь эту ссылку в браузере:"
+
+#: .\templates\users\password_reset_email.html:82
+msgid "This link will expire in 24 hours for security reasons."
+msgstr "Эта ссылка действительна 24 часа для безопасности."
+
+#: .\templates\users\password_reset_email.html:84
+msgid "Happy coding!"
+msgstr "Удачного кодинга!"
+
+#: .\templates\users\password_reset_email.html:85
+msgid "The Night Coder Team"
+msgstr "Команда Night Coder"
+
+#: .\templates\users\password_reset_email.html:89
+msgid "This email was sent to"
+msgstr "Это письмо отправлено на"
+
+#: .\templates\users\password_reset_email.html:90
+msgid "If you have any questions, please contact our support team."
+msgstr "Если есть вопросы, напиши в службу поддержки."
+
+#: .\templates\users\password_reset_email.html:91
+msgid "All rights reserved."
+msgstr "Все права защищены."
+
+#: .\templates\users\profile_edit.html:5
+msgid "Edit Profile - Night Coder"
+msgstr "Редактировать профиль — Night Coder"
+
+#: .\templates\users\profile_edit.html:14
+msgid "Edit Your Profile"
+msgstr "Редактировать профиль"
+
+#: .\templates\users\profile_edit.html:15
+msgid "Update your personal information and preferences"
+msgstr "Обнови личную информацию и настройки"
+
+#: .\templates\users\profile_edit.html:28
+msgid "Current avatar"
+msgstr "Текущий аватар"
+
+#: .\templates\users\profile_edit.html:38
+msgid "Profile Picture"
+msgstr "Фото профиля"
+
+#: .\templates\users\profile_edit.html:73
+msgid "First Name"
+msgstr "Имя"
+
+#: .\templates\users\profile_edit.html:80 .\users\forms.py:60
+msgid "Your first name"
+msgstr "Твоё имя"
+
+#: .\templates\users\profile_edit.html:91
+msgid "Last Name"
+msgstr "Фамилия"
+
+#: .\templates\users\profile_edit.html:98 .\users\forms.py:61
+msgid "Your last name"
+msgstr "Твоя фамилия"
+
+#: .\templates\users\profile_edit.html:107
+msgid "Birthday"
+msgstr "День рождения"
+
+#: .\templates\users\profile_edit.html:126
+msgid "Bio"
+msgstr "О себе"
+
+#: .\templates\users\profile_edit.html:132
+msgid ""
+"Tell other developers about yourself, your interests, and what you&lsquo;re "
+"learning..."
+msgstr "Расскажи другим разработчикам о себе, своих интересах и том, что изучаешь..."
+
+#: .\templates\users\profile_edit.html:137
+msgid "Share your coding journey, interests, and expertise with the community."
+msgstr "Расскажи сообществу о своём пути в программировании, интересах и опыте."
+
+#: .\templates\users\profile_edit.html:144
+msgid "Your Current Stats"
+msgstr "Твоя статистика"
+
+#: .\templates\users\profile_edit.html:169
+msgid "Save Changes"
+msgstr "Сохранить"
+
+#: .\templates\users\public_profile.html:36
+msgid "Admin"
+msgstr "Админ"
+
+#: .\templates\users\public_profile.html:43
+#, python-format
+msgid "Member since %(join_date)s"
+msgstr "Участник с %(join_date)s"
+
+#: .\templates\users\public_profile.html:67
+msgid "Quick Stats"
+msgstr "Общая статистика"
+
+#: .\templates\users\public_profile.html:94
+msgid "Reputation Sources"
+msgstr "Источники репутации"
+
+#: .\templates\users\public_profile.html:99
+msgid "Question upvotes"
+msgstr "Голосов за вопросы"
+
+#: .\templates\users\public_profile.html:103
+msgid "Answer upvotes"
+msgstr "Голосов за ответы"
+
+#: .\templates\users\public_profile.html:107
+msgid "Accepted answers"
+msgstr "Принятых ответов"
+
+#: .\templates\users\public_profile.html:111
+msgid "Review upvotes"
+msgstr "Голосов за отзывы"
+
+#: .\templates\users\public_profile.html:116
+msgid "Total earned"
+msgstr "Всего заработано"
+
+#: .\templates\users\public_profile.html:193
+msgid "No questions yet"
+msgstr "Пока нет вопросов"
+
+#: .\templates\users\public_profile.html:196
+msgid "You haven't asked any questions yet."
+msgstr "Ты ещё не задавал вопросов."
+
+#: .\templates\users\public_profile.html:198
+#, python-format
+msgid "%(username)s hasn't asked any questions yet."
+msgstr "%(username)s ещё не задавал вопросов."
+
+#: .\templates\users\public_profile.html:203
+msgid "Ask Your First Question"
+msgstr "Задать первый вопрос"
+
+#: .\templates\users\public_profile.html:231
+msgid "Re:"
+msgstr "Re:"
+
+#: .\templates\users\public_profile.html:253
+msgid "You haven't answered any questions yet."
+msgstr "Ты ещё не отвечал на вопросы."
+
+#: .\templates\users\public_profile.html:255
+#, python-format
+msgid "%(username)s hasn't answered any questions yet."
+msgstr "%(username)s ещё не отвечал на вопросы."
+
+#: .\templates\users\public_profile.html:260
+msgid "Help Other Developers"
+msgstr "Помочь другим разработчикам"
+
+#: .\templates\users\public_profile.html:298
+msgid "Read full review"
+msgstr "Читать полностью"
+
+#: .\templates\users\public_profile.html:313
+msgid "You haven't written any reviews yet."
+msgstr "Ты ещё не писал отзывов."
+
+#: .\templates\users\public_profile.html:315
+#, python-format
+msgid "%(username)s hasn't written any reviews yet."
+msgstr "%(username)s ещё не писал отзывов."
+
+#: .\templates\users\public_profile.html:320
+msgid "Write Your First Review"
+msgstr "Написать первый отзыв"
+
+#: .\templates\users\signup.html:5
+msgid "Join Night Coder - Start Your Coding Journey"
+msgstr "Присоединиться к Night Coder — Начни свой путь в программировании"
+
+#: .\templates\users\signup.html:14
+msgid "Join Night Coder"
+msgstr "Присоединиться к Night Coder"
+
+#: .\templates\users\signup.html:15
+msgid "Start your coding journey with thousands of developers"
+msgstr "Начни свой путь в программировании с тысячами разработчиков"
+
+#: .\templates\users\signup.html:30
+msgid "Username"
+msgstr "Логин"
+
+#: .\templates\users\signup.html:39
+msgid "This will be your public display name"
+msgstr "Это будет твоё публичное имя"
+
+#: .\templates\users\signup.html:67
+msgid "Confirm Password"
+msgstr "Подтверди пароль"
+
+#: .\templates\users\signup.html:79
+msgid "Create Account"
+msgstr "Создать аккаунт"
+
+#: .\templates\users\signup.html:84
+msgid "Already have an account?"
+msgstr "Уже есть аккаунт?"
+
+#: .\users\forms.py:21
+msgid "Enter username"
+msgstr "Введи логин"
+
+#: .\users\forms.py:28 .\users\forms.py:49
+msgid "Enter your password"
+msgstr "Введи пароль"
+
+#: .\users\forms.py:32
+msgid "Repeat the password"
+msgstr "Повтори пароль"
+
+#: .\users\forms.py:43
+msgid "Enter your username or email"
+msgstr "Введи логин или email"
+
+#: .\users\forms.py:91
+msgid "Max file size is 5MB"
+msgstr "Максимальный размер файла — 5 МБ"
+
+#: .\users\utils\validators.py:28 .\users\utils\validators.py:33
+#, python-format
+msgid "Year must be between %(min_year)s and %(max_year)s."
+msgstr "Год должен быть между %(min_year)s и %(max_year)s."
+
+#: .\users\utils\validators.py:38
+#, python-format
+msgid "Year must be exactly %(current_year)s."
+msgstr "Год должен быть %(current_year)s."
+
+#: .\votes\views.py:13
+msgid "Invalid vote type"
+msgstr "Неверный тип голоса"
+
+#: .\votes\views.py:20
+msgid "Cannot vote on your own content"
+msgstr "Нельзя голосовать за своё"
+
+#, python-format
+#~ msgid "%(time)s ago"
+#~ msgstr "%(time)s назад"

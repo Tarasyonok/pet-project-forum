@@ -1,7 +1,8 @@
 import datetime
-
 import django.utils.deconstruct
 import django.utils.timezone
+from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
 
 
 @django.utils.deconstruct.deconstructible
@@ -17,13 +18,21 @@ class YearRangeValidator:
             value = value.year
 
         if not (self.min_year <= value <= max_year):
-            raise django.core.exceptions.ValidationError(
+            raise ValidationError(
                 self.get_error_message(current_year),
                 params={"value": value},
             )
 
     def get_error_message(self, current_year):
-        if self.years_offset > 0 or self.years_offset < 0:
-            return f"Year must be between {self.min_year} and {current_year + self.years_offset}."
+        if self.years_offset > 0:
+            return _("Year must be between %(min_year)s and %(max_year)s.") % {
+                'min_year': self.min_year,
+                'max_year': current_year + self.years_offset
+            }
+        elif self.years_offset < 0:
+            return _("Year must be between %(min_year)s and %(max_year)s.") % {
+                'min_year': self.min_year,
+                'max_year': current_year + self.years_offset
+            }
 
-        return f"Year must be exactly {current_year}."
+        return _("Year must be exactly %(current_year)s.") % {'current_year': current_year}

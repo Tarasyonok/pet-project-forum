@@ -4,6 +4,7 @@ import django.utils.timezone
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.utils.translation import gettext_lazy as _
 
 from users.models import UserProfile
 
@@ -16,20 +17,19 @@ class SignUpForm(UserCreationForm):
         fields = ["email", "password1", "password2", "username"]
 
         widgets = {
-            "email": forms.TextInput(attrs={"class": "form-control", "placeholder": "your_email@example.com"}),
-            "username": forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter username"}),
-
+            "email": forms.TextInput(attrs={"class": "form-control", "placeholder": _("your_email@example.com")}),
+            "username": forms.TextInput(attrs={"class": "form-control", "placeholder": _("Enter username")}),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['password1'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'Enter your password'
+            'placeholder': _('Enter your password')
         })
         self.fields['password2'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'Repeat the password'
+            'placeholder': _('Repeat the password')
         })
 
 
@@ -40,13 +40,13 @@ class CustomLoginForm(AuthenticationForm):
         # Customize the username field
         self.fields['username'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'Enter your username or email'
+            'placeholder': _('Enter your username or email')
         })
 
         # Customize the password field
         self.fields['password'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'Enter your password'
+            'placeholder': _('Enter your password')
         })
 
 
@@ -55,6 +55,11 @@ class UserEditForm(forms.ModelForm):
         model = User
         fields = ["email", "first_name", "last_name"]
 
+        widgets = {
+            "email": forms.TextInput(attrs={"class": "form-control", "placeholder": _("your_email@example.com")}),
+            "first_name": forms.TextInput(attrs={"class": "form-control", "placeholder": _("Your first name")}),
+            "last_name": forms.TextInput(attrs={"class": "form-control", "placeholder": _("Your last name")}),
+        }
 
 
 class ProfileEditForm(forms.ModelForm):
@@ -83,7 +88,7 @@ class ProfileEditForm(forms.ModelForm):
     def clean_avatar(self):
         avatar = self.cleaned_data.get("avatar")
         if avatar and avatar.size > 5 * 1024 * 1024:
-            raise django.forms.ValidationError("Max file size is 5MB")
+            raise forms.ValidationError(_("Max file size is 5MB"))
         return avatar
 
     def save(self, *, commit=True):

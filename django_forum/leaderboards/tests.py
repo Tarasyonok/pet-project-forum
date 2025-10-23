@@ -1,4 +1,3 @@
-# leaderboards/tests.py
 import logging
 from datetime import timedelta
 

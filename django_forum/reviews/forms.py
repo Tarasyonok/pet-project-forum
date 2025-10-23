@@ -1,5 +1,6 @@
 import django.urls
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from reviews.models import CourseReview
 
@@ -10,13 +11,13 @@ class CourseReviewForm(forms.ModelForm):
         fields = ["course_name", "title", "content", "rating"]
         widgets = {
             "course_name": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "e.g., Django Masterclass, Python Basics..."},
+                attrs={"class": "form-control", "placeholder": _("e.g., Django Masterclass, Python Basics...")},
             ),
             "title": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Brief summary of your review..."},
+                attrs={"class": "form-control", "placeholder": _("Brief summary of your review...")},
             ),
             "content": forms.Textarea(
-                attrs={"class": "form-control", "placeholder": "Share your experience with this course...", "rows": 5},
+                attrs={"class": "form-control", "placeholder": _("Share your experience with this course..."), "rows": 5},
             ),
             "rating": forms.RadioSelect(choices=CourseReview.RATING_CHOICES),
         }
@@ -38,9 +39,11 @@ class CourseReviewForm(forms.ModelForm):
 
             if existing_review.exists():
                 raise forms.ValidationError(
-                    f"You have already reviewed '{course_name}'. "
-                    f"You can <a href='{existing_review.first().get_absolute_url()}'>view your existing review</a> "
-                    f"or <a href='{django.urls.reverse('reviews:review_update', kwargs={'pk': existing_review.first().pk})}'>edit it</a>.",
+                    _("You have already reviewed '%(course_name)s'. You can <a href='%(review_url)s'>view your existing review</a> or <a href='%(edit_url)s'>edit it</a>.") % {
+                        'course_name': course_name,
+                        'review_url': existing_review.first().get_absolute_url(),
+                        'edit_url': django.urls.reverse('reviews:review_update', kwargs={'pk': existing_review.first().pk})
+                    }
                 )
 
         return cleaned_data

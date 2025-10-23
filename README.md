@@ -24,11 +24,11 @@
 
 ## 🚀 Live Demo
 
-👉 **[Try Night Coder Live](https://your-night-coder-app.onrender.com)** 👈
+### 👉 **[Try Night Coder Live](https://your-night-coder-app.onrender.com)** 👈
 
 **Demo Credentials:**
 - Email: `demo@nightcoder.com`
-- Password: `demopass123`
+- Password: `DemoPass123`
 
 ## 📸 Screenshots
 

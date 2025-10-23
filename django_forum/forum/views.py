@@ -1,6 +1,7 @@
 import django.urls
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.translation import gettext_lazy as _
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
@@ -151,7 +152,7 @@ def accept_answer(request, pk):
     answer = get_object_or_404(Answer, pk=pk)
 
     if request.user != answer.question.author:
-        return JsonResponse({"error": "Only question author can accept answers"}, status=403)
+        return JsonResponse({"error": _("Only question author can accept answers")}, status=403)
 
     Answer.objects.filter(question=answer.question, is_accepted=True).update(is_accepted=False)
 
