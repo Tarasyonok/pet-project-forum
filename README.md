@@ -12,7 +12,8 @@
 
 ## 🎯 What is Night Coder?
 
-**Night Coder** is a full-stack developer community platform built for those magical hours when creativity flows best. It's where students, and passionate developers come together to ask questions, share knowledge, and grow their skills.
+**Night Coder** is a full-stack developer community platform built for those magical hours when creativity flows best.
+It's where students, and passionate developers come together to ask questions, share knowledge, and grow their skills.
 
 ### ✨ Why Night Coder Exists
 
@@ -27,29 +28,42 @@
 ### 👉 **[Try Night Coder Live](https://your-night-coder-app.onrender.com)** 👈
 
 **Demo Credentials:**
+
 - Email: `demo@nightcoder.com`
 - Password: `DemoPass123`
 
 ## 📸 Screenshots
 
-| Homepage | Forum | User Profile |
-|----------|-------|--------------|
-| ![Home](https://via.placeholder.com/300x200/667eea/ffffff?text=Beautiful+Homepage) | ![Forum](https://via.placeholder.com/300x200/764ba2/ffffff?text=Q%26A+Forum) | ![Profile](https://via.placeholder.com/300x200/2c3e50/ffffff?text=User+Profile) |
+<details>
+    <summary>🏠 Homepage</summary><br>
+    <img src="/readme_screenshots/home_en.png" alt="Homepage" width="100%">
+</details>
+<details>
+    <summary>💬 Forum</summary><br>
+    <img src="/readme_screenshots/forum_en.png" alt="Forum" width="100%">
+</details>
+<details>
+    <summary>👤 User Profile</summary>
+    <br> <img src="/readme_screenshots/profile_en.png" alt="User Profile" width="100%">
+</details>
 
 ## 🛠️ Tech Stack
 
 ### **Backend**
+
 - **Python 3.13** - Core programming language
 - **Django 5.2** - High-level Python Web framework
-- **SQLite** - Development & production database 
+- **SQLite** - Development & production database
 
 ### **Frontend**
+
 - **Bootstrap 5** - Responsive CSS framework
 - **JavaScript** - Interactive features
 - **HTML5 & CSS3** - Modern web standards
 - **Font Awesome** - Icons and emojis
 
 ### **DevOps & Tools**
+
 - **Render** - Cloud deployment platform
 - **Ruff** - Ultra-fast Python linter and formatter
 - **Tests** - Unit & Integration tests
@@ -59,35 +73,41 @@
 ## 🎨 Key Features
 
 ### 💬 **Smart Q&A Forum**
+
 - Ask programming questions and get answers
 - Vote system with reputation rewards
 - Mark answers as accepted
 - Full-text search across questions and answers
 
 ### ⭐ **Course Reviews**
+
 - Share experiences with programming courses
 - 5-star rating system with detailed reviews
 - Vote on helpful reviews
 - Search by course name or technology
 
 ### 🏆 **Gamification System**
+
 - **Reputation Points** - Earn through helpful contributions
 - **Leaderboards** - Compete with other developers
 - **Monthly Top Contributors** - Recognition for active members
 - **Footer statistics** - Context processor for community stats on every page
 
 ### 👤 **Rich User Profiles**
+
 - Avatar upload and personal bios
 - Activity history (questions, answers, reviews)
 - Reputation breakdown and statistics
 - Social proof with contribution metrics
 
 ### 🌐 **Internationalization**
+
 - Full English/Russian language support
 - Language switcher
 - SEO-friendly URL structure
 
 ### 🎯 **Developer Experience**
+
 - Dark theme optimized for coding
 - Mobile-responsive design
 - Accessible and keyboard-navigation friendly
@@ -111,6 +131,7 @@ night-coder/
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Python 3.13+
 - Git
 
@@ -180,6 +201,7 @@ Night Coder is deployed on **Render** with automatic CI/CD:
 3. **Environment** → Production-ready configuration
 
 ### Environment Variables
+
 ```env
 DEBUG=False
 SECRET_KEY=your-secret-key
@@ -198,6 +220,7 @@ We love contributions! Here's how you can help:
 5. **Open** a Pull Request
 
 ### Development Guidelines
+
 - Follow PEP 8 style guide
 - Write tests for new features
 - Update documentation
@@ -206,12 +229,14 @@ We love contributions! Here's how you can help:
 ## 📈 Project Impact
 
 ### 🎯 **For Job Seekers**
+
 - **Showcase full-stack skills** with a complete, production-ready project
 - **Demonstrate Django expertise** with advanced features
 - **Prove ability to ship** from idea to deployment
 - **Internationalization experience** with Russian/English support
 
 ### 🌍 **For the Community**
+
 - 500+ developers helped
 - 1,000+ questions answered
 - 200+ course reviews shared
@@ -239,7 +264,8 @@ This project demonstrates mastery in:
 - 🐙 **GitHub**: [@your-username](https://github.com/your-username)
 - 📧 **Email**: your.email@domain.com
 
-> "I built Night Coder to solve a real problem: creating a welcoming space for developers who do their best work when the world is asleep. It represents my passion for clean code, user experience, and community building."
+> "I built Night Coder to solve a real problem: creating a welcoming space for developers who do their best work when
+> the world is asleep. It represents my passion for clean code, user experience, and community building."
 
 ## 📄 License
 

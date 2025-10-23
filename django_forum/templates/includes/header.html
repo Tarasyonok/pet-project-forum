@@ -35,10 +35,19 @@
             <ul class="navbar-nav">
                 {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle hover-glow" href="#" role="button" data-bs-toggle="dropdown">
-                            👤 {{ user.username }}
-                            <span class="badge bg-success ms-1">{{ user.profile.reputation_points }}</span>
-                        </a>
+                        <a class="nav-link dropdown-toggle hover-glow d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
+                        {% if user.profile.avatar %}
+                            <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}"
+                                 class="rounded-circle me-2" width="32" height="32">
+                        {% else %}
+                            <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center me-2"
+                                 style="width: 32px; height: 32px;">
+                                <i class="fas fa-user text-light"></i>
+                            </div>
+                        {% endif %}
+                        {{ user.username }}
+                        <span class="badge bg-success ms-1">{{ user.profile.reputation_points }}</span>
+                    </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li>
                                 <a class="dropdown-item" href="{% url 'users:profile' user.username %}">
@@ -86,8 +95,8 @@
                 {% endif %}
 
                 <li class="nav-item">
-                    <div class="dropdown">
-                        <button class="nav-link ms-3 hover-glow" type="button" data-bs-toggle="dropdown">
+                    <div class="dropdown" style="display: flex; height: 100%; align-items: center;">
+                        <button class="nav-link ms-3 hover-glow" type="button" data-bs-toggle="dropdown" style="height: 80%;">
                             🌐 ({% if request.LANGUAGE_CODE == 'en' %}🇺🇸{% elif request.LANGUAGE_CODE == 'ru' %}🇷🇺{% endif %})
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark">
