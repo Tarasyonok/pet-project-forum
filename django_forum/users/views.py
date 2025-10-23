@@ -1,11 +1,18 @@
+import os
+
 import django.urls
+from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.views import View
+
 from core.rep_rules import REPUTATION_RULES
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
-from django.views.generic import DetailView, FormView, UpdateView
+from django.views.generic import DetailView, FormView, UpdateView, TemplateView
 
-from users.forms import ProfileEditForm, SignUpForm
+from users.forms import UserProfileUpdateForm, SignUpForm, UserUpdateForm
 
 User = get_user_model()
 
@@ -74,23 +81,49 @@ class PublicProfileView(DetailView):
         return context
 
 
-class PrivateProfileEditView(LoginRequiredMixin, UpdateView):
-    template_name = "users/profile_edit.html"
-    form_class = ProfileEditForm
-
-    def get_object(self, queryset=None):
-        return self.request.user.profile
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs["user_instance"] = self.request.user
-        return kwargs
+class ProfileUpdateView(LoginRequiredMixin, TemplateView):
+    template_name = 'users/profile_edit.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if "form" not in context:
-            context["form"] = self.get_form()
+
+        # Initialize forms if not already in context (from POST)
+        if 'user_form' not in context:
+            context['user_form'] = UserUpdateForm(instance=self.request.user)
+        if 'profile_form' not in context:
+            context['profile_form'] = UserProfileUpdateForm(
+                instance=self.request.user.profile
+            )
+
+        # Create a combined form object for template convenience
+        class CombinedForm:
+            def __init__(self, user_form, profile_form):
+                self.user_form = user_form
+                self.profile_form = profile_form
+
+        context['form'] = CombinedForm(context['user_form'], context['profile_form'])
         return context
 
+    def post(self, request, *args, **kwargs):
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        profile_form = UserProfileUpdateForm(
+            request.POST,
+            request.FILES,
+            instance=request.user.profile
+        )
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            # Use redirect instead of returning the URL string
+            return redirect(self.get_success_url())
+
+        # If forms are invalid, re-render with errors
+        context = self.get_context_data(
+            user_form=user_form,
+            profile_form=profile_form
+        )
+        return self.render_to_response(context)
+
     def get_success_url(self):
-        return django.urls.reverse("users:profile", kwargs={"username": self.request.user.username})
+        return reverse("users:profile", kwargs={"username": self.request.user.username})

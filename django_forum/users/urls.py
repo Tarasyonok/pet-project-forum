@@ -68,6 +68,6 @@ urlpatterns = [
         name="password_reset_complete",
     ),
     path("signup/", views.SignUpView.as_view(), name="signup"),
-    path("profile/", views.PrivateProfileEditView.as_view(), name="edit-profile"),
+    path("profile/", views.ProfileUpdateView.as_view(), name="edit-profile"),
     path("<str:username>/", views.PublicProfileView.as_view(), name="profile"),
 ]

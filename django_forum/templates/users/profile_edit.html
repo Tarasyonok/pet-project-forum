@@ -103,16 +103,16 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
-                                            <label for="{{ form.birthday.id_for_label }}" class="form-label text-light">
+                                            <label for="{{ form.profile_form.birthday.id_for_label }}" class="form-label text-light">
                                                 🎂 {% trans "Birthday" %}
                                             </label>
                                             <input type="date"
-                                                   name="{{ form.birthday.name }}"
-                                                   id="{{ form.birthday.id_for_label }}"
+                                                   name="{{ form.profile_form.birthday.name }}"
+                                                   id="{{ form.profile_form.birthday.id_for_label }}"
                                                    class="form-control"
-                                                   value="{{ form.birthday.value|default:'' }}">
-                                            {% if form.birthday.errors %}
-                                                <div class="text-danger small mt-1">{{ form.birthday.errors }}</div>
+                                                   value="{{ form.profile_form.birthday.value|date:'Y-m-d' }}">
+                                            {% if form.profile_form.birthday.errors %}
+                                                <div class="text-danger small mt-1">{{ form.profile_form.birthday.errors }}</div>
                                             {% endif %}
                                         </div>
                                     </div>
@@ -122,16 +122,16 @@
 
                         <!-- Bio Section -->
                         <div class="form-group mb-4">
-                            <label for="{{ form.bio.id_for_label }}" class="form-label text-light">
+                            <label for="{{ form.profile_form.bio.id_for_label }}" class="form-label text-light">
                                 📝 {% trans "Bio" %}
                             </label>
-                            <textarea name="{{ form.bio.name }}"
-                                      id="{{ form.bio.id_for_label }}"
+                            <textarea name="{{ form.profile_form.bio.name }}"
+                                      id="{{ form.profile_form.bio.id_for_label }}"
                                       class="form-control"
                                       rows="4"
-                                      placeholder="{% trans 'Tell other developers about yourself, your interests, and what you&lsquo;re learning...' %}">{{ form.bio.value|default:'' }}</textarea>
-                            {% if form.bio.errors %}
-                                <div class="text-danger small mt-1">{{ form.bio.errors }}</div>
+                                      placeholder="{% trans 'Tell other developers about yourself, your interests, and what you&lsquo;re learning...' %}">{{ form.profile_form.bio.value|default:'' }}</textarea>
+                            {% if form.profile_form.bio.errors %}
+                                <div class="text-danger small mt-1">{{ form.profile_form.bio.errors }}</div>
                             {% endif %}
                             <div class="form-text text-light-50">
                                 {% trans "Share your coding journey, interests, and expertise with the community." %}

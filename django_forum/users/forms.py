@@ -50,54 +50,32 @@ class CustomLoginForm(AuthenticationForm):
         })
 
 
-class UserEditForm(forms.ModelForm):
+class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ["email", "first_name", "last_name"]
+        fields = ['email', 'first_name', 'last_name']
 
-        widgets = {
-            "email": forms.TextInput(attrs={"class": "form-control", "placeholder": _("your_email@example.com")}),
-            "first_name": forms.TextInput(attrs={"class": "form-control", "placeholder": _("Your first name")}),
-            "last_name": forms.TextInput(attrs={"class": "form-control", "placeholder": _("Your last name")}),
-        }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Add Bootstrap classes to form fields
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control',
+                'placeholder': f'Enter your {field.replace("_", " ")}'
+            })
 
 
-class ProfileEditForm(forms.ModelForm):
+class UserProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ["avatar", "bio", "birthday"]
+        fields = ['avatar', 'bio', 'birthday']
         widgets = {
-            "birthday": forms.DateInput(attrs={"type": "date"}),
-            "bio": forms.Textarea(attrs={"rows": 4}),
+            'bio': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
+            'birthday': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'avatar': forms.FileInput(attrs={'class': 'form-control form-control-sm', 'accept': 'image/*'}),
         }
 
     def __init__(self, *args, **kwargs):
-        self.user_instance = kwargs.pop("user_instance", None)
         super().__init__(*args, **kwargs)
-
-        if args or kwargs.get("data"):
-            self.user_form = UserEditForm(data=kwargs.get("data"), instance=self.user_instance, prefix="user")
-        else:
-            self.user_form = UserEditForm(instance=self.user_instance, prefix="user")
-
-    def is_valid(self):
-        user_valid = self.user_form.is_valid()
-        profile_valid = super().is_valid()
-        return user_valid and profile_valid
-
-    def clean_avatar(self):
-        avatar = self.cleaned_data.get("avatar")
-        if avatar and avatar.size > 5 * 1024 * 1024:
-            raise forms.ValidationError(_("Max file size is 5MB"))
-        return avatar
-
-    def save(self, *, commit=True):
-        user = self.user_form.save(commit=commit)
-
-        profile = super().save(commit=False)
-        profile.user = user
-
-        if commit:
-            profile.save()
-
-        return profile
+        # Make avatar field not required since it's blank=True
+        self.fields['avatar'].required = False

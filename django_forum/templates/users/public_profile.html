@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}{{ profile_user.username }} - {% trans "Night Coder" %}{% endblock %}
+{% block title %}{% if profile_user.first_name %}{{ profile_user.first_name }} {{ profile_user.last_name }}{% else %}{{ profile_user.username }}{% endif %} - {% trans "Night Coder" %}{% endblock %}
 
 {% block content %}
 <div class="container py-4 py-md-5">
@@ -26,8 +26,16 @@
                         {% endif %}
                     </div>
 
-                    <!-- Username & Reputation -->
-                    <h2 class="h3 mb-2 text-light">{{ profile_user.username }}</h2>
+                    <!-- Display Name -->
+                    <h2 class="h3 mb-2 text-light">
+                        {% if profile_user.first_name %}
+                            {{ profile_user.first_name }} {{ profile_user.last_name }}
+                            <small class="d-block text-light-50 mt-1">@{{ profile_user.username }}</small>
+                        {% else %}
+                            {{ profile_user.username }}
+                        {% endif %}
+                    </h2>
+
                     <div class="d-flex justify-content-center align-items-center mb-3">
                         <span class="badge bg-warning text-dark fs-6 me-2">
                             🏆 {{ profile_user.profile.reputation_points }} {% trans "Reputation" %}
@@ -37,11 +45,19 @@
                         {% endif %}
                     </div>
 
-                    <!-- Member Since -->
-                    <p class="text-light-50 mb-3">
-                        <i class="fas fa-calendar me-1"></i>
-                        {% blocktrans with join_date=profile_user.date_joined|date:"F Y" %}Member since {{ join_date }}{% endblocktrans %}
-                    </p>
+                    <!-- Member Since & Birthday -->
+                    <div class="text-light-50 small mb-3">
+                        <div class="mb-1">
+                            <i class="fas fa-calendar me-1"></i>
+                            {% blocktrans with join_date=profile_user.date_joined|date:"F Y" %}Member since {{ join_date }}{% endblocktrans %}
+                        </div>
+                        {% if profile_user.profile.birthday %}
+                        <div>
+                            <i class="fas fa-birthday-cake me-1"></i>
+                            {% trans "BDay" %} {{ profile_user.profile.birthday|date:"F j, Y" }}
+                        </div>
+                        {% endif %}
+                    </div>
 
                     <!-- Bio -->
                     {% if profile_user.profile.bio %}
@@ -123,206 +139,197 @@
 
         <!-- Right Column - Activity & Content -->
         <div class="col-lg-8">
-            <!-- Navigation Tabs -->
-            <div class="card professional-card border-0 shadow-lg mb-4">
-                <div class="card-body p-0">
-                    <ul class="nav nav-tabs nav-justified" id="profileTabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active py-3" id="questions-tab" data-bs-toggle="tab"
+            <!-- Connected Tabs and Content -->
+            <div class="card professional-card border-0 shadow-lg">
+                <!-- Tab Headers -->
+                <div class="card-header professional-card-header p-0 border-0">
+                    <ul class="nav nav-tabs nav-justified m-0" id="profileTabs" role="tablist">
+                        <li class="nav-item m-0" role="presentation">
+                            <button class="nav-link active py-3 border-0 rounded-0" id="questions-tab" data-bs-toggle="tab"
                                     data-bs-target="#questions" type="button" role="tab">
                                 💬 {% trans "Questions" %} <span class="badge bg-warning text-dark ms-1">{{ questions_count }}</span>
                             </button>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link py-3" id="answers-tab" data-bs-toggle="tab"
+                        <li class="nav-item m-0" role="presentation">
+                            <button class="nav-link py-3 border-0 rounded-0" id="answers-tab" data-bs-toggle="tab"
                                     data-bs-target="#answers" type="button" role="tab">
                                 💡 {% trans "Answers" %} <span class="badge bg-warning text-dark ms-1">{{ answers_count }}</span>
                             </button>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link py-3" id="reviews-tab" data-bs-toggle="tab"
+                        <li class="nav-item m-0" role="presentation">
+                            <button class="nav-link py-3 border-0 rounded-0" id="reviews-tab" data-bs-toggle="tab"
                                     data-bs-target="#reviews" type="button" role="tab">
                                 ⭐ {% trans "Reviews" %} <span class="badge bg-warning text-dark ms-1">{{ reviews_count }}</span>
                             </button>
                         </li>
                     </ul>
                 </div>
-            </div>
 
-            <!-- Tab Content -->
-            <div class="tab-content" id="profileTabsContent">
-                <!-- Questions Tab -->
-                <div class="tab-pane fade show active" id="questions" role="tabpanel">
-                    {% if user_questions %}
-                        {% for question in user_questions %}
-                            <div class="card professional-card border-0 shadow-sm mb-3 hover-glow">
-                                <div class="card-body p-3">
-                                    <div class="d-flex align-items-start">
-                                        <div class="text-center me-3" style="min-width: 60px;">
-                                            <div class="fw-bold fs-5 {% if question.vote_count > 0 %}text-success{% elif question.vote_count < 0 %}text-danger{% else %}text-light-50{% endif %}">
-                                                {{ question.vote_count }}
+                <!-- Tab Content -->
+                <div class="card-body p-0">
+                    <div class="tab-content" id="profileTabsContent">
+                        <!-- Questions Tab -->
+                        <div class="tab-pane fade show active" id="questions" role="tabpanel">
+                            {% if user_questions %}
+                                {% for question in user_questions %}
+                                    <div class="border-bottom border-dark p-4 hover-glow">
+                                        <div class="d-flex align-items-start">
+                                            <div class="text-center me-3" style="min-width: 60px;">
+                                                <div class="fw-bold fs-5 {% if question.vote_count > 0 %}text-success{% elif question.vote_count < 0 %}text-danger{% else %}text-light-50{% endif %}">
+                                                    {{ question.vote_count }}
+                                                </div>
+                                                <small class="text-light-50">{% trans "votes" %}</small>
                                             </div>
-                                            <small class="text-light-50">{% trans "votes" %}</small>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <h5 class="card-title mb-2">
-                                                <a href="{% url 'forum:question_detail' question.pk %}"
-                                                   class="text-decoration-none text-light">
-                                                    {{ question.title }}
-                                                </a>
-                                            </h5>
-                                            <p class="card-text text-light-50 small mb-3">
-                                                {{ question.content|striptags|truncatewords:30 }}
-                                            </p>
-                                            <div class="d-flex flex-wrap gap-2 align-items-center text-light-50 small">
-                                                <span class="badge bg-dark">📅 {{ question.created_at|timesince }} {% trans "ago" %}</span>
-                                                <span class="badge bg-dark">💬 {{ question.answers.count }} {% trans "answers" %}</span>
-                                                {% if question.is_solved %}
-                                                    <span class="badge bg-success">✅ {% trans "Solved" %}</span>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <div class="card professional-card border-0 shadow-lg text-center py-5">
-                            <div class="card-body">
-                                <i class="fas fa-question-circle fa-3x text-muted mb-3"></i>
-                                <h5 class="text-light mb-2">{% trans "No questions yet" %}</h5>
-                                <p class="text-light-50 mb-4">
-                                    {% if user == profile_user %}
-                                        {% trans "You haven't asked any questions yet." %}
-                                    {% else %}
-                                        {% blocktrans with username=profile_user.username %}{{ username }} hasn't asked any questions yet.{% endblocktrans %}
-                                    {% endif %}
-                                </p>
-                                {% if user == profile_user %}
-                                    <a href="{% url 'forum:question_create' %}" class="btn btn-warning hover-glow">
-                                        🚀 {% trans "Ask Your First Question" %}
-                                    </a>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endif %}
-                </div>
-
-                <!-- Answers Tab -->
-                <div class="tab-pane fade" id="answers" role="tabpanel">
-                    {% if user_answers %}
-                        {% for answer in user_answers %}
-                            <div class="card professional-card border-0 shadow-sm mb-3 hover-glow {% if answer.is_accepted %}border-start border-success border-3{% endif %}">
-                                <div class="card-body p-3">
-                                    {% if answer.is_accepted %}
-                                        <div class="badge bg-success mb-2">✅ {% trans "Accepted Answer" %}</div>
-                                    {% endif %}
-                                    <div class="d-flex align-items-start">
-                                        <div class="text-center me-3" style="min-width: 60px;">
-                                            <div class="fw-bold fs-5 {% if answer.vote_count > 0 %}text-success{% elif answer.vote_count < 0 %}text-danger{% else %}text-light-50{% endif %}">
-                                                {{ answer.vote_count }}
-                                            </div>
-                                            <small class="text-light-50">{% trans "votes" %}</small>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <h6 class="card-title mb-2">
-                                                <a href="{% url 'forum:question_detail' answer.question.pk %}#answer-{{ answer.pk }}"
-                                                   class="text-decoration-none text-light">
-                                                    {% trans "Re:" %} {{ answer.question.title }}
-                                                </a>
-                                            </h6>
-                                            <p class="card-text text-light-50 small mb-3">
-                                                {{ answer.content|striptags|truncatewords:40 }}
-                                            </p>
-                                            <div class="d-flex flex-wrap gap-2 align-items-center text-light-50 small">
-                                                <span class="badge bg-dark">📅 {{ answer.created_at|timesince }} {% trans "ago" %}</span>
-                                                <span class="badge bg-dark">👤 {{ answer.question.author.username }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <div class="card professional-card border-0 shadow-lg text-center py-5">
-                            <div class="card-body">
-                                <i class="fas fa-lightbulb fa-3x text-muted mb-3"></i>
-                                <h5 class="text-light mb-2">{% trans "No answers yet" %}</h5>
-                                <p class="text-light-50 mb-4">
-                                    {% if user == profile_user %}
-                                        {% trans "You haven't answered any questions yet." %}
-                                    {% else %}
-                                        {% blocktrans with username=profile_user.username %}{{ username }} hasn't answered any questions yet.{% endblocktrans %}
-                                    {% endif %}
-                                </p>
-                                {% if user == profile_user %}
-                                    <a href="{% url 'forum:question_list' %}" class="btn btn-warning hover-glow">
-                                        💡 {% trans "Help Other Developers" %}
-                                    </a>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endif %}
-                </div>
-
-                <!-- Reviews Tab -->
-                <div class="tab-pane fade" id="reviews" role="tabpanel">
-                    {% if user_reviews %}
-                        {% for review in user_reviews %}
-                            <div class="card professional-card border-0 shadow-sm mb-3 hover-glow">
-                                <div class="card-body p-3">
-                                    <div class="d-flex align-items-start">
-                                        <div class="text-center me-3" style="min-width: 60px;">
-                                            <div class="fw-bold fs-5 {% if review.vote_count > 0 %}text-success{% elif review.vote_count < 0 %}text-danger{% else %}text-light-50{% endif %}">
-                                                {{ review.vote_count }}
-                                            </div>
-                                            <small class="text-light-50">{% trans "votes" %}</small>
-                                            <div class="text-warning small mt-1">
-                                                {{ review.get_rating_stars }}
-                                            </div>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <h6 class="card-title text-light mb-1">{{ review.title }}</h6>
-                                            <h6 class="card-subtitle mb-2 text-info">📖 {{ review.course_name }}</h6>
-                                            <p class="card-text text-light-50 small mb-3">
-                                                {{ review.content|striptags|truncatewords:40 }}
-                                            </p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="d-flex flex-wrap gap-2 text-light-50 small">
-                                                    <span class="badge bg-dark">📅 {{ review.created_at|timesince }} {% trans "ago" %}</span>
-                                                    {% if review.updated_at != review.created_at %}
-                                                        <span class="badge bg-dark">✏️ {% trans "Edited" %}</span>
+                                            <div class="flex-grow-1">
+                                                <h5 class="card-title mb-2">
+                                                    <a href="{% url 'forum:question_detail' question.pk %}"
+                                                       class="text-decoration-none text-light">
+                                                        {{ question.title }}
+                                                    </a>
+                                                </h5>
+                                                <p class="card-text text-light-50 small mb-3">
+                                                    {{ question.content|striptags|truncatewords:30 }}
+                                                </p>
+                                                <div class="d-flex flex-wrap gap-2 align-items-center text-light-50 small">
+                                                    <span class="badge bg-dark">📅 {{ question.created_at|timesince }} {% trans "ago" %}</span>
+                                                    <span class="badge bg-dark">💬 {{ question.answers.count }} {% trans "answers" %}</span>
+                                                    {% if question.is_solved %}
+                                                        <span class="badge bg-success">✅ {% trans "Solved" %}</span>
                                                     {% endif %}
                                                 </div>
-                                                <a href="{% url 'reviews:review_detail' review.pk %}" class="text-warning text-decoration-none small">
-                                                    {% trans "Read full review" %} →
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <div class="card professional-card border-0 shadow-lg text-center py-5">
-                            <div class="card-body">
-                                <i class="fas fa-star fa-3x text-muted mb-3"></i>
-                                <h5 class="text-light mb-2">{% trans "No reviews yet" %}</h5>
-                                <p class="text-light-50 mb-4">
+                                {% endfor %}
+                            {% else %}
+                                <div class="text-center py-5">
+                                    <i class="fas fa-question-circle fa-3x text-muted mb-3"></i>
+                                    <h5 class="text-light mb-2">{% trans "No questions yet" %}</h5>
+                                    <p class="text-light-50 mb-4">
+                                        {% if user == profile_user %}
+                                            {% trans "You haven't asked any questions yet." %}
+                                        {% else %}
+                                            {% blocktrans with username=profile_user.username %}{{ username }} hasn't asked any questions yet.{% endblocktrans %}
+                                        {% endif %}
+                                    </p>
                                     {% if user == profile_user %}
-                                        {% trans "You haven't written any reviews yet." %}
-                                    {% else %}
-                                        {% blocktrans with username=profile_user.username %}{{ username }} hasn't written any reviews yet.{% endblocktrans %}
+                                        <a href="{% url 'forum:question_create' %}" class="btn btn-warning hover-glow">
+                                            🚀 {% trans "Ask Your First Question" %}
+                                        </a>
                                     {% endif %}
-                                </p>
-                                {% if user == profile_user %}
-                                    <a href="{% url 'reviews:review_create' %}" class="btn btn-success hover-glow">
-                                        ⭐ {% trans "Write Your First Review" %}
-                                    </a>
-                                {% endif %}
-                            </div>
+                                </div>
+                            {% endif %}
                         </div>
-                    {% endif %}
+
+                        <!-- Answers Tab -->
+                        <div class="tab-pane fade" id="answers" role="tabpanel">
+                            {% if user_answers %}
+                                {% for answer in user_answers %}
+                                    <div class="border-bottom border-dark p-4 hover-glow {% if answer.is_accepted %}border-start border-success border-3{% endif %}">
+                                        {% if answer.is_accepted %}
+                                            <div class="badge bg-success mb-2">✅ {% trans "Accepted Answer" %}</div>
+                                        {% endif %}
+                                        <div class="d-flex align-items-start">
+                                            <div class="text-center me-3" style="min-width: 60px;">
+                                                <div class="fw-bold fs-5 {% if answer.vote_count > 0 %}text-success{% elif answer.vote_count < 0 %}text-danger{% else %}text-light-50{% endif %}">
+                                                    {{ answer.vote_count }}
+                                                </div>
+                                                <small class="text-light-50">{% trans "votes" %}</small>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="card-title mb-2">
+                                                    <a href="{% url 'forum:question_detail' answer.question.pk %}#answer-{{ answer.pk }}"
+                                                       class="text-decoration-none text-light">
+                                                        {% trans "Re:" %} {{ answer.question.title }}
+                                                    </a>
+                                                </h6>
+                                                <p class="card-text text-light-50 small mb-3">
+                                                    {{ answer.content|striptags|truncatewords:40 }}
+                                                </p>
+                                                <div class="d-flex flex-wrap gap-2 align-items-center text-light-50 small">
+                                                    <span class="badge bg-dark">📅 {{ answer.created_at|timesince }} {% trans "ago" %}</span>
+                                                    <span class="badge bg-dark">👤 {{ answer.question.author.username }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="text-center py-5">
+                                    <i class="fas fa-lightbulb fa-3x text-muted mb-3"></i>
+                                    <h5 class="text-light mb-2">{% trans "No answers yet" %}</h5>
+                                    <p class="text-light-50 mb-4">
+                                        {% if user == profile_user %}
+                                            {% trans "You haven't answered any questions yet." %}
+                                        {% else %}
+                                            {% blocktrans with username=profile_user.username %}{{ username }} hasn't answered any questions yet.{% endblocktrans %}
+                                        {% endif %}
+                                    </p>
+                                    {% if user == profile_user %}
+                                        <a href="{% url 'forum:question_list' %}" class="btn btn-warning hover-glow">
+                                            💡 {% trans "Help Other Developers" %}
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Reviews Tab -->
+                        <div class="tab-pane fade" id="reviews" role="tabpanel">
+                            {% if user_reviews %}
+                                {% for review in user_reviews %}
+                                    <div class="border-bottom border-dark p-4 hover-glow">
+                                        <div class="d-flex align-items-start">
+                                            <div class="text-center me-3" style="min-width: 60px;">
+                                                <div class="fw-bold fs-5 {% if review.vote_count > 0 %}text-success{% elif review.vote_count < 0 %}text-danger{% else %}text-light-50{% endif %}">
+                                                    {{ review.vote_count }}
+                                                </div>
+                                                <small class="text-light-50">{% trans "votes" %}</small>
+                                                <div class="text-warning small mt-1">
+                                                    {{ review.get_rating_stars }}
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="card-title text-light mb-1">{{ review.title }}</h6>
+                                                <h6 class="card-subtitle mb-2 text-info">📖 {{ review.course_name }}</h6>
+                                                <p class="card-text text-light-50 small mb-3">
+                                                    {{ review.content|striptags|truncatewords:40 }}
+                                                </p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex flex-wrap gap-2 text-light-50 small">
+                                                        <span class="badge bg-dark">📅 {{ review.created_at|timesince }} {% trans "ago" %}</span>
+                                                        {% if review.updated_at != review.created_at %}
+                                                            <span class="badge bg-dark">✏️ {% trans "Edited" %}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                    <a href="{% url 'reviews:review_detail' review.pk %}" class="text-warning text-decoration-none small">
+                                                        {% trans "Read full review" %} →
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="text-center py-5">
+                                    <i class="fas fa-star fa-3x text-muted mb-3"></i>
+                                    <h5 class="text-light mb-2">{% trans "No reviews yet" %}</h5>
+                                    <p class="text-light-50 mb-4">
+                                        {% if user == profile_user %}
+                                            {% trans "You haven't written any reviews yet." %}
+                                        {% else %}
+                                            {% blocktrans with username=profile_user.username %}{{ username }} hasn't written any reviews yet.{% endblocktrans %}
+                                        {% endif %}
+                                    </p>
+                                    {% if user == profile_user %}
+                                        <a href="{% url 'reviews:review_create' %}" class="btn btn-success hover-glow">
+                                            ⭐ {% trans "Write Your First Review" %}
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -357,31 +364,33 @@
         transition: background-color 0.2s ease;
     }
 
+    /* Connected Tabs Styling */
     .nav-tabs {
-        border-bottom: 1px solid #3a3f5c;
+        border-bottom: none;
     }
 
     .nav-tabs .nav-link {
-        background-color: #2a2d3e;
-        border: 1px solid #3a3f5c;
+        background-color: #343a50;
+        border: none;
         color: #e9ecef;
-        border-bottom: none;
-        margin-bottom: -1px;
+        border-radius: 0;
+        margin-bottom: 0;
+        transition: all 0.3s ease;
     }
 
     .nav-tabs .nav-link.active {
-        background-color: #343a50;
-        border-color: #3a3f5c #3a3f5c #2a2d3e;
+        background-color: #2a2d3e;
         color: #ffc107;
+        border-bottom: 3px solid #ffc107;
     }
 
     .nav-tabs .nav-link:hover {
-        border-color: #3a3f5c #3a3f5c #3a3f5c;
+        background-color: #3a3f5c;
         color: #ffc107;
     }
 
     .tab-content {
-        background-color: transparent;
+        background-color: #2a2d3e;
     }
 
     @media (max-width: 768px) {
@@ -392,6 +401,10 @@
         .nav-tabs .nav-link {
             padding: 0.75rem 0.5rem;
             font-size: 0.9rem;
+        }
+
+        .border-bottom.border-dark.p-4 {
+            padding: 1rem !important;
         }
     }
 </style>

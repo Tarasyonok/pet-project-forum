@@ -51,7 +51,7 @@ class UserProfile(models.Model):
         blank=True,
         null=True,
         validators=[
-            users.utils.validators.YearRangeValidator(2000, -10),
+            users.utils.validators.YearRangeValidator(1925, -10),
         ],
     )
 

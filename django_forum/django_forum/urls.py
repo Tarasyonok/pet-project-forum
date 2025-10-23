@@ -19,4 +19,8 @@ urlpatterns += i18n_patterns(
     *static(django.conf.settings.STATIC_URL, document_root=django.conf.settings.STATIC_ROOT),
 )
 
+
+if django.conf.settings.DEBUG:
+    urlpatterns += static(django.conf.settings.MEDIA_URL, document_root=django.conf.settings.MEDIA_ROOT)
+
 handler404 = "home.views.custom_404_view"
