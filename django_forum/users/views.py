@@ -1,4 +1,3 @@
-
 import django.urls
 from core.rep_rules import REPUTATION_RULES
 from django.contrib.auth import get_user_model

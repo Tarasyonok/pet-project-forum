@@ -1,21 +1,19 @@
 # users/tests.py
-import datetime
 import logging
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase
 from django.urls import reverse
-from django.utils import timezone
 
-from users.forms import ProfileEditForm, SignUpForm
+from users.forms import SignUpForm, UserProfileUpdateForm, UserUpdateForm
 from users.models import User, UserProfile
 
 # Get logger for this module
 logger = logging.getLogger(__name__)
 
 
-class ProfileEditFormTest(TestCase):
-    """Test ProfileEditForm validation and functionality"""
+class UserUpdateFormTest(TestCase):
+    """Test UserUpdateForm validation and functionality"""
 
     def setUp(self):
         self.user = User.objects.create_user(
@@ -25,86 +23,88 @@ class ProfileEditFormTest(TestCase):
             first_name="Old",
             last_name="Name",
         )
-        self.profile = self.user.profile
 
-    def test_valid_profile_edit_form(self):
+    def test_valid_user_update_form(self):
         """Test form with valid data"""
         form_data = {
-            "user-email": "updated@example.com",
-            "user-first_name": "Updated",
-            "user-last_name": "Name",
-            "bio": "This is my bio",
+            "email": "updated@example.com",
+            "first_name": "Updated",
+            "last_name": "Name",
         }
-        form = ProfileEditForm(data=form_data, instance=self.profile, user_instance=self.user)
-
-        # Log form validation details
-        if not form.is_valid():
-            logger.debug("Form validation failed with errors: %s", form.errors)
-            logger.debug("User form errors: %s", form.user_form.errors)
-
+        form = UserUpdateForm(data=form_data, instance=self.user)
         self.assertTrue(form.is_valid())
 
-    def test_profile_edit_form_save(self):
-        """Test form save method updates both user and profile"""
+    def test_user_update_form_save(self):
+        """Test form save method updates user"""
         form_data = {
-            "user-email": "updated@example.com",
-            "user-first_name": "Updated",
-            "user-last_name": "Name",
-            "bio": "This is my bio",
+            "email": "updated@example.com",
+            "first_name": "Updated",
+            "last_name": "Name",
         }
-        form = ProfileEditForm(data=form_data, instance=self.profile, user_instance=self.user)
-
-        # Log form validation details
-        if not form.is_valid():
-            logger.debug("Form validation failed with errors: %s", form.errors)
-            logger.debug("User form errors: %s", form.user_form.errors)
-
+        form = UserUpdateForm(data=form_data, instance=self.user)
         self.assertTrue(form.is_valid())
         form.save()
 
         # Refresh from database
         self.user.refresh_from_db()
-        self.profile.refresh_from_db()
 
         # Check user fields were updated
         self.assertEqual(self.user.email, "updated@example.com")
         self.assertEqual(self.user.first_name, "Updated")
         self.assertEqual(self.user.last_name, "Name")
 
+    def test_invalid_email_format(self):
+        """Test form with invalid email"""
+        form_data = {
+            "email": "invalid-email",
+            "first_name": "Test",
+            "last_name": "User",
+        }
+        form = UserUpdateForm(data=form_data, instance=self.user)
+        self.assertFalse(form.is_valid())
+        self.assertIn("email", form.errors)
+
+
+class UserProfileUpdateFormTest(TestCase):
+    """Test UserProfileUpdateForm validation and functionality"""
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="testuser",
+            email="test@example.com",
+            password="testpass123",
+        )
+        self.profile = self.user.profile
+
+    def test_valid_profile_update_form(self):
+        """Test form with valid data"""
+        form_data = {
+            "bio": "This is my bio",
+            "birthday": "1990-01-01",
+        }
+        form = UserProfileUpdateForm(data=form_data, instance=self.profile)
+        self.assertTrue(form.is_valid())
+
+    def test_profile_update_form_save(self):
+        """Test form save method updates profile"""
+        form_data = {
+            "bio": "This is my bio",
+            "birthday": "1990-01-01",
+        }
+        form = UserProfileUpdateForm(data=form_data, instance=self.profile)
+        self.assertTrue(form.is_valid())
+        form.save()
+
+        # Refresh from database
+        self.profile.refresh_from_db()
+
         # Check profile fields were updated
         self.assertEqual(self.profile.bio, "This is my bio")
+        self.assertEqual(str(self.profile.birthday), "1990-01-01")
 
-    def test_avatar_file_size_validation(self):
-        """Test avatar file size validation"""
-        # Create a large file (6MB)
-        large_img = (
-            (
-                b"\x47\x49\x46\x38\x39\x61\x01\x00\x01\x00\x00\x00\x00\x21\xf9\x04"
-                b"\x01\x0a\x00\x01\x00\x2c\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02"
-                b"\x02\x4c\x01\x00\x3b"
-            )
-            * 1024
-            * 1024
-        )
-        uploaded_file = SimpleUploadedFile("large.png", large_img, content_type="image/png")
-
-        form_data = {
-            "user-email": self.user.email,
-            "user-first_name": self.user.first_name,
-            "user-last_name": self.user.last_name,
-        }
-
-        form = ProfileEditForm(
-            data=form_data,
-            files={"avatar": uploaded_file},
-            instance=self.profile,
-            user_instance=self.user,
-        )
-        self.assertFalse(form.is_valid())
-        self.assertIn("avatar", form.errors)
-
-    def test_avatar_valid_file_size(self):
-        """Test avatar with acceptable file size"""
+    def test_avatar_file_validation(self):
+        """Test avatar file validation"""
+        # Create a valid image file
         small_img = (
             b"\x47\x49\x46\x38\x39\x61\x01\x00\x01\x00\x00\x00\x00\x21\xf9\x04"
             b"\x01\x0a\x00\x01\x00\x2c\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02"
@@ -113,24 +113,123 @@ class ProfileEditFormTest(TestCase):
         uploaded_file = SimpleUploadedFile("small.png", small_img, content_type="image/png")
 
         form_data = {
-            "user-email": self.user.email,
-            "user-first_name": self.user.first_name,
-            "user-last_name": self.user.last_name,
+            "bio": "Test bio",
         }
 
-        form = ProfileEditForm(
+        form = UserProfileUpdateForm(
             data=form_data,
             files={"avatar": uploaded_file},
             instance=self.profile,
-            user_instance=self.user,
         )
-
-        # Log form validation details
-        if not form.is_valid():
-            logger.debug("Avatar form validation failed with errors: %s", form.errors)
-            logger.debug("User form errors: %s", form.user_form.errors)
-
         self.assertTrue(form.is_valid())
+
+    def test_invalid_file_extension(self):
+        """Test avatar with invalid file extension"""
+        text_file = b"This is not an image file"
+        uploaded_file = SimpleUploadedFile("test.txt", text_file, content_type="text/plain")
+
+        form_data = {
+            "bio": "Test bio",
+        }
+
+        form = UserProfileUpdateForm(
+            data=form_data,
+            files={"avatar": uploaded_file},
+            instance=self.profile,
+        )
+        self.assertFalse(form.is_valid())
+        self.assertIn("avatar", form.errors)
+
+
+class ProfileUpdateViewTest(TestCase):
+    """Test ProfileUpdateView functionality"""
+
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create_user(
+            username="testuser",
+            email="test@example.com",
+            password="testpass123",
+            first_name="Old",
+            last_name="Name",
+        )
+        self.profile = self.user.profile
+        self.edit_url = reverse("users:edit-profile")
+
+    def test_login_required(self):
+        """Test that login is required to access edit profile"""
+        response = self.client.get(self.edit_url)
+
+        # Should redirect to login page
+        self.assertRedirects(response, f"/en/users/login/?next={self.edit_url}")
+
+    def test_authenticated_access(self):
+        """Test authenticated user can access edit profile"""
+        self.client.login(username="testuser", password="testpass123")
+        response = self.client.get(self.edit_url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "users/profile_edit.html")
+
+        # Check that both forms are in context
+        self.assertIn("user_form", response.context)
+        self.assertIn("profile_form", response.context)
+        self.assertIn("form", response.context)
+
+        # Check form types
+        self.assertIsInstance(response.context["user_form"], UserUpdateForm)
+        self.assertIsInstance(response.context["profile_form"], UserProfileUpdateForm)
+
+    def test_successful_profile_update(self):
+        """Test successful profile update"""
+        self.client.login(username="testuser", password="testpass123")
+
+        update_data = {
+            "email": "updated@example.com",
+            "first_name": "Updated",
+            "last_name": "Name",
+            "bio": "Updated bio text",
+            "birthday": "1990-01-01",
+        }
+
+        response = self.client.post(self.edit_url, data=update_data, follow=True)
+
+        # Should redirect to profile page
+        self.assertRedirects(response, reverse("users:profile", kwargs={"username": "testuser"}))
+
+        # Check data was updated
+        self.user.refresh_from_db()
+        self.profile.refresh_from_db()
+
+        self.assertEqual(self.user.email, "updated@example.com")
+        self.assertEqual(self.user.first_name, "Updated")
+        self.assertEqual(self.user.last_name, "Name")
+        self.assertEqual(self.profile.bio, "Updated bio text")
+        self.assertEqual(str(self.profile.birthday), "1990-01-01")
+
+    def test_profile_update_with_avatar(self):
+        """Test profile update with avatar upload"""
+        self.client.login(username="testuser", password="testpass123")
+
+        # Create a test image
+        small_img = (
+            b"\x47\x49\x46\x38\x39\x61\x01\x00\x01\x00\x00\x00\x00\x21\xf9\x04"
+            b"\x01\x0a\x00\x01\x00\x2c\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02"
+            b"\x02\x4c\x01\x00\x3b"
+        )
+        uploaded_file = SimpleUploadedFile("avatar.png", small_img, content_type="image/png")
+
+        update_data = {
+            "email": self.user.email,
+            "first_name": self.user.first_name,
+            "last_name": self.user.last_name,
+            "bio": "Bio with avatar",
+        }
+
+        response = self.client.post(self.edit_url, data=update_data, files={"avatar": uploaded_file}, follow=True)
+
+        # Should redirect to profile page
+        self.assertRedirects(response, reverse("users:profile", kwargs={"username": "testuser"}))
 
 
 class SignUpViewTest(TestCase):
@@ -184,112 +283,6 @@ class SignUpViewTest(TestCase):
         # Check that form has errors
         self.assertContains(response, "password2", status_code=200)
 
-        # Log response content for debugging if needed
-        if b"error" not in response.content.lower():
-            logger.debug("No 'error' found in response, checking for other indicators")
-
-
-class PrivateProfileEditViewTest(TestCase):
-    """Test PrivateProfileEditView functionality"""
-
-    def setUp(self):
-        self.client = Client()
-        self.user = User.objects.create_user(
-            username="testuser",
-            email="test@example.com",
-            password="testpass123",
-            first_name="Old",
-            last_name="Name",
-        )
-        self.profile = self.user.profile
-        self.edit_url = reverse("users:edit-profile")
-
-    # def test_login_required(self):
-    #     """Test that login is required to access edit profile"""
-    #     response = self.client.get(self.edit_url)
-    #
-    #     # Should redirect to login page
-    #     self.assertRedirects(response, f"/users/login/?next={self.edit_url}")
-
-    def test_authenticated_access(self):
-        """Test authenticated user can access edit profile"""
-        self.client.login(username="testuser", password="testpass123")
-        response = self.client.get(self.edit_url)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "users/profile_edit.html")
-        self.assertIsInstance(response.context["form"], ProfileEditForm)
-
-    def test_successful_profile_update(self):
-        """Test successful profile update"""
-        self.client.login(username="testuser", password="testpass123")
-
-        update_data = {
-            "user-email": "updated@example.com",
-            "user-first_name": "Updated",
-            "user-last_name": "Name",
-            "bio": "Updated bio text",
-        }
-
-        response = self.client.post(self.edit_url, data=update_data)
-
-        # Should stay on the edit page with success (200) or redirect
-        # Note: The view might return 200 on success with a success message
-        # or 302 for redirect. Let's check both.
-        if response.status_code == 302:
-            # If redirect, follow it
-            response = self.client.post(self.edit_url, data=update_data, follow=True)
-
-        # Log the response status for debugging
-        logger.debug("Profile update response status: %s", response.status_code)
-
-        # Check data was updated regardless of redirect
-        self.user.refresh_from_db()
-        self.profile.refresh_from_db()
-
-        self.assertEqual(self.user.email, "updated@example.com")
-        self.assertEqual(self.user.first_name, "Updated")
-        self.assertEqual(self.user.last_name, "Name")
-        self.assertEqual(self.profile.bio, "Updated bio text")
-
-
-class DebugProfileFormTest(TestCase):
-    """Debug tests to understand form validation issues"""
-
-    def setUp(self):
-        self.user = User.objects.create_user(username="debuguser", email="debug@example.com", password="testpass123")
-        self.profile = self.user.profile
-
-    def test_debug_form_validation(self):
-        """Debug what's causing form validation to fail"""
-        # Test with minimal data
-        form_data = {
-            "user-email": "debug@example.com",  # Same email should be fine
-            "user-first_name": "",
-            "user-last_name": "",
-        }
-
-        form = ProfileEditForm(data=form_data, instance=self.profile, user_instance=self.user)
-
-        logger.debug("=== DEBUG FORM VALIDATION ===")
-        logger.debug("Form is bound: %s", form.is_bound)
-        logger.debug("Form errors: %s", form.errors)
-        logger.debug("User form errors: %s", form.user_form.errors)
-        logger.debug("Form is valid: %s", form.is_valid())
-        logger.debug("User form is valid: %s", form.user_form.is_valid())
-
-        # If form is not valid, log detailed errors
-        if not form.is_valid():
-            if form.user_form.errors:
-                logger.debug("User form field errors:")
-                for field, errors in form.user_form.errors.items():
-                    logger.debug("  %s: %s", field, errors)
-
-            if form.errors:
-                logger.debug("Profile form field errors:")
-                for field, errors in form.errors.items():
-                    logger.debug("  %s: %s", field, errors)
-
 
 class UserModelTest(TestCase):
     """Test User model functionality"""
@@ -319,19 +312,6 @@ class UserModelTest(TestCase):
         """Test user string representation"""
         user = User.objects.create_user(**self.user_data)
         self.assertEqual(str(user), "User testuser")
-
-    # def test_is_moderator_or_higher(self):
-    #     """Test moderator permission check"""
-    #     user = User.objects.create_user(**self.user_data)
-    #     admin_user = User.objects.create_user(
-    #         username="admin",
-    #         email="admin@example.com",
-    #         password="testpass123",
-    #         role=User.Role.ADMIN,
-    #     )
-    #
-    #     self.assertFalse(user.is_moderator_or_higher())
-    #     self.assertTrue(admin_user.is_moderator_or_higher())
 
     def test_user_profile_auto_creation(self):
         """Test that user profile is automatically created when user is created"""
@@ -387,24 +367,6 @@ class LoginViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "users/login.html")
 
-    # def test_successful_login_redirect(self):
-    #     """Test successful login redirects to user profile"""
-    #     response = self.client.post(
-    #         self.login_url,
-    #         {
-    #             "username": "testuser",
-    #             "password": "testpass123",
-    #         },
-    #         follow=True,
-    #     )
-    #
-    #     # Should end up on profile page
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, "users/public_profile.html")
-    #
-    #     # User should be authenticated
-    #     self.assertTrue(response.context["user"].is_authenticated)
-
     def test_failed_login(self):
         """Test failed login attempt"""
         response = self.client.post(
@@ -443,10 +405,6 @@ class PublicProfileViewTest(TestCase):
 
         # Check basic context variables
         self.assertEqual(context["profile_user"], self.user)
-        self.assertIn("questions_count", context)
-        self.assertIn("answers_count", context)
-        self.assertIn("reviews_count", context)
-        self.assertIn("accepted_answers", context)
         self.assertIn("is_owner", context)
 
     def test_is_owner_context(self):
@@ -471,42 +429,6 @@ class PublicProfileViewTest(TestCase):
         nonexistent_url = reverse("users:profile", kwargs={"username": "nonexistent"})
         response = self.client.get(nonexistent_url)
         self.assertEqual(response.status_code, 404)
-
-
-class AuthenticationFlowTest(TestCase):
-    """Test complete authentication flows"""
-
-    def setUp(self):
-        self.client = Client()
-        self.signup_url = reverse("users:signup")
-        self.login_url = reverse("users:login")
-        self.profile_url = reverse("users:profile", kwargs={"username": "testuser"})
-
-    # def test_complete_signup_login_flow(self):
-    #     """Test complete flow: signup -> login -> access profile"""
-    #     # Step 1: Sign up
-    #     signup_data = {
-    #         "username": "testuser",
-    #         "email": "test@example.com",
-    #         "password1": "ComplexPassword123!",
-    #         "password2": "ComplexPassword123!",
-    #     }
-    #     response = self.client.post(self.signup_url, data=signup_data)
-    #     self.assertRedirects(response, reverse("users:login"))
-    #
-    #     # Step 2: Login
-    #     response = self.client.post(
-    #         self.login_url,
-    #         {
-    #             "username": "testuser",
-    #             "password": "ComplexPassword123!",
-    #         },
-    #         follow=True,
-    #     )
-    #
-    #     # Should be authenticated and on profile page
-    #     self.assertTrue(response.context["user"].is_authenticated)
-    #     self.assertTemplateUsed(response, "users/public_profile.html")
 
 
 class EdgeCaseTests(TestCase):
@@ -550,40 +472,6 @@ class EdgeCaseTests(TestCase):
         self.assertFalse(response.context["user"].is_authenticated)
 
 
-class FormFieldValidationTest(TestCase):
-    """Test specific form field validations"""
-
-    def setUp(self):
-        self.user = User.objects.create_user(username="testuser", email="test@example.com", password="testpass123")
-        self.profile = self.user.profile
-
-    def test_invalid_email_format(self):
-        """Test profile form with invalid email"""
-        form_data = {
-            "user-email": "invalid-email",
-            "user-first_name": "Test",
-            "user-last_name": "User",
-        }
-        form = ProfileEditForm(data=form_data, instance=self.profile, user_instance=self.user)
-        self.assertFalse(form.is_valid())
-        self.assertIn("email", form.user_form.errors)
-
-    def test_birthday_future_date_validation(self):
-        """Test that future birthday dates are rejected"""
-        future_date = (timezone.now() + datetime.timedelta(days=365)).date()
-        form_data = {
-            "user-email": self.user.email,
-            "user-first_name": self.user.first_name,
-            "user-last_name": self.user.last_name,
-            "birthday": future_date,
-        }
-        form = ProfileEditForm(data=form_data, instance=self.profile, user_instance=self.user)
-
-        # Log validation results for debugging
-        if not form.is_valid():
-            logger.debug("Birthday form validation failed with errors: %s", form.errors)
-
-
 class URLTests(TestCase):
     """Test URL patterns and their accessibility"""
 
@@ -606,15 +494,14 @@ class URLTests(TestCase):
             response = self.client.get(url)
             self.assertIn(response.status_code, [200, 302])
 
-    # def test_protected_urls_redirect_when_anonymous(self):
-    #     """Test protected URLs redirect anonymous users to login"""
-    #     protected_urls = [
-    #         reverse("users:edit-profile"),
-    #         reverse("users:password_change"),
-    #         reverse("users:password_change_done"),
-    #     ]
-    #
-    #     for url in protected_urls:
-    #         response = self.client.get(url)
-    #         self.assertEqual(response.status_code, 302)
-    #         self.assertTrue(response.url.startswith("/users/login/"))
+    def test_protected_urls_redirect_when_anonymous(self):
+        """Test protected URLs redirect anonymous users to login"""
+        protected_urls = [
+            reverse("users:edit-profile"),
+            reverse("users:password_change"),
+        ]
+
+        for url in protected_urls:
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, 302)
+            self.assertTrue("/login" in response.url)
