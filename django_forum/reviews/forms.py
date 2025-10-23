@@ -17,7 +17,11 @@ class CourseReviewForm(forms.ModelForm):
                 attrs={"class": "form-control", "placeholder": _("Brief summary of your review...")},
             ),
             "content": forms.Textarea(
-                attrs={"class": "form-control", "placeholder": _("Share your experience with this course..."), "rows": 5},
+                attrs={
+                    "class": "form-control",
+                    "placeholder": _("Share your experience with this course..."),
+                    "rows": 5,
+                },
             ),
             "rating": forms.RadioSelect(choices=CourseReview.RATING_CHOICES),
         }
@@ -39,10 +43,15 @@ class CourseReviewForm(forms.ModelForm):
 
             if existing_review.exists():
                 raise forms.ValidationError(
-                    _("You have already reviewed '%(course_name)s'. You can <a href='%(review_url)s'>view your existing review</a> or <a href='%(edit_url)s'>edit it</a>.") % {
-                        'course_name': course_name,
-                        'review_url': existing_review.first().get_absolute_url(),
-                        'edit_url': django.urls.reverse('reviews:review_update', kwargs={'pk': existing_review.first().pk})
+                    _(
+                        "You have already reviewed '%(course_name)s'. You can <a href='%(review_url)s'>view your existing review</a> or <a href='%(edit_url)s'>edit it</a>."
+                    )
+                    % {
+                        "course_name": course_name,
+                        "review_url": existing_review.first().get_absolute_url(),
+                        "edit_url": django.urls.reverse(
+                            "reviews:review_update", kwargs={"pk": existing_review.first().pk}
+                        ),
                     }
                 )
 

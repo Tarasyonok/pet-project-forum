@@ -1,9 +1,6 @@
-import django.conf
-import django.core.exceptions
-import django.utils.timezone
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.utils.translation import gettext_lazy as _
 
 from users.models import UserProfile
@@ -23,14 +20,8 @@ class SignUpForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['password1'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': _('Enter your password')
-        })
-        self.fields['password2'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': _('Repeat the password')
-        })
+        self.fields["password1"].widget.attrs.update({"class": "form-control", "placeholder": _("Enter your password")})
+        self.fields["password2"].widget.attrs.update({"class": "form-control", "placeholder": _("Repeat the password")})
 
 
 class CustomLoginForm(AuthenticationForm):
@@ -38,44 +29,39 @@ class CustomLoginForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
 
         # Customize the username field
-        self.fields['username'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': _('Enter your username or email')
-        })
+        self.fields["username"].widget.attrs.update(
+            {"class": "form-control", "placeholder": _("Enter your username or email")}
+        )
 
         # Customize the password field
-        self.fields['password'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': _('Enter your password')
-        })
+        self.fields["password"].widget.attrs.update({"class": "form-control", "placeholder": _("Enter your password")})
 
 
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name']
+        fields = ["email", "first_name", "last_name"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Add Bootstrap classes to form fields
         for field in self.fields:
-            self.fields[field].widget.attrs.update({
-                'class': 'form-control',
-                'placeholder': f'Enter your {field.replace("_", " ")}'
-            })
+            self.fields[field].widget.attrs.update(
+                {"class": "form-control", "placeholder": f"Enter your {field.replace('_', ' ')}"}
+            )
 
 
 class UserProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['avatar', 'bio', 'birthday']
+        fields = ["avatar", "bio", "birthday"]
         widgets = {
-            'bio': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
-            'birthday': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'avatar': forms.FileInput(attrs={'class': 'form-control form-control-sm', 'accept': 'image/*'}),
+            "bio": forms.Textarea(attrs={"rows": 4, "class": "form-control"}),
+            "birthday": forms.DateInput(attrs={"type": "date", "class": "form-control"}),
+            "avatar": forms.FileInput(attrs={"class": "form-control form-control-sm", "accept": "image/*"}),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Make avatar field not required since it's blank=True
-        self.fields['avatar'].required = False
+        self.fields["avatar"].required = False
