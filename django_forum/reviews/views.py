@@ -27,13 +27,14 @@ class ReviewListView(ListView):
         else:
             queryset = CourseReview.objects.all().select_related("author", "author__profile")
 
+        self.search_words = queryset.count()
         return queryset.order_by("-created_at")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         query = self.request.GET.get("q", "").strip()
         context["query"] = query
-        context["results_count"] = context["reviews"].count()
+        context["results_count"] = self.search_words
         context["is_search"] = bool(query)
 
         for review in context["reviews"]:
@@ -120,6 +121,7 @@ class UserReviewListView(ListView):
         context = super().get_context_data(**kwargs)
         reviews = self.get_queryset()
         context["profile_user"] = reviews.first().author if reviews else None
+        print(context["profile_user"])
 
         for review in context["reviews"]:
             review.upvotes = review.get_upvotes().count()

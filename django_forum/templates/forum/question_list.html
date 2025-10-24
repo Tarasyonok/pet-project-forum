@@ -30,16 +30,21 @@
 
                 <!-- Search Form -->
                 <form method="get" class="mb-3">
-                    <div class="input-group input-group-lg">
-                        <input type="text"
-                               name="q"
-                               value="{{ query }}"
-                               class="form-control bg-dark text-white border-secondary"
-                               placeholder="{% trans "Search questions and answers..." %}"
-                               aria-label="{% trans "Search questions" %}">
-                        <button class="btn btn-warning" type="submit">
-                            🔍 {% trans "Search" %}
-                        </button>
+                    <div class="row g-2">
+                        <div class="col-12 col-sm-8">
+                            <input type="text"
+                                   name="q"
+                                   value="{{ query }}"
+                                   class="form-control form-control-lg bg-dark text-white border-secondary"
+                                   placeholder="{% trans 'Search questions and answers...' %}"
+                                   aria-label="{% trans 'Search questions' %}">
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <button class="btn btn-warning btn-lg w-100 h-100" type="submit">
+                                <span class="d-none d-sm-inline">🔍 {% trans "Search" %}</span>
+                                <span class="d-sm-none">🔍 {% trans "Search" %}</span>
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -172,37 +177,120 @@
 
             <!-- Pagination -->
             {% if page_obj.paginator.num_pages > 1 %}
-            <nav aria-label="{% trans "Question pagination" %}" class="mt-4">
-                <ul class="pagination justify-content-center">
+            <nav aria-label="{% trans 'Question pagination' %}" class="mt-4">
+                <ul class="pagination justify-content-center flex-wrap">
                     {% if page_obj.has_previous %}
-                    <li class="page-item">
+                    <li class="page-item d-none d-sm-block">
                         <a class="page-link bg-dark text-white border-secondary"
                            href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">
                             ← {% trans "Previous" %}
                         </a>
                     </li>
-                    {% endif %}
-
-                    {% for num in page_obj.paginator.page_range %}
-                    {% if page_obj.number == num %}
-                    <li class="page-item active">
-                        <span class="page-link bg-warning border-warning text-dark">{{ num }}</span>
-                    </li>
-                    {% else %}
-                    <li class="page-item">
+                    <li class="page-item d-sm-none">
                         <a class="page-link bg-dark text-white border-secondary"
-                           href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}">
-                            {{ num }}
+                           href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">
+                            ←
                         </a>
                     </li>
                     {% endif %}
-                    {% endfor %}
+
+                    {% with total_pages=page_obj.paginator.num_pages current_page=page_obj.number %}
+                        {% if total_pages <= 7 %}
+                            <!-- Show all pages if 7 or fewer -->
+                            {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                            <li class="page-item active d-none d-sm-block">
+                                <span class="page-link bg-warning border-warning text-dark">{{ num }}</span>
+                            </li>
+                            <li class="page-item active d-sm-none">
+                                <span class="page-link bg-warning border-warning text-dark">{{ num }}</span>
+                            </li>
+                            {% else %}
+                            <li class="page-item d-none d-sm-block">
+                                <a class="page-link bg-dark text-white border-secondary"
+                                   href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}">
+                                    {{ num }}
+                                </a>
+                            </li>
+                            <li class="page-item d-sm-none">
+                                <a class="page-link bg-dark text-white border-secondary"
+                                   href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}">
+                                    {{ num }}
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <!-- Show first page -->
+                            <li class="page-item {% if page_obj.number == 1 %}active{% endif %} d-none d-md-block">
+                                {% if page_obj.number == 1 %}
+                                <span class="page-link bg-warning border-warning text-dark">1</span>
+                                {% else %}
+                                <a class="page-link bg-dark text-white border-secondary"
+                                   href="?page=1{% if query %}&q={{ query }}{% endif %}">1</a>
+                                {% endif %}
+                            </li>
+
+                            <!-- Show ellipsis after first page if needed -->
+                            {% if current_page > 4 %}
+                            <li class="page-item disabled d-none d-md-block">
+                                <span class="page-link bg-dark border-secondary">...</span>
+                            </li>
+                            {% endif %}
+
+                            <!-- Show pages around current page -->
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if num > 1 and num < total_pages %}
+                                    {% if num >= current_page|add:"-1" and num <= current_page|add:"1" %}
+                                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                                        {% if page_obj.number == num %}
+                                        <span class="page-link bg-warning border-warning text-dark">{{ num }}</span>
+                                        {% else %}
+                                        <a class="page-link bg-dark text-white border-secondary"
+                                           href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}">{{ num }}</a>
+                                        {% endif %}
+                                    </li>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+
+                            <!-- Show ellipsis before last page if needed -->
+                            {% if current_page < total_pages|add:"-3" %}
+                            <li class="page-item disabled d-none d-md-block">
+                                <span class="page-link bg-dark border-secondary">...</span>
+                            </li>
+                            {% endif %}
+
+                            <!-- Show last page -->
+                            <li class="page-item {% if page_obj.number == total_pages %}active{% endif %} d-none d-md-block">
+                                {% if page_obj.number == total_pages %}
+                                <span class="page-link bg-warning border-warning text-dark">{{ total_pages }}</span>
+                                {% else %}
+                                <a class="page-link bg-dark text-white border-secondary"
+                                   href="?page={{ total_pages }}{% if query %}&q={{ query }}{% endif %}">{{ total_pages }}</a>
+                                {% endif %}
+                            </li>
+
+                            <!-- Mobile: Current page indicator -->
+                            <li class="page-item disabled d-md-none">
+                                <span class="page-link bg-dark border-secondary text-muted">
+                                    {{ current_page }} / {{ total_pages }}
+                                </span>
+                            </li>
+                        {% endif %}
+                    {% endwith %}
 
                     {% if page_obj.has_next %}
-                    <li class="page-item">
+                    <li class="page-item d-none d-sm-block">
                         <a class="page-link bg-dark text-white border-secondary"
                            href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}">
                             {% trans "Next" %} →
+                        </a>
+                    </li>
+                    <li class="page-item d-sm-none">
+                        <a class="page-link bg-dark text-white border-secondary"
+                           href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}">
+                            →
                         </a>
                     </li>
                     {% endif %}
@@ -262,7 +350,7 @@
                             <small class="text-muted">{% trans "Solved" %}</small>
                         </div>
                         <div class="col-6 mb-3">
-                            <h4 class="text-warning mb-1">{{ active_users }}</h4>
+                            <h4 class="text-warning mb-1">{{ active_questions }}</h4>
                             <small class="text-muted">{% trans "Active" %}</small>
                         </div>
                     </div>
@@ -347,5 +435,46 @@
             font-size: 0.75rem;
         }
     }
+
+    /* Search form mobile optimization */
+@media (max-width: 576px) {
+    .form-control-lg {
+        border-radius: 0.375rem 0.375rem 0 0 !important;
+        margin-bottom: -1px;
+    }
+
+    .btn-lg {
+        border-radius: 0 0 0.375rem 0.375rem !important;
+        padding: 0.75rem 1rem;
+    }
+
+    /* Ensure proper spacing on mobile */
+    .row.g-2 {
+        margin-left: -0.25rem;
+        margin-right: -0.25rem;
+    }
+
+    .row.g-2 > [class*="col-"] {
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+    }
+}
+
+/* Medium devices (tablets) */
+@media (max-width: 768px) {
+    .input-group-lg {
+        flex-direction: column;
+    }
+
+    .input-group-lg .form-control {
+        border-radius: 0.375rem 0.375rem 0 0 !important;
+        margin-bottom: -1px;
+    }
+
+    .input-group-lg .btn {
+        border-radius: 0 0 0.375rem 0.375rem !important;
+        width: 100%;
+    }
+}
 </style>
 {% endblock %}

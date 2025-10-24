@@ -5,10 +5,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.core.management.base import BaseCommand
 from faker import Faker
-
-from votes.models import Vote
 from forum.models import Answer, Question
 from reviews.models import CourseReview
+from votes.models import Vote
 
 User = get_user_model()
 

@@ -40,13 +40,14 @@ class QuestionListView(ListView):
         else:
             queryset = Question.objects.all().select_related("author", "author__profile").prefetch_related("answers")
 
+        self.search_words = queryset.count()
         return queryset.order_by("-created_at")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         query = self.request.GET.get("q", "").strip()
         context["query"] = query
-        context["results_count"] = context["questions"].count()
+        context["results_count"] = self.search_words
         context["search_words"] = query.split()
         context["is_search"] = bool(query)
 

@@ -3,7 +3,7 @@
 {% load votes_tags %}
 {% load i18n %}
 
-{% block title %}{% blocktrans %}{{ profile_user.username }}'s Reviews - Night Coder{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans with username=profile_user.username %}{{ username }}'s Reviews - Night Coder{% endblocktrans %}{% endblock %}
 
 {% block main_class %}bg-dark{% endblock %}
 
@@ -14,10 +14,10 @@
         <div class="row align-items-center">
             <div class="col-lg-8">
                 <h1 class="display-5 display-md-4 fw-bold mb-3">
-                    👤 {% blocktrans %}{{ profile_user.username }}'s Reviews{% endblocktrans %}
+                    👤 {% blocktrans with username=profile_user.username %}{{ username }}'s Reviews{% endblocktrans %}
                 </h1>
                 <p class="lead mb-4">
-                    {% blocktrans %}Course reviews and learning experiences shared by {{ profile_user.username }}.{% endblocktrans %}
+                    {% blocktrans with username=profile_user.username %}Course reviews and learning experiences shared by {{ username }}.{% endblocktrans %}
                 </p>
 
                 <!-- User Stats -->
@@ -130,7 +130,7 @@
                             {% if user == profile_user %}
                             {% trans "You haven't written any course reviews yet." %}
                             {% else %}
-                            {% blocktrans %}{{ profile_user.username }} hasn't written any course reviews yet.{% endblocktrans %}
+                            {% blocktrans with username=profile_user.username %}{{ username }} hasn't written any course reviews yet.{% endblocktrans %}
                             {% endif %}
                         </p>
                     </div>
@@ -141,36 +141,119 @@
             <!-- Pagination -->
             {% if page_obj.paginator.num_pages > 1 %}
             <nav aria-label="{% trans 'User reviews pagination' %}" class="mt-4">
-                <ul class="pagination justify-content-center">
+                <ul class="pagination justify-content-center flex-wrap">
                     {% if page_obj.has_previous %}
-                    <li class="page-item">
+                    <li class="page-item d-none d-sm-block">
                         <a class="page-link bg-dark text-white border-secondary"
                            href="?page={{ page_obj.previous_page_number }}">
                             ← {% trans "Previous" %}
                         </a>
                     </li>
-                    {% endif %}
-
-                    {% for num in page_obj.paginator.page_range %}
-                    {% if page_obj.number == num %}
-                    <li class="page-item active">
-                        <span class="page-link bg-warning border-warning text-dark">{{ num }}</span>
-                    </li>
-                    {% else %}
-                    <li class="page-item">
+                    <li class="page-item d-sm-none">
                         <a class="page-link bg-dark text-white border-secondary"
-                           href="?page={{ num }}">
-                            {{ num }}
+                           href="?page={{ page_obj.previous_page_number }}">
+                            ←
                         </a>
                     </li>
                     {% endif %}
-                    {% endfor %}
+
+                    {% with total_pages=page_obj.paginator.num_pages current_page=page_obj.number %}
+                        {% if total_pages <= 7 %}
+                            <!-- Show all pages if 7 or fewer -->
+                            {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                            <li class="page-item active d-none d-sm-block">
+                                <span class="page-link bg-warning border-warning text-dark">{{ num }}</span>
+                            </li>
+                            <li class="page-item active d-sm-none">
+                                <span class="page-link bg-warning border-warning text-dark">{{ num }}</span>
+                            </li>
+                            {% else %}
+                            <li class="page-item d-none d-sm-block">
+                                <a class="page-link bg-dark text-white border-secondary"
+                                   href="?page={{ num }}">
+                                    {{ num }}
+                                </a>
+                            </li>
+                            <li class="page-item d-sm-none">
+                                <a class="page-link bg-dark text-white border-secondary"
+                                   href="?page={{ num }}">
+                                    {{ num }}
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <!-- Show first page -->
+                            <li class="page-item {% if page_obj.number == 1 %}active{% endif %} d-none d-md-block">
+                                {% if page_obj.number == 1 %}
+                                <span class="page-link bg-warning border-warning text-dark">1</span>
+                                {% else %}
+                                <a class="page-link bg-dark text-white border-secondary"
+                                   href="?page=1">1</a>
+                                {% endif %}
+                            </li>
+
+                            <!-- Show ellipsis after first page if needed -->
+                            {% if current_page > 4 %}
+                            <li class="page-item disabled d-none d-md-block">
+                                <span class="page-link bg-dark border-secondary">...</span>
+                            </li>
+                            {% endif %}
+
+                            <!-- Show pages around current page -->
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if num > 1 and num < total_pages %}
+                                    {% if num >= current_page|add:"-1" and num <= current_page|add:"1" %}
+                                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                                        {% if page_obj.number == num %}
+                                        <span class="page-link bg-warning border-warning text-dark">{{ num }}</span>
+                                        {% else %}
+                                        <a class="page-link bg-dark text-white border-secondary"
+                                           href="?page={{ num }}">{{ num }}</a>
+                                        {% endif %}
+                                    </li>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+
+                            <!-- Show ellipsis before last page if needed -->
+                            {% if current_page < total_pages|add:"-3" %}
+                            <li class="page-item disabled d-none d-md-block">
+                                <span class="page-link bg-dark border-secondary">...</span>
+                            </li>
+                            {% endif %}
+
+                            <!-- Show last page -->
+                            <li class="page-item {% if page_obj.number == total_pages %}active{% endif %} d-none d-md-block">
+                                {% if page_obj.number == total_pages %}
+                                <span class="page-link bg-warning border-warning text-dark">{{ total_pages }}</span>
+                                {% else %}
+                                <a class="page-link bg-dark text-white border-secondary"
+                                   href="?page={{ total_pages }}">{{ total_pages }}</a>
+                                {% endif %}
+                            </li>
+
+                            <!-- Mobile: Current page indicator -->
+                            <li class="page-item disabled d-md-none">
+                                <span class="page-link bg-dark border-secondary text-muted">
+                                    {{ current_page }} / {{ total_pages }}
+                                </span>
+                            </li>
+                        {% endif %}
+                    {% endwith %}
 
                     {% if page_obj.has_next %}
-                    <li class="page-item">
+                    <li class="page-item d-none d-sm-block">
                         <a class="page-link bg-dark text-white border-secondary"
                            href="?page={{ page_obj.next_page_number }}">
                             {% trans "Next" %} →
+                        </a>
+                    </li>
+                    <li class="page-item d-sm-none">
+                        <a class="page-link bg-dark text-white border-secondary"
+                           href="?page={{ page_obj.next_page_number }}">
+                            →
                         </a>
                     </li>
                     {% endif %}
