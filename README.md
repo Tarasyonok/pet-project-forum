@@ -23,12 +23,13 @@ It's where students, and passionate developers come together to ask questions, s
 - 🎨 **Beautiful UI** - Dark theme optimized for night coding sessions
 - 🤝 **Real Connections** - Build your developer reputation and portfolio
 
-## 🚀 Live Demo
+## 🚀 Night Coder Live
 
-### 👉 **[Try Night Coder Live](https://your-night-coder-app.onrender.com)** 👈
+### 👉 **[Try Night Coder](https://your-night-coder-app.onrender.com)** 👈
 
-**Demo Credentials:**
+**Demo Credentials (if you don't want to create an account):**
 
+- Nickname: `DemoUser`
 - Email: `demo@nightcoder.com`
 - Password: `DemoPass123`
 
@@ -39,12 +40,20 @@ It's where students, and passionate developers come together to ask questions, s
     <img src="/readme_screenshots/home_en.png" alt="Homepage" width="100%">
 </details>
 <details>
+    <summary>👤 User Profile</summary>
+    <br> <img src="/readme_screenshots/profile_en.png" alt="User Profile" width="100%">
+</details>
+<details>
     <summary>💬 Forum</summary><br>
     <img src="/readme_screenshots/forum_en.png" alt="Forum" width="100%">
 </details>
 <details>
-    <summary>👤 User Profile</summary>
-    <br> <img src="/readme_screenshots/profile_en.png" alt="User Profile" width="100%">
+    <summary>📚 Reviews</summary><br>
+    <img src="/readme_screenshots/reviews_en.png" alt="Reviews" width="100%">
+</details>
+<details>
+    <summary>🏆 Leaderboards</summary><br>
+    <img src="/readme_screenshots/leaderboards_en.png" alt="Leaderboard" width="100%">
 </details>
 
 ## 🛠️ Tech Stack
@@ -52,7 +61,7 @@ It's where students, and passionate developers come together to ask questions, s
 ### **Backend**
 
 - **Python 3.13** - Core programming language
-- **Django 5.2** - High-level Python Web framework
+- **Django 5.2** - Python Web framework
 - **SQLite** - Development & production database
 
 ### **Frontend**
@@ -60,7 +69,6 @@ It's where students, and passionate developers come together to ask questions, s
 - **Bootstrap 5** - Responsive CSS framework
 - **JavaScript** - Interactive features
 - **HTML5 & CSS3** - Modern web standards
-- **Font Awesome** - Icons and emojis
 
 ### **DevOps & Tools**
 
@@ -72,7 +80,7 @@ It's where students, and passionate developers come together to ask questions, s
 
 ## 🎨 Key Features
 
-### 💬 **Smart Q&A Forum**
+### 💬 **Q&A Forum**
 
 - Ask programming questions and get answers
 - Vote system with reputation rewards
@@ -93,12 +101,12 @@ It's where students, and passionate developers come together to ask questions, s
 - **Monthly Top Contributors** - Recognition for active members
 - **Footer statistics** - Context processor for community stats on every page
 
-### 👤 **Rich User Profiles**
+### 👤 **User Profiles**
 
 - Avatar upload and personal bios
 - Activity history (questions, answers, reviews)
 - Reputation breakdown and statistics
-- Social proof with contribution metrics
+- Сontribution metrics
 
 ### 🌐 **Internationalization**
 
@@ -106,7 +114,7 @@ It's where students, and passionate developers come together to ask questions, s
 - Language switcher
 - SEO-friendly URL structure
 
-### 🎯 **Developer Experience**
+### 🎯 **UX/UI**
 
 - Dark theme optimized for coding
 - Mobile-responsive design
@@ -116,16 +124,16 @@ It's where students, and passionate developers come together to ask questions, s
 
 ```
 night-coder/
-├── 🏠 home/                # Homepage app
-├── 💬 forum/               # Q&A functionality
-├── ⭐ reviews/             # Course reviews
-├── 👤 users/               # Authentication & profiles
-├── 👍 votes/               # Content votes
-├── 🏆 leaderboards/        # Gamification system
 ├── 🔧 core/                # Shared utilities & mixins
-├── 📁 templates/           # Django templates
-├── 📁 static/              # CSS, JS, images
-└── 📁 locale/              # Translation files
+├── 💬 forum/               # Q&A functionality
+├── 🏠 home/                # Homepage app
+├── 🏆 leaderboards/        # Gamification system
+├── 🌐 locale/              # Translation files
+├── ⭐ reviews/             # Course reviews
+├── 🗿 static/              # CSS, JS, images
+├── 💄 templates/           # Django templates
+├── 👤 users/               # Authentication & profiles
+└── 👍 votes/               # Content votes
 ```
 
 ## 🚀 Quick Start
@@ -158,7 +166,7 @@ night-coder/
 4. **Configure environment**
    ```bash
    cp .env.example .env
-   # Edit .env with your database and secret key
+   # Edit .env with your hosts and secret key
    ```
 
 5. **Run migrations**
@@ -176,7 +184,7 @@ night-coder/
    python manage.py runserver
    ```
 
-Visit `http://localhost:8000` and create your first question! 🌙
+Visit [localhost:8000](http://localhost:8000) and create your first question! 🌙
 
 ## 🧪 Testing
 
@@ -197,17 +205,8 @@ ruff format .         # Formatting
 Night Coder is deployed on **Render** with automatic CI/CD:
 
 1. **Push to main branch** → Automatic deployment
-2. **build.sh and start.sh** → Automatic deployment
+2. **build.sh and start.sh** → Build and start scripts
 3. **Environment** → Production-ready configuration
-
-### Environment Variables
-
-```env
-DEBUG=False
-SECRET_KEY=your-secret-key
-DATABASE_URL=postgresql://...
-ALLOWED_HOSTS=your-domain.com
-```
 
 ## 🤝 Contributing
 
@@ -219,28 +218,14 @@ We love contributions! Here's how you can help:
 4. **Push** to the branch (`git push origin feature/amazing-feature`)
 5. **Open** a Pull Request
 
+### If you have any feedback/suggestions for improvements, feel free to open an Issue
+
 ### Development Guidelines
 
-- Follow PEP 8 style guide
+- Follow PEP 8 style guide (use ruff)
 - Write tests for new features
 - Update documentation
-- Use meaningful commit messages
-
-## 📈 Project Impact
-
-### 🎯 **For Job Seekers**
-
-- **Showcase full-stack skills** with a complete, production-ready project
-- **Demonstrate Django expertise** with advanced features
-- **Prove ability to ship** from idea to deployment
-- **Internationalization experience** with Russian/English support
-
-### 🌍 **For the Community**
-
-- 500+ developers helped
-- 1,000+ questions answered
-- 200+ course reviews shared
-- 10,000+ reputation points earned
+- Use meaningful commit messages with emojis
 
 ## 🏆 Achievements
 
@@ -259,13 +244,12 @@ This project demonstrates mastery in:
 **Kir Tarasov**  
 *Full-Stack Developer*
 
-- 🌐 **Portfolio**: [your-portfolio.com](https://your-portfolio.com)
-- 💼 **LinkedIn**: [Your LinkedIn](https://linkedin.com/in/your-profile)
-- 🐙 **GitHub**: [@your-username](https://github.com/your-username)
-- 📧 **Email**: your.email@domain.com
+- ✈️ **Telegram**: [@bravekirty](https://t.me/bravekirty)
+- 🐙 **GitHub**: [@Tarasyonok](https://github.com/Tarasyonok)
+- 📧 **Email**: bravekirty@gmail.com
 
-> "I built Night Coder to solve a real problem: creating a welcoming space for developers who do their best work when
-> the world is asleep. It represents my passion for clean code, user experience, and community building."
+[//]: # (- 🌳 **Linktree**: [@bravekirty]&#40;https://linktr.ee/bravekirty&#41;)
+[//]: # (- 💼 **LinkedIn**: [Your LinkedIn]&#40;https://linkedin.com/in/your-profile&#41;)
 
 ## 📄 License
 
@@ -277,7 +261,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### **Ready to join our night coding community?** 🌙
 
-[![Try Night Coder](https://img.shields.io/badge/Try_Night_Coder-Live_Demo-orange?style=for-the-badge)](https://your-night-coder-app.onrender.com)
+[![Try Night Coder](https://img.shields.io/badge/Try_Night_Coder-Live-orange?style=for-the-badge)](https://your-night-coder-app.onrender.com)
 
 *⭐ Don't forget to star this repo if you found it interesting/helpful!*
 
