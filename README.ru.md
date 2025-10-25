@@ -1,3 +1,5 @@
+[![en_readme](https://img.shields.io/badge/Readme-in_English-darkblue)](https://github.com/Tarasyonok/pet-project-forum/blob/main/README.md)
+
 # 🌙 Night Coder
 
 > **Место, где разработчики кодят и развиваются вместе**  
