@@ -22,11 +22,11 @@
                 <!-- Stats Overview -->
                 <div class="d-flex flex-wrap gap-4 text-light">
                     <div class="text-center">
-                        <h3 class="text-warning mb-1">{{ all_time_leaders|length }}+</h3>
+                        <h3 class="text-warning mb-1">{{ all_time_leaders|length }}</h3>
                         <small class="text-light-50">{% trans "Top Contributors" %}</small>
                     </div>
                     <div class="text-center">
-                        <h3 class="text-success mb-1">{{ month_leaders|length }}+</h3>
+                        <h3 class="text-success mb-1">{{ active_users }}+</h3>
                         <small class="text-light-50">{% trans "This Month" %}</small>
                     </div>
                     <div class="text-center">
@@ -41,7 +41,7 @@
                         <span class="text-success">// {% trans "Leaderboard stats" %}</span><br>
                         <span class="text-info">const</span> <span class="text-warning">leaderboards</span> = {<br>
                         &nbsp;&nbsp;topContributors: <span class="text-info">{{ all_time_leaders|length }}</span>,<br>
-                        &nbsp;&nbsp;monthlyActive: <span class="text-info">{{ month_leaders|length }}</span>,<br>
+                        &nbsp;&nbsp;monthlyActive: <span class="text-info">{{ active_users }}</span>,<br>
                         &nbsp;&nbsp;updated: <span class="text-info">"{% trans "Just now" %}"</span><br>
                         };
                     </div>

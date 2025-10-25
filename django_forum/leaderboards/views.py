@@ -17,11 +17,13 @@ def leaderboard_view(request):
         | Q(reviews__created_at__gte=month_start),
     ).distinct()
 
-    month_leaders = UserProfile.objects.filter(user__in=this_month_active).order_by("-reputation_points")[:10]
+    month_leaders = UserProfile.objects.filter(user__in=this_month_active).order_by("-reputation_points")
+    active_users = month_leaders.count()
 
     context = {
         "all_time_leaders": all_time_leaders,
-        "month_leaders": month_leaders,
+        "active_users": active_users,
+        "month_leaders": month_leaders[:10],
     }
 
     return render(request, "leaderboards/leaderboard.html", context)
