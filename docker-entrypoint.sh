@@ -2,20 +2,25 @@
 
 DB_HOST="${DB_HOST:-db}"
 DB_PORT="${DB_PORT:-5432}"
+DB_USER="${POSTGRES_USER:-postgres}"
+DB_PASSWORD="${POSTGRES_PASSWORD}"
+DB_NAME="${POSTGRES_DB:-railway}"
+TIMEOUT=60
 
 echo "Waiting for database at $DB_HOST:$DB_PORT..."
 
 counter=0
-while ! nc -z "$DB_HOST" "$DB_PORT"; do
-  sleep 1
+until PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -c '\q' 2>/dev/null; do
+  sleep 2
   counter=$((counter + 1))
-  if [ $counter -ge 30 ]; then
-    echo "Error: Database at $DB_HOST:$DB_PORT not available after 30 seconds"
+  echo "Attempt $counter: Waiting for database connection..."
+  if [ $counter -ge $TIMEOUT ]; then
+    echo "Error: Cannot connect to database at $DB_HOST:$DB_PORT after $TIMEOUT seconds"
     exit 1
   fi
 done
 
-echo "Database started successfully!"
+echo "Database connection established successfully!"
 
 # Run migrations
 python django_forum/manage.py migrate
@@ -28,5 +33,4 @@ python django_forum/manage.py collectstatic --noinput
 
 echo "All setup tasks completed!"
 
-# Execute the main command (from CMD in Dockerfile)
 exec "$@"
