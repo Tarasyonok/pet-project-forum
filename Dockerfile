@@ -24,3 +24,5 @@ RUN chmod +x /app/docker-entrypoint.sh
 RUN mkdir -p /app/staticfiles
 
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
+
+CMD ["gunicorn", "-c", "gunicorn.conf.py", "django_forum.wsgi:application"]
