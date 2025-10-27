@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Waiting for Railway internal DNS to propagate..."
+sleep 20
+
 echo "Running database migrations..."
 python django_forum/manage.py migrate
 
