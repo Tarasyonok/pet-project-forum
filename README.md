@@ -8,8 +8,11 @@
 ![CI/CD](https://github.com/Tarasyonok/pet-project-forum/actions/workflows/ci.yml/badge.svg)
 ![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python)
 ![Django](https://img.shields.io/badge/Django-5.2-darkgreen?logo=django)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-blue?logo=postgresql)
+![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker)
+![Gunicorn](https://img.shields.io/badge/Gunicorn-23.0-green?logo=gunicorn)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.2-purple?logo=bootstrap)
-![PostgreSQL](https://img.shields.io/badge/Ruff-14-lightgreen?logo=ruff)
+![Ruff](https://img.shields.io/badge/Ruff-14-lightgreen?logo=ruff)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
 ## 🎯 What is Night Coder?
@@ -64,7 +67,7 @@ It's where students, and passionate developers come together to ask questions, s
 
 - **Python 3.13** - Core programming language
 - **Django 5.2** - Python Web framework
-- **SQLite** - Development & production database
+- **PostgreSQL 17** - Production database
 
 ### **Frontend**
 
@@ -74,11 +77,14 @@ It's where students, and passionate developers come together to ask questions, s
 
 ### **DevOps & Tools**
 
-- **Render** - Cloud deployment platform
+- **Poetry** - Dependency management and packaging
 - **Ruff** - Ultra-fast Python linter and formatter
 - **Tests** - Unit & Integration tests
 - **Git** - Version control with clean commit history
 - **CI/CD** - Automated linting and testing
+- **Gunicorn** - WSGI HTTP Server for production
+- **Docker** - Containerization
+- **Render** - Cloud deployment platform
 
 ## 🎨 Key Features
 
@@ -140,53 +146,55 @@ night-coder/
 
 ## 🚀 Quick Start
 
-### Prerequisites
-
-- Python 3.13+
-- Git
-
-### Installation
-
 1. **Clone the repository**
    ```bash
    git clone https://github.com/Tarasyonok/pet-project-forum
    cd pet-project-forum
    ```
 
-2. **Set up virtual environment**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-3. **Install dependencies**
-   ```bash
-   pip install poetry
-   poetry install
-   ```
-
-4. **Configure environment**
+2. **Configure environment**
    ```bash
    cp .env.example .env
    # Edit .env with your hosts and secret key
    ```
 
-5. **Run migrations**
+### Option 1: Docker (Recommended)
+
+1. **Run with Docker**
+   ```bash
+   docker-compose up --build
+   ```
+
+### Option 2: Traditional Development
+
+1. **Set up virtual environment**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+2. **Install dependencies**
+   ```bash
+   pip install poetry
+   poetry install
+   ```
+
+3. **Run migrations**
    ```bash
    python manage.py migrate
    ```
 
-6. **Create superuser**
+4. **Create superuser**
    ```bash
    python manage.py createsuperuser
    ```
 
-7. **Run development server**
+5. **Run development server**
    ```bash
    python manage.py runserver
    ```
 
-Visit [localhost:8000](http://localhost:8000) and create your first question! 🌙
+**Visit [localhost:8000](http://localhost:8000) and create your first question! 🌙**
 
 ## 🧪 Testing
 
@@ -236,7 +244,9 @@ This project demonstrates mastery in:
 - ✅ **Full-Stack Development** - End-to-end web application
 - ✅ **Database Design** - Complex relationships and optimization
 - ✅ **User Experience** - Intuitive and engaging interface
-- ✅ **DevOps** - CI/CD and cloud deployment
+- ✅ **DevOps** - CI/CD, and cloud deployment
+- ✅ **Containerization** - Docker and Docker Compose
+- ✅ Production Deployment - PostgreSQL, Gunicorn, and environment management
 - ✅ **Internationalization** - Multi-language support
 - ✅ **Testing & Quality** - Comprehensive test coverage
 - ✅ **Performance** - Fast loading and efficient queries
@@ -251,6 +261,7 @@ This project demonstrates mastery in:
 - 📧 **Email**: bravekirty@gmail.com
 
 [//]: # (- 🌳 **Linktree**: [@bravekirty]&#40;https://linktr.ee/bravekirty&#41;)
+
 [//]: # (- 💼 **LinkedIn**: [Your LinkedIn]&#40;https://linkedin.com/in/your-profile&#41;)
 
 ## 📄 License

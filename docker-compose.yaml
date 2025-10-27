@@ -1,0 +1,32 @@
+services:
+  web:
+    build: .
+    command: gunicorn -c gunicorn.conf.py django_forum.wsgi:application
+    volumes:
+      - static_volume:/app/staticfiles
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - DJANGO_SETTINGS_MODULE=django_forum.settings
+      - PYTHONPATH=/app:/app/django_forum
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: postgres:17
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=night_coder_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  static_volume:
