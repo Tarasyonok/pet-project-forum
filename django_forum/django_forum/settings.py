@@ -1,4 +1,5 @@
 import pathlib
+import sys
 
 import decouple
 import django.urls
@@ -8,7 +9,8 @@ BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 SECRET_KEY = decouple.config("DJANGO_SECRET_KEY", default="FAKE-SECRET-KEY")
 DEBUG = decouple.config("DJANGO_DEBUG", default=False, cast=bool)
 ALLOWED_HOSTS = decouple.config("DJANGO_ALLOWED_HOSTS", default="*", cast=lambda v: v.split(","))
-CSRF_TRUSTED_ORIGINS = decouple.config("DJANGO_CSRF_TRUSTED_ORIGINS", default="http://*", cast=lambda v: v.split(","))
+
+IS_TESTING = "test" in sys.argv
 
 INSTALLED_APPS = [
     "users.apps.UsersConfig",  # Before django.contrib.auth
@@ -114,23 +116,27 @@ MEDIA_URL = "/media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-if DEBUG:
+
+if DEBUG or IS_TESTING:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
     CSRF_COOKIE_SECURE = False
     SESSION_COOKIE_SECURE = False
-else:
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-    CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_SECURE = True
-    SECURE_SSL_REDIRECT = True
+    SECURE_SSL_REDIRECT = False
 
-if DEBUG:
     INSTALLED_APPS.append("debug_toolbar")
     MIDDLEWARE = [
         "debug_toolbar.middleware.DebugToolbarMiddleware",
         *MIDDLEWARE,
     ]
     INTERNAL_IPS = ["*"]
+else:
+    CSRF_TRUSTED_ORIGINS = decouple.config(
+        "DJANGO_CSRF_TRUSTED_ORIGINS", default="http://*", cast=lambda v: v.split(",")
+    )
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
 
 AUTH_USER_MODEL = "users.User"
 AUTHENTICATION_BACKENDS = [
