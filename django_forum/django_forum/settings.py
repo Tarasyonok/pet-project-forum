@@ -8,7 +8,7 @@ BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 SECRET_KEY = decouple.config("DJANGO_SECRET_KEY", default="FAKE-SECRET-KEY")
 DEBUG = decouple.config("DJANGO_DEBUG", default=False, cast=bool)
 ALLOWED_HOSTS = decouple.config("DJANGO_ALLOWED_HOSTS", default="*", cast=lambda v: v.split(","))
-CSRF_TRUSTED_ORIGINS = decouple.config("DJANGO_CSRF_TRUSTED_ORIGINS", default="*", cast=lambda v: v.split(","))
+CSRF_TRUSTED_ORIGINS = decouple.config("DJANGO_CSRF_TRUSTED_ORIGINS", default="http://*", cast=lambda v: v.split(","))
 
 INSTALLED_APPS = [
     "users.apps.UsersConfig",  # Before django.contrib.auth
