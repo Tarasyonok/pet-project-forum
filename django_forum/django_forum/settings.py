@@ -121,7 +121,6 @@ if DEBUG or IS_TESTING:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
     CSRF_COOKIE_SECURE = False
     SESSION_COOKIE_SECURE = False
-    SECURE_SSL_REDIRECT = False
 
     INSTALLED_APPS.append("debug_toolbar")
     MIDDLEWARE = [
@@ -136,7 +135,6 @@ else:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
-    SECURE_SSL_REDIRECT = True
 
 AUTH_USER_MODEL = "users.User"
 AUTHENTICATION_BACKENDS = [
