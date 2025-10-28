@@ -25,4 +25,4 @@ RUN mkdir -p /app/staticfiles
 
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
 
-CMD ["gunicorn", "-c", "gunicorn.conf.py", "django_forum.django_forum.wsgi:application"]
+CMD ["gunicorn", "django_forum.django_forum.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "2"]
