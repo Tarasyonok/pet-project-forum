@@ -61,11 +61,11 @@ WSGI_APPLICATION = "django_forum.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": decouple.config("DB_NAME", default="night_coder"),
-        "USER": decouple.config("DB_USER", default="postgres"),
-        "PASSWORD": decouple.config("DB_PASSWORD", default="postgres"),
-        "HOST": decouple.config("DB_HOST", default="db"),
-        "PORT": decouple.config("DB_PORT", default="5432"),
+        "NAME": decouple.config("DB_NAME"),
+        "USER": decouple.config("DB_USER"),
+        "PASSWORD": decouple.config("DB_PASSWORD"),
+        "HOST": decouple.config("DB_HOST"),
+        "PORT": decouple.config("DB_PORT"),
     }
 }
 
