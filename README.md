@@ -9,18 +9,19 @@
 ![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python)
 ![Django](https://img.shields.io/badge/Django-5.2-darkgreen?logo=django)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-blue?logo=postgresql)
-![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker)
-![Gunicorn](https://img.shields.io/badge/Gunicorn-23.0-green?logo=gunicorn)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.2-purple?logo=bootstrap)
 ![Ruff](https://img.shields.io/badge/Ruff-14-lightgreen?logo=ruff)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+![Gunicorn](https://img.shields.io/badge/Gunicorn-23.0-green?logo=gunicorn)
+![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker)
+![Railway](https://img.shields.io/badge/Railway-Hosting-white?logo=railway)
+![License](https://img.shields.io/badge/License-MIT-yellow?logo=readme)
 
 ## 🎯 What is Night Coder?
 
 **Night Coder** is a full-stack developer community platform built for those magical hours when creativity flows best.
 It's where students, and passionate developers come together to ask questions, share knowledge, and grow their skills.
 
-### ✨ Why Night Coder Exists
+### ✨ Why Night Coder?
 
 - 🕒 **Community** - Someone is always awake somewhere in the world
 - 🏆 **Gamified Learning** - Earn reputation and climb leaderboards
@@ -30,7 +31,7 @@ It's where students, and passionate developers come together to ask questions, s
 
 ## 🚀 Night Coder Live
 
-### 👉 **[Try Night Coder](https://your-night-coder-app.onrender.com)** 👈
+### 👉 **[Try Night Coder](https://pet-project-forum-production.up.railway.app/en/)** 👈
 
 **Demo Credentials (if you don't want to create an account):**
 
@@ -84,7 +85,7 @@ It's where students, and passionate developers come together to ask questions, s
 - **CI/CD** - Automated linting and testing
 - **Gunicorn** - WSGI HTTP Server for production
 - **Docker** - Containerization
-- **Render** - Cloud deployment platform
+- **Railway** - Deployment platform
 
 ## 🎨 Key Features
 
@@ -246,7 +247,7 @@ This project demonstrates mastery in:
 - ✅ **User Experience** - Intuitive and engaging interface
 - ✅ **DevOps** - CI/CD, and cloud deployment
 - ✅ **Containerization** - Docker and Docker Compose
-- ✅ Production Deployment - PostgreSQL, Gunicorn, and environment management
+- ✅ **Production Deployment** - PostgreSQL, Gunicorn, and environment management
 - ✅ **Internationalization** - Multi-language support
 - ✅ **Testing & Quality** - Comprehensive test coverage
 - ✅ **Performance** - Fast loading and efficient queries
@@ -274,7 +275,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### **Ready to join our night coding community?** 🌙
 
-[![Try Night Coder](https://img.shields.io/badge/Try_Night_Coder-Live-orange?style=for-the-badge)](https://your-night-coder-app.onrender.com)
+[![Try Night Coder](https://img.shields.io/badge/Try_Night_Coder-Live-orange?style=for-the-badge)](https://pet-project-forum-production.up.railway.app/en/)
 
 *⭐ Don't forget to star this repo if you found it interesting/helpful!*
 

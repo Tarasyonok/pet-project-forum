@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-23 15:30+0300\n"
+"POT-Creation-Date: 2025-10-28 16:01+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr "Опиши проблему подробнее..."
 msgid "Write your answer here..."
 msgstr "Напиши свой ответ здесь..."
 
-#: .\forum\views.py:155
+#: .\forum\views.py:156
 msgid "Only question author can accept answers"
 msgstr "Только автор вопроса может отметить ответ как верный"
 
@@ -44,11 +44,11 @@ msgstr "Например: «Django Masterclass», «Основы Python»..."
 msgid "Brief summary of your review..."
 msgstr "Коротко о впечатлениях..."
 
-#: .\reviews\forms.py:20
+#: .\reviews\forms.py:22
 msgid "Share your experience with this course..."
 msgstr "Поделись впечатлениями от курса..."
 
-#: .\reviews\forms.py:42
+#: .\reviews\forms.py:47
 #, python-format
 msgid ""
 "You have already reviewed '%(course_name)s'. You can <a "
@@ -218,7 +218,7 @@ msgid "Night Coder"
 msgstr "Night Coder"
 
 #: .\templates\forum\question_detail.html:17
-#: .\templates\forum\question_list.html:65
+#: .\templates\forum\question_list.html:70
 msgid "Back to All Questions"
 msgstr "Назад к списку вопросов"
 
@@ -260,8 +260,8 @@ msgstr "Дизлайк (-2 к репутации)"
 
 #: .\templates\forum\question_detail.html:79
 #: .\templates\forum\question_detail.html:149
-#: .\templates\forum\question_list.html:122
-#: .\templates\forum\question_list.html:262
+#: .\templates\forum\question_list.html:127
+#: .\templates\forum\question_list.html:350
 #: .\templates\users\public_profile.html:197
 msgid "Solved"
 msgstr "Решено"
@@ -279,22 +279,22 @@ msgstr "Редактировать вопрос"
 
 #: .\templates\forum\question_detail.html:109
 #: .\templates\forum\question_detail.html:225
-#: .\templates\forum\question_list.html:135 .\templates\home\home.html:190
+#: .\templates\forum\question_list.html:140 .\templates\home\home.html:190
 #: .\templates\includes\footer.html:32
 #: .\templates\leaderboards\leaderboard.html:195
 #: .\templates\reviews\review_detail.html:119
-#: .\templates\reviews\review_list.html:129
+#: .\templates\reviews\review_list.html:134
 msgid "rep"
 msgstr "реп."
 
 #: .\templates\forum\question_detail.html:112
 #: .\templates\forum\question_detail.html:116
 #: .\templates\forum\question_detail.html:228
-#: .\templates\forum\question_list.html:138 .\templates\home\home.html:123
+#: .\templates\forum\question_list.html:143 .\templates\home\home.html:123
 #: .\templates\home\home.html:156 .\templates\reviews\review_detail.html:122
 #: .\templates\reviews\review_detail.html:126
 #: .\templates\reviews\review_detail.html:172
-#: .\templates\reviews\review_list.html:132
+#: .\templates\reviews\review_list.html:137
 #: .\templates\reviews\user_reviews.html:109
 #: .\templates\users\public_profile.html:194
 #: .\templates\users\public_profile.html:250
@@ -313,7 +313,7 @@ msgid "views"
 msgstr "просмотры"
 
 #: .\templates\forum\question_detail.html:146
-#: .\templates\forum\question_list.html:258 .\templates\home\home.html:81
+#: .\templates\forum\question_list.html:346 .\templates\home\home.html:81
 #: .\templates\home\home.html:225 .\templates\leaderboards\leaderboard.html:238
 #: .\templates\users\profile_edit.html:156
 #: .\templates\users\public_profile.html:93
@@ -388,7 +388,7 @@ msgid "Sign in to post your answer and help solve this problem."
 msgstr "Войди, чтобы ответить и помочь с решением."
 
 #: .\templates\forum\question_detail.html:297
-#: .\templates\includes\header.html:78
+#: .\templates\includes\header.html:87
 #: .\templates\leaderboards\leaderboard.html:269
 msgid "Login"
 msgstr "Войти"
@@ -406,7 +406,7 @@ msgid "Edit Your Question"
 msgstr "Редактировать вопрос"
 
 #: .\templates\forum\question_form.html:21
-#: .\templates\forum\question_list.html:226 .\templates\home\home.html:34
+#: .\templates\forum\question_list.html:314 .\templates\home\home.html:34
 msgid "Ask a Question"
 msgstr "Задать вопрос"
 
@@ -415,7 +415,7 @@ msgid "Improve your question to get better answers from the community."
 msgstr "Улучши вопрос, чтобы получить более точные ответы."
 
 #: .\templates\forum\question_form.html:28
-#: .\templates\forum\question_list.html:223
+#: .\templates\forum\question_list.html:311
 msgid "Get help from thousands of developers working through the night."
 msgstr "Получи помощь от тысяч разработчиков, которые работают ночами."
 
@@ -493,47 +493,49 @@ msgid ""
 "Ask questions, share knowledge, and help fellow developers grow together."
 msgstr "Задавай вопросы, делись знаниями и помогай другим разработчикам расти."
 
-#: .\templates\forum\question_list.html:38
+#: .\templates\forum\question_list.html:39
 msgid "Search questions and answers..."
 msgstr "Искать вопросы и ответы..."
 
-#: .\templates\forum\question_list.html:39
+#: .\templates\forum\question_list.html:40
 msgid "Search questions"
 msgstr "Поиск вопросов"
 
-#: .\templates\forum\question_list.html:41
-#: .\templates\reviews\review_list.html:41
+#: .\templates\forum\question_list.html:44
+#: .\templates\forum\question_list.html:45
+#: .\templates\reviews\review_list.html:44
+#: .\templates\reviews\review_list.html:45
 msgid "Search"
 msgstr "Найти"
 
-#: .\templates\forum\question_list.html:61
+#: .\templates\forum\question_list.html:66
 msgid "Search Results for"
 msgstr "Результаты поиска по запросу"
 
-#: .\templates\forum\question_list.html:62
+#: .\templates\forum\question_list.html:67
 msgid "questions found"
 msgstr "вопросов найдено"
 
-#: .\templates\forum\question_list.html:70
+#: .\templates\forum\question_list.html:75
 msgid "Search terms:"
 msgstr "Искали:"
 
-#: .\templates\forum\question_list.html:84
-#: .\templates\reviews\review_list.html:76
+#: .\templates\forum\question_list.html:89
+#: .\templates\reviews\review_list.html:81
 msgid "Results"
 msgstr "Результаты"
 
-#: .\templates\forum\question_list.html:84 .\templates\home\home.html:102
+#: .\templates\forum\question_list.html:89 .\templates\home\home.html:102
 msgid "Latest Questions"
 msgstr "Свежие вопросы"
 
-#: .\templates\forum\question_list.html:87
+#: .\templates\forum\question_list.html:92
 msgid "total"
 msgstr "всего"
 
-#: .\templates\forum\question_list.html:102 .\templates\home\home.html:111
+#: .\templates\forum\question_list.html:107 .\templates\home\home.html:111
 #: .\templates\home\home.html:161 .\templates\reviews\review_detail.html:174
-#: .\templates\reviews\review_list.html:94
+#: .\templates\reviews\review_list.html:99
 #: .\templates\reviews\user_reviews.html:77
 #: .\templates\reviews\user_reviews.html:112
 #: .\templates\users\public_profile.html:181
@@ -542,71 +544,71 @@ msgstr "всего"
 msgid "votes"
 msgstr "голосов"
 
-#: .\templates\forum\question_list.html:111 .\templates\home\home.html:125
+#: .\templates\forum\question_list.html:116 .\templates\home\home.html:125
 #: .\templates\includes\footer.html:34
 #: .\templates\leaderboards\leaderboard.html:102
 #: .\templates\users\public_profile.html:195
 msgid "answers"
 msgstr "ответов"
 
-#: .\templates\forum\question_list.html:155
+#: .\templates\forum\question_list.html:160
 msgid "No questions found"
 msgstr "Вопросы не найдены"
 
-#: .\templates\forum\question_list.html:158
+#: .\templates\forum\question_list.html:163
 msgid "Try different search terms or browse all questions."
 msgstr "Попробуй другие слова или посмотри все вопросы."
 
-#: .\templates\forum\question_list.html:160
+#: .\templates\forum\question_list.html:165
 msgid "Be the first to ask a question and help build our community!"
 msgstr "Стань первым, задай вопрос и помоги нашему сообществу расти!"
 
-#: .\templates\forum\question_list.html:165
+#: .\templates\forum\question_list.html:170
 msgid "Ask First Question"
 msgstr "Задать первый вопрос"
 
-#: .\templates\forum\question_list.html:175
+#: .\templates\forum\question_list.html:180
 msgid "Question pagination"
 msgstr "Навигация по вопросам"
 
-#: .\templates\forum\question_list.html:181
-#: .\templates\reviews\review_list.html:167
+#: .\templates\forum\question_list.html:186
+#: .\templates\reviews\review_list.html:172
 #: .\templates\reviews\user_reviews.html:149
 msgid "Previous"
 msgstr "Назад"
 
-#: .\templates\forum\question_list.html:205
-#: .\templates\reviews\review_list.html:191
-#: .\templates\reviews\user_reviews.html:173
+#: .\templates\forum\question_list.html:287
+#: .\templates\reviews\review_list.html:273
+#: .\templates\reviews\user_reviews.html:250
 msgid "Next"
 msgstr "Вперёд"
 
-#: .\templates\forum\question_list.html:221
+#: .\templates\forum\question_list.html:309
 msgid "Ready to Ask?"
 msgstr "Готов задать вопрос?"
 
-#: .\templates\forum\question_list.html:234
-#: .\templates\reviews\review_list.html:220
+#: .\templates\forum\question_list.html:322
+#: .\templates\reviews\review_list.html:308
 msgid "Join the Community"
 msgstr "Вступи в сообщество"
 
-#: .\templates\forum\question_list.html:236
+#: .\templates\forum\question_list.html:324
 msgid "Sign up to ask questions, answer others, and build your reputation."
 msgstr ""
 "Зарегистрируйся, чтобы задавать вопросы, помогать другим и зарабатывать "
 "репутацию."
 
-#: .\templates\forum\question_list.html:239 .\templates\home\home.html:25
+#: .\templates\forum\question_list.html:327 .\templates\home\home.html:25
 #: .\templates\leaderboards\leaderboard.html:266
-#: .\templates\reviews\review_list.html:225
+#: .\templates\reviews\review_list.html:313
 msgid "Start Coding Free"
 msgstr "Начать бесплатно"
 
-#: .\templates\forum\question_list.html:248
+#: .\templates\forum\question_list.html:336
 msgid "Forum Stats"
 msgstr "Статистика форума"
 
-#: .\templates\forum\question_list.html:254 .\templates\home\home.html:77
+#: .\templates\forum\question_list.html:342 .\templates\home\home.html:77
 #: .\templates\home\home.html:221 .\templates\leaderboards\leaderboard.html:234
 #: .\templates\users\profile_edit.html:152
 #: .\templates\users\public_profile.html:89
@@ -614,7 +616,7 @@ msgstr "Статистика форума"
 msgid "Questions"
 msgstr "Вопросы"
 
-#: .\templates\forum\question_list.html:266
+#: .\templates\forum\question_list.html:354
 msgid "Active"
 msgstr "Активные"
 
@@ -663,8 +665,8 @@ msgstr "Репутация"
 #: .\templates\home\home.html:85 .\templates\home\home.html:229
 #: .\templates\includes\footer.html:23 .\templates\includes\header.html:24
 #: .\templates\leaderboards\leaderboard.html:242
-#: .\templates\reviews\review_list.html:240
-#: .\templates\reviews\user_reviews.html:200
+#: .\templates\reviews\review_list.html:328
+#: .\templates\reviews\user_reviews.html:283
 #: .\templates\users\profile_edit.html:160
 #: .\templates\users\public_profile.html:97
 #: .\templates\users\public_profile.html:162
@@ -762,41 +764,43 @@ msgstr "Вопросов за ночь"
 
 #: .\templates\includes\footer.html:62
 msgid ""
-"&copy; 2025 Night Coder. Built with ☕ and 🌙 by developers, for developers."
+"&copy; 2025 Night Coder. Built with ☕ and 🌙 by <a href=\"https://"
+"github.com/Tarasyonok\" target=\"_blank\">@Tarasyonok</a>."
 msgstr ""
-"&copy; 2025 Night Coder. Сделано с ☕ и 🌙 разработчиками для разработчиков."
+"&copy; 2025 Night Coder. Сделано с ☕ и 🌙 by <a href=\"https://github.com/"
+"Tarasyonok\" target=\"_blank\">@Tarasyonok</a>."
 
 #: .\templates\includes\footer.html:67
 msgid "Current Time:"
 msgstr "Текущее время:"
 
-#: .\templates\includes\header.html:45
+#: .\templates\includes\header.html:54
 msgid "My Profile"
 msgstr "Мой профиль"
 
-#: .\templates\includes\header.html:50 .\templates\users\public_profile.html:73
+#: .\templates\includes\header.html:59 .\templates\users\public_profile.html:73
 msgid "Edit Profile"
 msgstr "Редактировать профиль"
 
-#: .\templates\includes\header.html:56
+#: .\templates\includes\header.html:65
 #: .\templates\leaderboards\leaderboard.html:248
 #: .\templates\leaderboards\leaderboard.html:289
 msgid "Ask Question"
 msgstr "Задать вопрос"
 
-#: .\templates\includes\header.html:61
+#: .\templates\includes\header.html:70
 #: .\templates\leaderboards\leaderboard.html:251
 #: .\templates\reviews\review_detail.html:23
-#: .\templates\reviews\review_list.html:212
-#: .\templates\reviews\user_reviews.html:222
+#: .\templates\reviews\review_list.html:300
+#: .\templates\reviews\user_reviews.html:305
 msgid "Write Review"
 msgstr "Написать отзыв"
 
-#: .\templates\includes\header.html:69
+#: .\templates\includes\header.html:78
 msgid "Logout"
 msgstr "Выйти"
 
-#: .\templates\includes\header.html:83
+#: .\templates\includes\header.html:92
 msgid "Join Free"
 msgstr "Зарегистрироваться"
 
@@ -847,7 +851,7 @@ msgid "rank"
 msgstr "место"
 
 #: .\templates\leaderboards\leaderboard.html:96
-#: .\templates\reviews\user_reviews.html:195
+#: .\templates\reviews\user_reviews.html:278
 msgid "reputation"
 msgstr "репутация"
 
@@ -968,7 +972,7 @@ msgid "Consider editing instead if you want to improve the content"
 msgstr "Если хочешь что-то улучшить, лучше отредактируй отзыв"
 
 #: .\templates\reviews\review_detail.html:17
-#: .\templates\reviews\review_list.html:65
+#: .\templates\reviews\review_list.html:70
 msgid "Back to All Reviews"
 msgstr "Назад к списку отзывов"
 
@@ -1147,97 +1151,96 @@ msgid ""
 "Share your learning experience and help others choose the right courses."
 msgstr "Делись опытом обучения и помогай другим выбирать подходящие курсы."
 
-#: .\templates\reviews\review_list.html:38
+#: .\templates\reviews\review_list.html:39
 msgid "Search courses, titles, or content..."
 msgstr "Искать курсы, заголовки или текст..."
 
-#: .\templates\reviews\review_list.html:39
+#: .\templates\reviews\review_list.html:40
 msgid "Search reviews"
 msgstr "Поиск отзывов"
 
-#: .\templates\reviews\review_list.html:61
+#: .\templates\reviews\review_list.html:66
 #, python-format
 msgid "Search Results for \"%(query)s\""
 msgstr "Результаты поиска по запросу «%(query)s»"
 
-#: .\templates\reviews\review_list.html:62
+#: .\templates\reviews\review_list.html:67
 #, python-format
 msgid "%(results_count)s reviews found"
 msgstr "Найдено отзывов: %(results_count)s"
 
-#: .\templates\reviews\review_list.html:76
+#: .\templates\reviews\review_list.html:81
 msgid "Latest Reviews"
 msgstr "Свежие отзывы"
 
-#: .\templates\reviews\review_list.html:79
+#: .\templates\reviews\review_list.html:84
 #, python-format
 msgid "%(page_obj.paginator.count)s total"
 msgstr "Всего: %(page_obj.paginator.count)s"
 
-#: .\templates\reviews\review_list.html:141
+#: .\templates\reviews\review_list.html:146
 msgid "No reviews found"
 msgstr "Отзывы не найдены"
 
-#: .\templates\reviews\review_list.html:144
+#: .\templates\reviews\review_list.html:149
 msgid "Try different search terms or browse all reviews."
 msgstr "Попробуй другие слова или посмотри все отзывы."
 
-#: .\templates\reviews\review_list.html:146
+#: .\templates\reviews\review_list.html:151
 msgid "Be the first to share your course experience!"
 msgstr "Стань первым, поделись впечатлениями о курсе!"
 
-#: .\templates\reviews\review_list.html:151
+#: .\templates\reviews\review_list.html:156
 msgid "Write First Review"
 msgstr "Написать первый отзыв"
 
-#: .\templates\reviews\review_list.html:161
+#: .\templates\reviews\review_list.html:166
 msgid "Review pagination"
 msgstr "Навигация по отзывам"
 
-#: .\templates\reviews\review_list.html:207
+#: .\templates\reviews\review_list.html:295
 msgid "Share Your Experience"
 msgstr "Поделись опытом"
 
-#: .\templates\reviews\review_list.html:209
+#: .\templates\reviews\review_list.html:297
 msgid "Help fellow developers by reviewing courses you've taken."
 msgstr "Помоги другим разработчикам — оставь отзыв о пройденных курсах."
 
-#: .\templates\reviews\review_list.html:222
+#: .\templates\reviews\review_list.html:310
 msgid "Sign up to write reviews and help others make better learning choices."
 msgstr "Зарегистрируйся, чтобы писать отзывы и помогать другим выбирать курсы."
 
-#: .\templates\reviews\review_list.html:234
+#: .\templates\reviews\review_list.html:322
 msgid "Reviews Stats"
 msgstr "Статистика отзывов"
 
-#: .\templates\reviews\review_list.html:244
-#: .\templates\reviews\user_reviews.html:206
+#: .\templates\reviews\review_list.html:332
+#: .\templates\reviews\user_reviews.html:289
 msgid "Avg Rating"
 msgstr "Средняя оценка"
 
-#: .\templates\reviews\review_list.html:248
+#: .\templates\reviews\review_list.html:336
 msgid "Courses"
 msgstr "Курсы"
 
-#: .\templates\reviews\review_list.html:252
+#: .\templates\reviews\review_list.html:340
 msgid "Helpful Votes"
 msgstr "Полезные голоса"
 
 #: .\templates\reviews\user_reviews.html:6
 #, python-format
-msgid "%(profile_user.username)s's Reviews - Night Coder"
-msgstr "Отзывы %(profile_user.username)s — Night Coder"
+msgid "%(username)s's Reviews - Night Coder"
+msgstr "Отзывы от %(username)s — Night Coder"
 
 #: .\templates\reviews\user_reviews.html:17
 #, python-format
-msgid "%(profile_user.username)s's Reviews"
-msgstr "Отзывы %(profile_user.username)s"
+msgid "%(username)s's Reviews"
+msgstr "Отзывы от %(username)s"
 
 #: .\templates\reviews\user_reviews.html:20
 #, python-format
-msgid ""
-"Course reviews and learning experiences shared by %(profile_user.username)s."
-msgstr "Отзывы о курсах и опыт обучения от %(profile_user.username)s."
+msgid "Course reviews and learning experiences shared by %(username)s."
+msgstr "Отзывы о курсах и опыт обучения от %(username)s."
 
 #: .\templates\reviews\user_reviews.html:27
 msgid "Total Reviews"
@@ -1266,22 +1269,22 @@ msgstr "Ты ещё не написал ни одного отзыва о кур
 
 #: .\templates\reviews\user_reviews.html:133
 #, python-format
-msgid "%(profile_user.username)s hasn't written any course reviews yet."
-msgstr "%(profile_user.username)s ещё не написал ни одного отзыва о курсах."
+msgid "%(username)s hasn't written any course reviews yet."
+msgstr "%(username)s ещё не писал отзывов."
 
 #: .\templates\reviews\user_reviews.html:143
 msgid "User reviews pagination"
 msgstr "Навигация по отзывам пользователя"
 
-#: .\templates\reviews\user_reviews.html:187
+#: .\templates\reviews\user_reviews.html:270
 msgid "User Profile"
 msgstr "Профиль пользователя"
 
-#: .\templates\reviews\user_reviews.html:217
+#: .\templates\reviews\user_reviews.html:300
 msgid "Write Another Review"
 msgstr "Написать ещё отзыв"
 
-#: .\templates\reviews\user_reviews.html:219
+#: .\templates\reviews\user_reviews.html:302
 msgid "Share your experience with another course."
 msgstr "Поделись впечатлениями о другом курсе."
 
@@ -1497,7 +1500,7 @@ msgstr "Введи email, чтобы получить инструкции по 
 msgid "Email Address"
 msgstr "Email"
 
-#: .\templates\users\password_reset.html:35 .\users\forms.py:20
+#: .\templates\users\password_reset.html:35 .\users\forms.py:17
 msgid "your_email@example.com"
 msgstr "ваш_email@example.com"
 
@@ -1866,28 +1869,28 @@ msgstr "Создать аккаунт"
 msgid "Already have an account?"
 msgstr "Уже есть аккаунт?"
 
-#: .\users\forms.py:21
+#: .\users\forms.py:18
 msgid "Enter username"
 msgstr "Введи логин"
 
-#: .\users\forms.py:28 .\users\forms.py:49
+#: .\users\forms.py:23 .\users\forms.py:37
 msgid "Enter your password"
 msgstr "Введи пароль"
 
-#: .\users\forms.py:32
+#: .\users\forms.py:24
 msgid "Repeat the password"
 msgstr "Повтори пароль"
 
-#: .\users\forms.py:43
+#: .\users\forms.py:33
 msgid "Enter your username or email"
 msgstr "Введи логин или email"
 
-#: .\users\utils\validators.py:28 .\users\utils\validators.py:33
+#: .\users\utils\validators.py:29
 #, python-format
 msgid "Year must be between %(min_year)s and %(max_year)s."
 msgstr "Год должен быть между %(min_year)s и %(max_year)s."
 
-#: .\users\utils\validators.py:38
+#: .\users\utils\validators.py:34
 #, python-format
 msgid "Year must be exactly %(current_year)s."
 msgstr "Год должен быть %(current_year)s."
@@ -1899,6 +1902,10 @@ msgstr "Неверный тип голоса"
 #: .\votes\views.py:20
 msgid "Cannot vote on your own content"
 msgstr "Нельзя голосовать за своё"
+
+#, python-format
+#~ msgid "%(profile_user.username)s hasn't written any course reviews yet."
+#~ msgstr "%(profile_user.username)s ещё не написал ни одного отзыва о курсах."
 
 #~ msgid "Max file size is 5MB"
 #~ msgstr "Максимальный размер файла — 5 МБ"

@@ -9,11 +9,12 @@
 ![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python)
 ![Django](https://img.shields.io/badge/Django-5.2-darkgreen?logo=django)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-blue?logo=postgresql)
-![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker)
-![Gunicorn](https://img.shields.io/badge/Gunicorn-23.0-green?logo=gunicorn)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.2-purple?logo=bootstrap)
 ![Ruff](https://img.shields.io/badge/Ruff-14-lightgreen?logo=ruff)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+![Gunicorn](https://img.shields.io/badge/Gunicorn-23.0-green?logo=gunicorn)
+![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker)
+![Railway](https://img.shields.io/badge/Railway-Hosting-white?logo=railway)
+![License](https://img.shields.io/badge/License-MIT-yellow?logo=readme)
 
 ## 🎯 Что такое Night Coder?
 
@@ -31,7 +32,7 @@
 
 ## 🚀 Night Coder Live
 
-### 👉 **[Попробуй Night Coder](https://your-night-coder-app.onrender.com)** 👈
+### 👉 **[Попробуй Night Coder](https://pet-project-forum-production.up.railway.app/ru/)** 👈
 
 **Демо-доступ (если не хочешь создавать аккаунт):**
 
@@ -85,7 +86,7 @@
 - **CI/CD** - Автоматические линтинг и тестирование
 - **Gunicorn** - WSGI HTTP сервер для продакшена
 - **Docker** - Контейнеризация
-- **Render** - Платформа для деплоя
+- **Railway** - Платформа для деплоя
 
 ## 🎨 Ключевые возможности
 
@@ -275,7 +276,7 @@ Night Coder развёрнут на **Render** с автоматическим C
 
 ### **Готов присоединиться к нашему ночному сообществу?** 🌙
 
-[![Попробовать Night Coder](https://img.shields.io/badge/Попробовать_Night_Coder-Live-orange?style=for-the-badge)](https://your-night-coder-app.onrender.com)
+[![Попробовать Night Coder](https://img.shields.io/badge/Попробовать_Night_Coder-Live-orange?style=for-the-badge)](https://pet-project-forum-production.up.railway.app/ru/)
 
 *⭐ Не забудь поставить звёздочку репозиторию, если он тебе понравился!*
 
